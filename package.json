@@ -1,0 +1,20 @@
+{
+  "name": "listingspark",
+  "version": "1.0.0",
+  "description": "AI product listing generator for Etsy, Amazon, Shopify and eBay sellers, with Stripe credit packs.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/server.js",
+    "dev": "node --disable-warning=ExperimentalWarning --watch src/server.js",
+    "test": "node --disable-warning=ExperimentalWarning --test \"test/**/*.test.js\""
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.128.0",
+    "express": "^5.2.1",
+    "stripe": "^22.6.2"
+  }
+}
