@@ -5,3 +5,6 @@ data/
 *.db-shm
 *.db-wal
 .DS_Store
+gm-campaign-planner/source/planner.html
+gm-campaign-planner/source/sample.html
+gm-campaign-planner/build/
