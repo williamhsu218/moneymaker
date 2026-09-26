@@ -1,0 +1,9 @@
+{
+  "name": "planner-2027",
+  "private": true,
+  "type": "module",
+  "description": "2027 电子手帐 · 农历节气版: build scripts for the dated, hyperlinked iPad planner",
+  "dependencies": {
+    "lunar-javascript": "^1.7.7"
+  }
+}
