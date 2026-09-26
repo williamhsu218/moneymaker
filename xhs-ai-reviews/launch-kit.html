@@ -1,0 +1,462 @@
+<title>AI试吃员 Launch Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<style>
+:root {
+  --bg: #f1f3ee;
+  --surface: #ffffff;
+  --ink: #16201b;
+  --muted: #56625b;
+  --line: #d3d9d1;
+  --chip: #e3e8e0;
+  --accent: #1d6a4d;
+  --accent-soft: #dcebe3;
+  --hl: #f2d34c;
+  --hl-ink: #16201b;
+  --warn: #b3391f;
+  --warn-soft: #f6e1db;
+  --f-display: 'Archivo', 'Noto Sans SC', system-ui, sans-serif;
+  --f-body: 'IBM Plex Sans', 'Noto Sans SC', system-ui, sans-serif;
+  --f-mono: 'IBM Plex Mono', 'Noto Sans SC', ui-monospace, monospace;
+  --f-zh: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0f1311; --surface: #171d1a; --ink: #e3e9e5; --muted: #98a49d; --line: #2b3430;
+    --chip: #222a26; --accent: #62c49b; --accent-soft: #1b3129; --hl: #e2c443; --hl-ink: #16201b;
+    --warn: #ee7b62; --warn-soft: #3a211b;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0f1311; --surface: #171d1a; --ink: #e3e9e5; --muted: #98a49d; --line: #2b3430;
+  --chip: #222a26; --accent: #62c49b; --accent-soft: #1b3129; --hl: #e2c443; --hl-ink: #16201b;
+  --warn: #ee7b62; --warn-soft: #3a211b;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--f-body); padding-inline: 16px; padding-block: 0 72px; }
+.wrap { max-width: 780px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; }
+p { margin: 0; }
+.zh { font-family: var(--f-zh); }
+.eyebrow { font: 600 12px/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.muted { color: var(--muted); }
+mark { background: var(--hl); color: var(--hl-ink); padding: 0 .2em; border-radius: 2px; }
+a { color: var(--accent); }
+
+/* Header */
+header { padding-block: 44px 28px; display: grid; gap: 18px; }
+header h1 { font-family: var(--f-zh); font-weight: 900; font-size: clamp(44px, 11vw, 76px); line-height: 1; letter-spacing: -.01em; }
+header h1 span { font-family: var(--f-display); font-stretch: 118%; font-weight: 800; font-size: .42em; letter-spacing: .01em; color: var(--accent); display: block; margin-top: 12px; }
+.lead { font-size: 18px; max-width: 62ch; }
+.targets { display: flex; flex-wrap: wrap; gap: 10px 28px; border-top: 1px solid var(--line); padding-top: 16px; }
+.targets div { display: grid; gap: 2px; }
+.targets b { font: 800 26px/1.1 var(--f-display); font-stretch: 110%; font-variant-numeric: tabular-nums; }
+.targets small { font-size: 13px; color: var(--muted); }
+
+/* Nav */
+nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+nav a { flex: none; text-decoration: none; color: var(--ink); background: var(--chip); font: 500 14px var(--f-body); padding: 6px 12px; border-radius: 999px; }
+nav a:hover, nav a:focus-visible { background: var(--accent); color: var(--surface); outline: none; }
+
+/* Sections */
+section { padding-block: 44px 8px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; scroll-margin-top: 56px; }
+section > h2 { font-size: clamp(28px, 6vw, 38px); font-stretch: 112%; font-weight: 800; line-height: 1.1; }
+.sec-head { display: grid; gap: 8px; }
+.sec-head p { max-width: 62ch; }
+
+/* Steps */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; }
+.steps li::before { content: counter(s); font: 700 15px/30px var(--f-mono); text-align: center; width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--accent); color: var(--accent); }
+.steps li > div { display: grid; gap: 6px; padding-top: 3px; }
+.steps b { font-weight: 600; }
+
+/* Copy blocks */
+.copy { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.copy-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 8px 8px 14px; border-bottom: 1px solid var(--line); }
+.copy pre { margin: 0; padding: 14px; font: 400 15.5px/1.75 var(--f-zh); white-space: pre-wrap; word-break: break-word; }
+button { font: 600 13px var(--f-body); color: var(--ink); background: var(--chip); border: 0; border-radius: 7px; padding: 7px 12px; cursor: pointer; }
+button:hover { background: var(--accent-soft); }
+button:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button.done { background: var(--accent); color: var(--surface); }
+
+.names { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+.name { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: grid; gap: 4px; }
+.name.pick { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.name .zh { font-size: 22px; font-weight: 900; }
+.name small { color: var(--muted); font-size: 13.5px; }
+.tag { justify-self: start; font: 600 11px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; background: var(--accent); color: var(--surface); padding: 2px 7px; border-radius: 4px; }
+
+/* Formats */
+.formats { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.fmt { border-top: 3px solid var(--ink); padding-top: 10px; display: grid; gap: 6px; align-content: start; }
+.fmt h3 { font-size: 19px; font-stretch: 108%; }
+.fmt .zh { font-weight: 700; }
+.fmt p { font-size: 15px; color: var(--muted); }
+
+/* Post list */
+.posts { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.post { display: grid; grid-template-columns: 38px 1fr auto; gap: 4px 12px; padding: 12px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.post .no { font: 600 14px var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.post .t { font: 700 17px/1.45 var(--f-zh); }
+.post .k { font: 600 11px var(--f-mono); letter-spacing: .05em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; background: var(--chip); white-space: nowrap; }
+.post .k.cmp { background: var(--hl); color: var(--hl-ink); }
+.post .k.new { background: var(--warn-soft); color: var(--warn); }
+.post .d { grid-column: 2 / 4; font-size: 14.5px; color: var(--muted); }
+.post .cc { font: 400 12px var(--f-mono); color: var(--muted); }
+.week { font: 600 12px var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); padding: 18px 0 4px; border-bottom: 1px solid var(--line); }
+
+/* Covers: these stand for images, so they keep fixed colours in both themes */
+.covers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.cover { container-type: inline-size; aspect-ratio: 3 / 4; max-width: 100%; border-radius: 10px; padding: 9% 8%; display: flex; flex-direction: column; justify-content: space-between; font-family: var(--f-zh); overflow: hidden; }
+.cover .ct { font-weight: 700; font-size: 7cqi; align-self: flex-start; padding: 2px 8px; border-radius: 4px; }
+.cover .ch { font-weight: 900; font-size: 13cqi; line-height: 1.15; }
+.cover .cf { font-weight: 500; font-size: 5.5cqi; display: flex; flex-wrap: wrap; gap: 1.5cqi; }
+.cover .cf i { font-style: normal; padding: 1px 6px; border-radius: 3px; }
+.cv1 { background: #f2d34c; color: #16201b; }
+.cv1 .ct { background: #16201b; color: #f2d34c; }
+.cv1 .ch u { text-decoration: none; box-shadow: inset 0 -.28em 0 #e0593b; }
+.cv1 .cf i { background: rgba(22,32,27,.12); }
+.cv2 { background: #16201b; color: #f4f5f1; }
+.cv2 .ct { background: #f2d34c; color: #16201b; }
+.cv2 .ch em { font-style: normal; color: #f2d34c; }
+.cv2 .cf i { background: rgba(255,255,255,.14); }
+.cv3 { background: #dcebe3; color: #133f2e; }
+.cv3 .ct { background: #1d6a4d; color: #fff; }
+.cv3 .ch em { font-style: normal; background: #fff; padding: 0 .12em; }
+.cv3 .cf i { background: rgba(29,106,77,.14); }
+@media (max-width: 420px) { .covers { gap: 8px; } }
+
+/* Traps + scorecard */
+.traps { display: grid; gap: 8px; }
+.trap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 4px 14px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--warn); border-radius: 8px; padding: 10px 14px; font-size: 15px; }
+.trap .in { font-family: var(--f-zh); }
+.trap .out { color: var(--warn); font-family: var(--f-zh); }
+.trap small { grid-column: 1 / -1; color: var(--muted); font-size: 13.5px; }
+@media (max-width: 520px) { .trap { grid-template-columns: 1fr; } }
+
+.score-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 14px; }
+th, td { padding: 9px 10px; border-bottom: 1px solid var(--line); text-align: center; vertical-align: middle; }
+th { font: 600 12px/1.3 var(--f-body); color: var(--muted); }
+th:first-child, td:first-child { text-align: left; }
+td:first-child { font-weight: 600; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--warn); }
+select, input[type="text"], textarea { font: 400 14px var(--f-body); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 5px 6px; }
+input[type="text"] { width: 100%; min-width: 140px; }
+textarea { width: 100%; min-height: 70px; resize: vertical; font-family: var(--f-zh); }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+/* Rules */
+.rules { display: grid; gap: 10px; }
+.rule { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; }
+.rule::before { content: ''; width: 12px; height: 12px; margin-top: 6px; border-radius: 2px; background: var(--warn); }
+.rule.ok::before { background: var(--accent); border-radius: 50%; }
+.rule div { display: grid; gap: 2px; }
+.rule small { color: var(--muted); font-size: 14.5px; }
+
+.split { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: grid; gap: 10px; align-content: start; }
+.panel h3 { font-size: 18px; font-stretch: 108%; }
+.panel ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 15px; }
+.note { font-size: 14.5px; color: var(--muted); max-width: 62ch; }
+footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--muted); display: grid; gap: 6px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+<div class="wrap">
+<header>
+  <p class="eyebrow">小红书 launch kit · 0 → 1,000 followers</p>
+  <h1>AI试吃员<span>Test every new AI first, on real tasks</span></h1>
+  <p class="lead">You test the AI tools yourself. I do the research beforehand and turn your results into posts afterwards. This page covers the first 30 days: setting up the account, what to post, and everything you need to shoot post #1.</p>
+  <div class="targets">
+    <div><b>1,000</b><small>followers unlocks 蒲公英 brand deals</small></div>
+    <div><b>20 posts</b><small>in the first 30 days</small></div>
+    <div><b>20:00–21:00</b><small>when to publish</small></div>
+  </div>
+</header>
+
+<nav aria-label="Sections">
+  <a href="#setup">Setup</a>
+  <a href="#plan">30-day plan</a>
+  <a href="#post1">Post #1 kit</a>
+  <a href="#rules">Rules</a>
+  <a href="#handoff">Send to me</a>
+</nav>
+
+<section id="setup">
+  <div class="sec-head">
+    <p class="eyebrow">Days 1–3</p>
+    <h2>Set up the account</h2>
+    <p>Do this before your first post. It takes about 20 minutes, plus a few days of normal scrolling.</p>
+  </div>
+
+  <div class="names">
+    <div class="name pick"><span class="tag">Recommended</span><span class="zh">AI试吃员</span><small>"The AI food taster": new AI comes out, I taste it first. Easy to remember, and it says what you do.</small></div>
+    <div class="name"><span class="zh">替你先试AI</span><small>"I try the AI for you." Plainer, but it's a phrase people actually search.</small></div>
+    <div class="name"><span class="zh">AI实测所</span><small>"AI test lab." More serious, better if you lean toward office-work tests.</small></div>
+  </div>
+  <p class="note">If the name is taken, add your nickname after it (for example AI试吃员 + your name). Pick one and leave it. Changing your name often in the first weeks confuses both followers and the feed.</p>
+
+  <div class="copy">
+    <div class="copy-top"><span class="eyebrow">Bio · 简介</span><button type="button" data-copy="bio">Copy</button></div>
+    <pre id="bio">新AI出来，我先替你试一遍
+只用真实任务测：周报 / PPT / 表格 / 作业
+不吹不黑，截图为证</pre>
+  </div>
+
+  <ol class="steps">
+    <li><div><b>Register and complete real-name verification (实名认证).</b><span class="muted">Use your mainland number. 蒲公英 requires verification, so do it now.</span></div></li>
+    <li><div><b>Set the name, bio and avatar.</b><span class="muted">Avatar: a clear photo of you, or a simple icon in the same yellow and dark green as the covers below. No QR codes, no WeChat ID, no links.</span></div></li>
+    <li><div><b>Spend 2–3 days using 小红书 normally.</b><span class="muted">Search <span class="zh">AI测评</span>, <span class="zh">AI工具</span> and <span class="zh">AI写周报</span>. Follow 15–20 AI creators, and like and save posts you'd want to make. This teaches the feed what your account is about.</span></div></li>
+    <li><div><b>Save 10 AI posts with lots of saves (收藏) to a board.</b><span class="muted">Screenshot them and send them to me. I'll break down why each one works and fold that into your posts.</span></div></li>
+    <li><div><b>Install the five apps for post #1 and sign up.</b><span class="muted">All free with a mainland number: <span class="zh">DeepSeek、豆包、Kimi、腾讯元宝、千问</span>.</span></div></li>
+  </ol>
+</section>
+
+<section id="plan">
+  <div class="sec-head">
+    <p class="eyebrow">Days 4–30</p>
+    <h2>What to post</h2>
+    <p>Three kinds of post. Comparisons and how-tos pull steady search traffic and saves. New-release tests bring spikes when something big launches.</p>
+  </div>
+
+  <div class="formats">
+    <div class="fmt"><h3>Same task, several AIs</h3><span class="zh">横评</span><p>One real task, the same prompt in 3–5 free apps, and a clear winner and loser. The easiest post to save and share.</p></div>
+    <div class="fmt"><h3>How to do X with AI</h3><span class="zh">教程</span><p>A task people search for (PPT, Excel, meeting notes), done step by step with the best tool. Search traffic keeps coming for months.</p></div>
+    <div class="fmt"><h3>New release in 48 hours</h3><span class="zh">新品实测</span><p>When a big model or feature launches, test it on your usual tasks within two days. Speed is your edge over people who only repost news.</p></div>
+  </div>
+
+  <div>
+    <p class="eyebrow" style="margin-bottom:10px">Cover formula · 3:4, 1080×1440</p>
+    <div class="covers" aria-label="Example covers">
+      <div class="cover cv1"><span class="ct">5个AI横评</span><div class="ch">同一份周报<br><u>谁在瞎编？</u></div><div class="cf"><i>DeepSeek</i><i>豆包</i><i>Kimi</i><i>元宝</i><i>千问</i></div></div>
+      <div class="cover cv2"><span class="ct">免费工具实测</span><div class="ch">AI做PPT<br>试了4个<br><em>只推荐1个</em></div><div class="cf"><i>截图为证</i><i>不吹不黑</i></div></div>
+      <div class="cover cv3"><span class="ct">家长必看</span><div class="ch">孩子的数学题<br><em>哪个AI</em><br>讲得明白</div><div class="cf"><i>5个AI</i><i>同一道题</i></div></div>
+    </div>
+    <p class="note" style="margin-top:10px">Type of post on top, one question in huge type, tool names at the bottom. Every cover uses the same three colours, so your posts are recognisable in the feed. I'll make the real covers from your results.</p>
+  </div>
+
+  <div>
+    <p class="eyebrow" style="margin-bottom:6px">The first 12 posts · titles are drafts until your results are in</p>
+    <div class="posts" id="posts"></div>
+    <p class="note" style="margin-top:12px">That's 12 of the 20 posts. The other 8 are open: new releases within 48 hours, or a second round of whichever format got the most saves.</p>
+  </div>
+</section>
+
+<section id="post1">
+  <div class="sec-head">
+    <p class="eyebrow">Day 4 · about 45 minutes</p>
+    <h2>Post #1: the weekly report test</h2>
+    <p>Five free AIs get the same messy work notes and must turn them into a weekly report for the boss. The notes contain three traps that show which AIs make things up. People care about that much more than about which one writes prettier sentences.</p>
+  </div>
+
+  <ol class="steps">
+    <li><div><b>Keep the settings equal.</b><span class="muted">Use each app's default model. Turn off 深度思考 and 联网搜索 wherever there's a switch, and write down the model name the app shows.</span></div></li>
+    <li><div><b>Paste Prompt A into each app in a new chat.</b><span class="muted">Take a long screenshot (长截图) of each full answer. If you can, screen-record one of them while it's generating; it makes a good extra image or a short video later.</span></div></li>
+    <li><div><b>In the same chat, paste Prompt B.</b><span class="muted">This tests whether it follows instructions. Screenshot that answer too.</span></div></li>
+    <li><div><b>Check each answer against the traps and fill in the scorecard.</b><span class="muted">It copies a summary you can send me in one tap.</span></div></li>
+  </ol>
+
+  <div class="copy">
+    <div class="copy-top"><span class="eyebrow">Prompt A</span><button type="button" data-copy="pa">Copy</button></div>
+    <pre id="pa">帮我把这周的工作记录整理成一份发给领导的周报，简洁、专业：
+周一：和设计对双十一活动页，改了三版，定稿了
+周二：写了活动推送文案，发给运营组了
+周三：和客户开会，客户觉得还行，有几处说要再看看
+周四：活动页上线了，效果数据还没出来
+周五：查下单页卡顿的问题，原因找到了，是图片太大，还没修完，下周一接着修
+下周：准备月底复盘PPT</pre>
+  </div>
+
+  <div class="copy">
+    <div class="copy-top"><span class="eyebrow">Prompt B · same chat</span><button type="button" data-copy="pb">Copy</button></div>
+    <pre id="pb">太长了，压缩到150字以内，下周计划要保留。</pre>
+  </div>
+
+  <div class="traps">
+    <p class="eyebrow">The traps: what the notes say, and what counts as failing</p>
+    <div class="trap"><span class="in">效果数据还没出来</span><span class="out">写了任何数字，比如“点击率提升20%”</span><small>No results exist yet, so any number is invented.</small></div>
+    <div class="trap"><span class="in">客户觉得还行</span><span class="out">“客户高度认可”“非常满意”</span><small>"It's OK" became "highly satisfied": exaggeration.</small></div>
+    <div class="trap"><span class="in">原因找到了……还没修完</span><span class="out">“已修复”“问题已解决”</span><small>Claims the bug is fixed when it isn't.</small></div>
+    <div class="trap"><span class="in">Prompt B：150字以内，保留下周计划</span><span class="out">明显超过150字，或者下周计划没了</span><small>Didn't follow the instruction. Send me the text and I'll count exactly.</small></div>
+  </div>
+
+  <div>
+    <p class="eyebrow" style="margin-bottom:10px">Scorecard · tick a box when the AI fell for the trap</p>
+    <div class="score-wrap">
+      <table>
+        <thead><tr><th>App</th><th>Invented numbers</th><th>Exaggerated</th><th>Said it's fixed</th><th>Broke Prompt B</th><th>Could I hand it in? (1–5)</th><th>Your one-line take</th></tr></thead>
+        <tbody id="score"></tbody>
+      </table>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <button type="button" id="copy-score">Copy scorecard summary</button>
+      <button type="button" id="reset-score">Clear scorecard</button>
+      <span class="muted" id="score-status" role="status" style="font-size:14px"></span>
+    </div>
+    <p class="note" style="margin-top:8px">The scorecard is saved in this browser only, so you can fill it in over several sittings.</p>
+  </div>
+</section>
+
+<section id="rules">
+  <div class="sec-head">
+    <p class="eyebrow">Every post</p>
+    <h2>Rules that protect a new account</h2>
+    <p>小红书 tightened its AI rules in 2026: accounts that post fully AI-written notes get banned, and it wants AI-assisted posts labelled. Labelled posts that follow the rules aren't penalised in reach.</p>
+  </div>
+  <div class="rules">
+    <div class="rule ok"><div><b>Declare AI assistance when publishing.</b><small>In the publish screen's content declaration (内容类型声明), pick the AI option whenever I helped write the text.</small></div></div>
+    <div class="rule ok"><div><b>Keep it first-hand.</b><small>Your own screenshots and recordings, your verdicts, and at least one line in your own words. That's the value, and it's what keeps the account safe.</small></div></div>
+    <div class="rule ok"><div><b>Reply to every comment in the first hour.</b><small>Early comments and replies tell the feed the post is worth showing to more people.</small></div></div>
+    <div class="rule"><div><b>No WeChat IDs, QR codes, links or other platforms' names.</b><small>Sending people off 小红书 (导流) gets posts limited, even in comments and replies.</small></div></div>
+    <div class="rule"><div><b>Don't explain how to reach blocked foreign AI, and don't sell access.</b><small>Mentioning foreign models as news or in comparisons is fine. Keep the tests on apps people in China can use.</small></div></div>
+    <div class="rule"><div><b>Never claim a result you didn't test.</b><small>If something wasn't tried, the post says so or leaves it out.</small></div></div>
+    <div class="rule"><div><b>Don't use other people's images, and don't buy followers or likes.</b><small>Both get new accounts limited quickly.</small></div></div>
+  </div>
+</section>
+
+<section id="handoff">
+  <div class="sec-head">
+    <p class="eyebrow">After each test</p>
+    <h2>Send it to me</h2>
+  </div>
+  <div class="split">
+    <div class="panel">
+      <h3>You send</h3>
+      <ul>
+        <li>The long screenshots, or the answers pasted as text</li>
+        <li>The scorecard summary</li>
+        <li>Your gut reaction to each tool, in any language, messy is fine</li>
+        <li>Which one you'd actually keep using, and why</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>I send back</h3>
+      <ul>
+        <li>Three title options, 20 characters or fewer</li>
+        <li>The cover and a comparison graphic, 1080×1440</li>
+        <li>Image order for the post</li>
+        <li>The post text (300–1,000 characters) in your voice</li>
+        <li>8–12 hashtags and a first comment to pin</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="copy">
+    <div class="copy-top"><span class="eyebrow">Message template</span><button type="button" data-copy="tpl">Copy</button></div>
+    <pre id="tpl">Post #__ — [topic]
+Tools and models:
+Screenshots / answers: (attached)
+Scorecard: (paste)
+My take on each:
+What surprised me:
+The one I'd keep using: </pre>
+  </div>
+
+  <div class="panel">
+    <h3>Week 4 review</h3>
+    <p class="note">After about 20 posts, send me each post's views, likes, saves, comments and new followers (小红书 shows these under 数据 on each post). I'll work out which format and topics bring followers, and we'll put most of month two into those.</p>
+  </div>
+</section>
+
+<footer>
+  <span>Figures from public sources: 蒲公英 opens at 1,000 followers with real-name verification; early brand deals are typically ¥200–2,000 per post; 小红书's AI content rules were announced in March and April 2026.</span>
+  <span>Tools listed for post #1 were free with a mainland number when this kit was made. Check each app still offers a free tier before testing.</span>
+</footer>
+</div>
+
+<script>
+const POSTS = [
+  { w: 'Week 1' },
+  { t: '同一份周报丢给5个AI，差距太大了', k: 'cmp', d: 'Post #1 below. Office workers; the trap check is the hook.' },
+  { t: '免费AI做PPT，试了4个只推荐1个', k: 'how', d: 'Same outline into 4 free AI PPT tools, such as Kimi’s PPT助手 and 讯飞智文. Show the slides side by side.' },
+  { t: '孩子的数学题，5个AI谁讲得最明白', k: 'cmp', d: 'One primary-school word problem; judge whether a parent could explain the answer from it. Parents are a huge 小红书 audience.' },
+  { t: '5个AI翻译同一段英文，谁最像人话', k: 'cmp', d: 'Your English is the edge here: pick a tricky paragraph and judge the Chinese yourself.' },
+  { t: '不会写Excel公式？一句话让AI写', k: 'how', d: 'Three everyday spreadsheet problems, the prompt, the formula, and proof it works.' },
+  { w: 'Week 2' },
+  { t: '让AI总结论文，谁在一本正经瞎编', k: 'cmp', d: 'Upload one real paper; check each summary against it. Students and grad students save these.' },
+  { t: '开会录音丢给AI，5分钟出纪要', k: 'how', d: 'Record a short mock meeting and compare the free transcription and minutes tools.' },
+  { t: '照着AI做的攻略，我玩了一整天', k: 'how', d: 'Ask for a one-day plan in your city and actually follow it. Nothing is more first-hand than this.' },
+  { t: '同一张照片让3个AI修，差别好大', k: 'cmp', d: 'One real photo through the free AI photo editors. The before-and-after images do the work.' },
+  { t: '一句话让3个AI拍视频，谁最像样', k: 'cmp', d: 'Same prompt into 可灵, 即梦 and 海螺 on their free credits.' },
+  { w: 'Week 3 onward' },
+  { t: '千问新模型能看视频了？我实测了', k: 'new', d: 'Example of a 48-hour post: Alibaba announced Qwen3.8-Omni-Flash this month. Only if it’s in the app when you test.' },
+  { t: '测了10期AI，我手机里只留下3个', k: 'cmp', d: 'A round-up of everything so far. Round-ups get saved and bring profile visits.' },
+];
+const KIND = { cmp: '横评', how: '教程', new: '新品' };
+let n = 0;
+document.getElementById('posts').innerHTML = POSTS.map((p) => {
+  if (p.w) return `<div class="week">${p.w}</div>`;
+  n += 1;
+  return `<div class="post"><span class="no">${String(n).padStart(2, '0')}</span><span class="t">${p.t}</span><span class="k ${p.k}">${KIND[p.k]}</span><span class="d">${p.d} <span class="cc">· ${[...p.t].length} chars</span></span></div>`;
+}).join('');
+
+function copyText(text, btn) {
+  const done = () => { const old = btn.textContent; btn.textContent = 'Copied'; btn.classList.add('done'); setTimeout(() => { btn.textContent = old; btn.classList.remove('done'); }, 1400); };
+  const fallback = () => {
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    let ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+    ta.remove();
+    if (ok) done(); else { btn.textContent = 'Select and copy manually'; }
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback);
+  else fallback();
+}
+document.querySelectorAll('[data-copy]').forEach((b) => b.addEventListener('click', () => copyText(document.getElementById(b.dataset.copy).textContent, b)));
+
+const APPS = ['DeepSeek', '豆包', 'Kimi', '腾讯元宝', '千问'];
+const CHECKS = ['num', 'exa', 'fix', 'pb'];
+const CHECK_ZH = { num: '编了数据', exa: '夸大客户反馈', fix: '说bug已修好', pb: '没做到150字/丢了下周计划' };
+const KEY = 'aitaster-post1-score';
+let state = {};
+try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+
+const tbody = document.getElementById('score');
+tbody.innerHTML = APPS.map((a, i) => `<tr>
+  <td>${a}</td>
+  ${CHECKS.map((c) => `<td><input type="checkbox" id="s-${i}-${c}" aria-label="${a}: ${CHECK_ZH[c]}"></td>`).join('')}
+  <td><select id="s-${i}-grade" aria-label="${a}: could I hand it in"><option value="">–</option>${[1, 2, 3, 4, 5].map((g) => `<option>${g}</option>`).join('')}</select></td>
+  <td><input type="text" id="s-${i}-note" aria-label="${a}: your take" placeholder="e.g. clean but made up a 15%"></td>
+</tr>`).join('');
+
+function load() {
+  APPS.forEach((a, i) => {
+    const r = state[a] || {};
+    CHECKS.forEach((c) => { document.getElementById(`s-${i}-${c}`).checked = !!r[c]; });
+    document.getElementById(`s-${i}-grade`).value = r.grade || '';
+    document.getElementById(`s-${i}-note`).value = r.note || '';
+  });
+}
+load();
+tbody.addEventListener('input', (e) => {
+  const [, i, f] = e.target.id.split('-');
+  const a = APPS[+i];
+  state[a] = state[a] || {};
+  state[a][f] = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+  save();
+});
+
+function summary() {
+  return ['Post #1 周报横评 scorecard'].concat(APPS.map((a) => {
+    const r = state[a] || {};
+    const fails = CHECKS.filter((c) => r[c]).map((c) => CHECK_ZH[c]);
+    return `${a}: 能直接交 ${r.grade || '?'}/5；${fails.length ? '翻车：' + fails.join('、') : '没踩坑'}${r.note ? '；' + r.note : ''}`;
+  })).join('\n');
+}
+const status = document.getElementById('score-status');
+document.getElementById('copy-score').addEventListener('click', (e) => copyText(summary(), e.currentTarget));
+let armed = false;
+document.getElementById('reset-score').addEventListener('click', (e) => {
+  if (!armed) { armed = true; e.currentTarget.textContent = 'Tap again to clear'; setTimeout(() => { armed = false; e.target.textContent = 'Clear scorecard'; }, 3000); return; }
+  armed = false; state = {}; save(); load(); e.currentTarget.textContent = 'Clear scorecard'; status.textContent = 'Scorecard cleared';
+  setTimeout(() => { status.textContent = ''; }, 2000);
+});
+</script>
