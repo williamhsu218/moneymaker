@@ -8,3 +8,7 @@ data/
 gm-campaign-planner/source/planner.html
 gm-campaign-planner/source/sample.html
 gm-campaign-planner/build/
+kp-planner-cn/source/fonts/*.ttf
+kp-planner-cn/source/planner.html
+kp-planner-cn/source/sample.html
+kp-planner-cn/build/
