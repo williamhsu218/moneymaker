@@ -1,0 +1,676 @@
+<title>科技试吃员 选题手册</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<style>
+:root {
+  --bg: #f1f3ee;
+  --surface: #ffffff;
+  --ink: #16201b;
+  --muted: #56625b;
+  --line: #d3d9d1;
+  --chip: #e3e8e0;
+  --accent: #1d6a4d;
+  --accent-soft: #dcebe3;
+  --hl: #f2d34c;
+  --hl-ink: #16201b;
+  --warn: #b3391f;
+  --warn-soft: #f6e1db;
+  --f-display: 'Archivo', 'Noto Sans SC', system-ui, sans-serif;
+  --f-body: 'IBM Plex Sans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --f-mono: 'IBM Plex Mono', 'Noto Sans SC', ui-monospace, monospace;
+  --f-zh: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0f1311; --surface: #171d1a; --ink: #e3e9e5; --muted: #98a49d; --line: #2b3430;
+    --chip: #222a26; --accent: #62c49b; --accent-soft: #1b3129; --hl: #e2c443; --hl-ink: #16201b;
+    --warn: #ee7b62; --warn-soft: #3a211b;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0f1311; --surface: #171d1a; --ink: #e3e9e5; --muted: #98a49d; --line: #2b3430;
+  --chip: #222a26; --accent: #62c49b; --accent-soft: #1b3129; --hl: #e2c443; --hl-ink: #16201b;
+  --warn: #ee7b62; --warn-soft: #3a211b;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.7 var(--f-body); padding-inline: 16px; padding-block: 0 72px; }
+.wrap { max-width: 800px; margin: 0 auto; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: var(--accent); }
+.eyebrow { font: 600 12px/1.3 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.muted { color: var(--muted); }
+.note { font-size: 14.5px; color: var(--muted); max-width: 62ch; }
+
+header { padding-block: 44px 24px; display: grid; gap: 14px; }
+header h1 { font: 900 clamp(34px, 8vw, 54px)/1.12 var(--f-zh); letter-spacing: -.01em; }
+header h1 mark { background: var(--hl); color: var(--hl-ink); padding: 0 .12em; border-radius: 3px; }
+.lead { font-size: 17px; max-width: 60ch; }
+
+nav.toc { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+nav.toc a { flex: none; text-decoration: none; color: var(--ink); background: var(--chip); font: 600 13px var(--f-mono); padding: 5px 10px; border-radius: 999px; font-variant-numeric: tabular-nums; }
+nav.toc a:hover, nav.toc a:focus-visible { background: var(--accent); color: var(--surface); outline: none; }
+
+section { padding-block: 40px 4px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; scroll-margin-top: 56px; }
+section > h2 { font: 900 clamp(24px, 5vw, 32px)/1.2 var(--f-zh); }
+
+.sop { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; counter-reset: s; }
+.sop li { counter-increment: s; display: grid; grid-template-columns: 32px 1fr; gap: 12px; }
+.sop li::before { content: counter(s); font: 700 14px/28px var(--f-mono); text-align: center; width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--accent); color: var(--accent); }
+.sop li > div { display: grid; gap: 4px; padding-top: 2px; }
+.sop b { font-weight: 700; }
+.sop ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15px; display: grid; gap: 2px; }
+
+.voice { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; }
+.vcard { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: grid; gap: 4px; }
+.vcard q { font: 700 17px/1.5 var(--f-zh); quotes: '“' '”'; }
+
+/* Topic cards */
+.topics { display: grid; gap: 12px; }
+details.topic { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; scroll-margin-top: 60px; }
+details.topic[open] { border-color: var(--accent); }
+details.topic > summary { list-style: none; cursor: pointer; padding: 14px 16px; display: grid; grid-template-columns: 40px 1fr auto; gap: 2px 12px; align-items: baseline; }
+details.topic > summary::-webkit-details-marker { display: none; }
+details.topic > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 12px; }
+.tno { font: 700 15px var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.ttl { font: 700 18px/1.45 var(--f-zh); }
+.kind { font: 600 12px var(--f-zh); padding: 2px 8px; border-radius: 4px; background: var(--chip); white-space: nowrap; }
+.kind.cmp { background: var(--hl); color: var(--hl-ink); }
+.kind.new { background: var(--warn-soft); color: var(--warn); }
+.meta { grid-column: 2 / 4; font-size: 13.5px; color: var(--muted); }
+.meta .chev { display: inline-block; margin-left: 6px; transition: transform .15s; }
+details.topic[open] .meta .chev { transform: rotate(90deg); }
+
+.tbody { padding: 4px 16px 18px; display: grid; gap: 18px; border-top: 1px solid var(--line); padding-top: 16px; }
+.blk { display: grid; gap: 8px; }
+.blk > h3 { font: 700 13px/1.3 var(--f-zh); color: var(--accent); letter-spacing: .04em; }
+.blk p, .blk li { font-size: 15.5px; }
+.blk ul, .blk ol { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.why { font-size: 15.5px; background: var(--accent-soft); border-radius: 8px; padding: 10px 12px; }
+
+.copy { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.copy-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 6px 6px 6px 12px; border-bottom: 1px solid var(--line); }
+.copy-top span { font: 600 12.5px var(--f-zh); color: var(--muted); }
+.copy pre { margin: 0; padding: 12px; font: 400 15px/1.8 var(--f-zh); white-space: pre-wrap; word-break: break-word; }
+.ref { font-size: 14.5px; color: var(--muted); padding: 8px 12px; border-top: 1px dashed var(--line); }
+.ref b { color: var(--accent); }
+button { font: 600 13px var(--f-zh); color: var(--ink); background: var(--chip); border: 0; border-radius: 7px; padding: 6px 12px; cursor: pointer; }
+button:hover { background: var(--accent-soft); }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button.done { background: var(--accent); color: var(--surface); }
+
+.imgs { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; counter-reset: p; }
+.imgs li { counter-increment: p; display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: baseline; font-size: 15px; }
+.imgs li::before { content: 'P' counter(p); font: 600 13px var(--f-mono); color: var(--muted); }
+.who { font: 600 11.5px var(--f-zh); padding: 1px 7px; border-radius: 4px; white-space: nowrap; }
+.who.me { background: var(--accent-soft); color: var(--accent); }
+.who.you { background: var(--hl); color: var(--hl-ink); }
+
+.titles { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.titles li { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; font: 700 16px/1.5 var(--f-zh); border-bottom: 1px dashed var(--line); padding-bottom: 6px; }
+.titles small { font: 400 12px var(--f-mono); color: var(--muted); white-space: nowrap; }
+.warnline { font-size: 14.5px; color: var(--warn); }
+
+footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--muted); display: grid; gap: 6px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media (prefers-reduced-motion: reduce) { .meta .chev { transition: none; } }
+</style>
+
+<div class="wrap">
+<header>
+  <p class="eyebrow">科技试吃员 · 选题手册</p>
+  <h1>12期内容<br>每期<mark>怎么测、怎么发</mark></h1>
+  <p class="lead">每一期都写好了：为什么做这个题、用哪些工具、可以直接复制的测试提示词、怎么判断好坏、要拍哪些素材、图片顺序、标题、正文模板、话题标签和置顶评论。</p>
+  <p class="note">正文模板里【 】的地方要填你自己测出来的真实结果。填不出来的就说明还没测，不要编。测完把素材发给我，我帮你定稿、做封面和结果图。账号改造和整体计划见 <a href="https://claude.ai/artifact/Y9u3WVY4UBufZ9dt8MbLxo" target="_blank" rel="noopener">启动手册</a>。</p>
+</header>
+
+<nav class="toc" aria-label="目录">
+  <a href="#sop">发布流程</a>
+  <a href="#voice">账号口吻</a>
+</nav>
+
+<section id="sop">
+  <h2>每一期的发布流程</h2>
+  <ol class="sop">
+    <li><div><b>测试</b><span class="muted">按这一期的测试方案做，边测边截图或录屏。每个AI都开新对话，设置保持一致。</span></div></li>
+    <li><div><b>发给我</b><span class="muted">截图、评分、每个工具一句你的真实感受。我回给你：3个标题、封面图、结果对比图、定稿正文、标签和置顶评论。</span></div></li>
+    <li><div><b>发布设置</b>
+      <ul>
+        <li>图片6–9张，第一张是3:4封面</li>
+        <li>标题不超过20字</li>
+        <li>正文300–800字，前两行决定别人会不会点“展开”</li>
+        <li>正文末尾加8–10个话题</li>
+        <li>“内容类型声明”选AI辅助的选项（只要我帮写了文字就要选）</li>
+        <li>加入对应合集：AI横评 / AI教程 / 新品实测</li>
+        <li>发布时间：晚上20:00–21:00</li>
+      </ul></div></li>
+    <li><div><b>发布后1小时</b><span class="muted">发置顶评论，回复每一条评论。发完尽量不要改正文，要改也只改错字。</span></div></li>
+    <li><div><b>第二天</b><span class="muted">记下浏览、点赞、收藏、评论、涨粉五个数，第4周我们一起复盘。</span></div></li>
+  </ol>
+</section>
+
+<section id="voice">
+  <h2>账号口吻</h2>
+  <div class="voice">
+    <div class="vcard"><span class="eyebrow">固定开场</span><q>我是科技试吃员，新AI我先替你尝一口</q><span class="note">可以放在正文第一行，也可以做成封面角标。</span></div>
+    <div class="vcard"><span class="eyebrow">固定结尾</span><q>想让我试吃什么，评论区点菜</q><span class="note">“点菜”呼应“试吃员”，评论里的点菜就是下期选题。</span></div>
+  </div>
+  <ul class="note" style="margin:0;padding-left:18px;display:grid;gap:4px">
+    <li>像跟朋友聊天：短句，先说结论，不堆形容词。</li>
+    <li>不吹不黑：踩坑就直说，好用也直说，每期都要有明确的推荐和不推荐。</li>
+    <li>每篇至少一句你自己写的真实感受。这是AI写不出来的部分，也是账号的价值。</li>
+    <li>评论区不留微信、不提其他平台、不发链接。</li>
+  </ul>
+</section>
+
+<section id="topics">
+  <h2>12期选题</h2>
+  <div class="topics" id="topic-list"></div>
+</section>
+
+<footer>
+  <span>工具的免费额度和功能会变，测试前先确认；哪个要付费，本身就是可以写进笔记的结论。</span>
+  <span>第5期表格用的身份证号是编的，不是真实号码。任何截图里出现真实个人信息都要打码。</span>
+</footer>
+</div>
+
+<script>
+const T = [
+{
+  no: '01', title: '同一份周报丢给5个AI，差距太大了', kind: 'cmp', week: '第1周', who: '打工人',
+  why: '周报是打工人每周都要写的，人人有共鸣。比起“谁写得漂亮”，“AI会不会编数据”更有看点，也更有用。',
+  tools: 'DeepSeek、豆包、Kimi、腾讯元宝、千问（全部免费）',
+  setup: '每个AI都开新对话，用默认模型，关掉“深度思考”和“联网搜索”，记下App显示的模型名。',
+  tests: [
+    { label: '提示词A', text: '帮我把这周的工作记录整理成一份发给领导的周报，简洁、专业：\n周一：和设计对双十一活动页，改了三版，定稿了\n周二：写了活动推送文案，发给运营组了\n周三：和客户开会，客户觉得还行，有几处说要再看看\n周四：活动页上线了，效果数据还没出来\n周五：查下单页卡顿的问题，原因找到了，是图片太大，还没修完，下周一接着修\n下周：准备月底复盘PPT' },
+    { label: '提示词B（同一个对话里接着发）', text: '太长了，压缩到150字以内，下周计划要保留。' },
+  ],
+  judge: [
+    '效果数据还没出来 → 写了任何数字（比如“点击率提升20%”）= 编造数据',
+    '客户觉得还行 → 写成“高度认可”“非常满意” = 夸大',
+    '还没修完 → 写成“已修复”“问题已解决” = 说错进度',
+    '提示词B → 明显超过150字，或者把下周计划删了 = 没听指令',
+    '最后给每个打1–5分：这份周报我敢不敢直接交',
+  ],
+  assets: ['每个AI两次回答的长截图（A和B）', '可选：录一段生成过程，以后做视频版'],
+  images: [['封面', 'me'], ['测试规则和3个坑', 'me'], ['DeepSeek的回答（踩坑处红框）', 'you'], ['豆包的回答', 'you'], ['Kimi的回答', 'you'], ['元宝的回答', 'you'], ['千问的回答', 'you'], ['结果总表', 'me'], ['我的结论', 'me']],
+  titles: ['同一份周报丢给5个AI，差距太大了', '用AI写周报前，先看这篇', '让5个AI写周报，有几个在编数据'],
+  titleNote: '第3个标题只有真的有AI编数据才能用。',
+  body: `我是科技试吃员，新AI我先替你尝一口🍴
+
+打工人每周五的噩梦：写周报😮‍💨
+这次我把同一份乱糟糟的工作记录，丢给了5个免费AI：DeepSeek、豆包、Kimi、元宝、千问
+
+为了看谁会“瞎编”，我在记录里埋了3个坑👇
+1️⃣ 活动数据还没出来 → 谁写了数字，谁就是编的
+2️⃣ 客户只说“还行” → 谁写“高度认可”，谁就在夸大
+3️⃣ bug还没修完 → 谁写“已修复”，谁就在乱说
+
+结果：
+✅ 一个坑都没踩：【】
+❌ 编了数据：【】
+❌ 夸大客户反馈：【】
+❌ 说bug修好了：【】
+
+第二轮让它们压缩到150字：【谁超字数 / 谁把下周计划删了】
+
+我的结论：能直接交的是【】，【一句你自己的真实感受】
+⚠️ 用AI写周报一定要检查数字和进度，领导看到“提升20%”找你要数据就尴尬了
+
+你们平时用哪个写周报？想让我试吃什么，评论区点菜👇`,
+  tags: '#AI工具 #AI测评 #周报 #打工人 #职场干货 #效率工具 #DeepSeek #豆包 #Kimi #千问',
+  pin: '测试统一用的免费版，关了深度思考和联网，每个都是新对话～你们平时用哪个写周报？',
+},
+{
+  no: '02', title: '免费AI做PPT，试了4个只推荐1个', kind: 'how', week: '第1周', who: '打工人、学生',
+  why: '“AI做PPT”搜索量很大。大家最关心的其实是免费能不能导出、导出后能不能改，这正好是一般测评不说清楚的地方。',
+  tools: 'Kimi（PPT助手）、讯飞智文、WPS AI、AiPPT。先确认免费额度，哪个要付费才能导出，这本身就是结论。',
+  setup: '4个工具用同一份提纲，都选“商务/简约”一类的风格。',
+  tests: [
+    { label: '提纲（直接粘贴）', text: '帮我做一份10页左右的PPT，主题：新员工入职培训——公司介绍。\n内容包括：\n1. 公司简介（成立于2018年，主营智能家居，员工约200人）\n2. 组织架构（产品、研发、市场、销售、行政五个部门）\n3. 新人第一周安排（周一报到和领电脑，周二到周四部门轮岗，周五和导师一对一）\n4. 常用工具（飞书、企业邮箱、报销系统）\n5. 常见问题（考勤、请假、报销流程）\n风格简洁商务，蓝白配色。', ref: '<b>陷阱：</b>提纲里没给营收、市场份额、客户数。PPT里出现“年营收X亿”“行业第一”之类的，就是编的。也要核对成立年份和员工数有没有写错。' },
+  ],
+  judge: ['生成用了多久', '模板好不好看（1–5分）', '有没有编内容（见上面的陷阱）', '免费能不能导出PPTX', '导出后用WPS或PowerPoint打开，文字能不能改'],
+  assets: ['每个工具生成的前3页截图', '点“导出”那一步的截图，特别是付费弹窗', '用WPS/PowerPoint打开导出文件的截图'],
+  images: [['封面', 'me'], ['测试条件：同一份提纲', 'me'], ['Kimi的3页（我拼成一张）', 'me'], ['讯飞智文的3页', 'me'], ['WPS AI的3页', 'me'], ['AiPPT的3页', 'me'], ['导出要不要钱对比表', 'me'], ['推荐的那一个和理由', 'me']],
+  titles: ['免费AI做PPT，试了4个只推荐1个', 'AI做PPT到底要不要钱？实测4个', '做PPT别急着开会员，先看这篇'],
+  body: `我是科技试吃员，新AI我先替你尝一口🍴
+
+做PPT最怕的不是做，是做完导出要钱😅
+这次我用同一份提纲，测了4个AI做PPT的工具：Kimi、讯飞智文、WPS AI、AiPPT
+
+测的是大家最关心的5件事👇
+⏱ 多久能做完
+🎨 模板好不好看
+🧐 会不会乱编内容（我没给营收数据，看谁自己编）
+💰 免费能不能导出
+✏️ 导出后能不能改
+
+结果：
+🥇 【推荐的工具】：【理由，一两句】
+🥈 【】：【】
+❌ 【】：【比如：做得好看，但导出要开会员】
+❌ 【】：【比如：给我编了一个“年营收5亿”】
+
+我的结论：【一句你自己的真实感受】
+📌 AI做的PPT，数字和公司信息一定要自己核一遍
+
+你们做PPT用哪个？想让我试吃什么，评论区点菜👇`,
+  tags: '#PPT #AI做PPT #PPT制作 #AI工具 #打工人 #大学生 #效率工具 #Kimi #WPS #办公技巧',
+  pin: '免费额度是测试当天的情况，各家会调整，用之前再确认一下～想看我测哪类PPT（答辩、述职、课程汇报）？',
+},
+{
+  no: '03', title: '孩子的数学题，5个AI谁讲得最明白', kind: 'cmp', week: '第1周', who: '家长',
+  why: '家长是小红书最大的人群之一，“辅导作业”是刚需。比的不只是答案，而是孩子能不能听懂。',
+  tools: 'DeepSeek、豆包、Kimi、腾讯元宝、千问',
+  setup: '每道题都开新对话，先粘贴下面的“要求”，再粘贴题目。',
+  tests: [
+    { label: '每题前面都加这句要求', text: '你是一位小学数学老师，请用五年级学生能听懂的方法讲这道题，不要用方程：' },
+    { label: '题1 鸡兔同笼', text: '笼子里有鸡和兔一共35只，从下面数有94只脚。鸡和兔各有几只？', ref: '<b>答案：</b>鸡23只，兔12只。<b>好的讲法：</b>假设全是鸡，只有70只脚，少了24只；每把一只鸡换成兔多2只脚，24÷2=12只兔。<b>扣分：</b>用了x、y方程，说明没听要求。' },
+    { label: '题2 剪绳子', text: '一根绳子对折，再对折，然后从正中间剪一刀，绳子变成了几段？', ref: '<b>答案：</b>5段。对折两次后是4股，剪一刀相当于在绳子上剪了4个口，4个口把绳子分成5段。<b>常见错误：</b>4段或8段。' },
+    { label: '题3 钟表夹角', text: '3点15分的时候，时针和分针的夹角是多少度？', ref: '<b>答案：</b>7.5度。分针指向3；时针已经从3往4走了四分之一格，一格是30度，所以差7.5度。<b>常见错误：</b>0度。' },
+  ],
+  judge: ['答案对不对', '题1有没有用方程', '你读一遍：能不能讲给10岁孩子听懂（1–5分）', '有没有画图、举例或一步一步来'],
+  assets: ['每道题每个AI的回答截图（共15张，挑有代表性的用）'],
+  images: [['封面', 'me'], ['三道题和正确答案', 'me'], ['题1：讲得最好 vs 最差', 'you'], ['题2：谁答错了', 'you'], ['题3：谁答错了', 'you'], ['总分表', 'me'], ['我的推荐和使用建议', 'me']],
+  titles: ['孩子的数学题，5个AI谁讲得最明白', '让AI辅导作业前，家长先看这篇', '5个AI做小学数学题，有的连钟表题都错'],
+  titleNote: '第3个标题只有真的有AI答错钟表题才能用。',
+  body: `我是科技试吃员，新AI我先替你尝一口🍴
+
+辅导作业辅导到血压飙升？现在不少家长会让AI帮忙讲题
+但AI讲题靠谱吗？我挑了3道小学经典题，测了5个免费AI👇
+1️⃣ 鸡兔同笼（要求：不许用方程，要让五年级孩子听懂）
+2️⃣ 绳子对折再对折，中间剪一刀，变成几段？
+3️⃣ 3点15分，时针和分针夹角多少度？
+
+（正确答案：鸡23兔12 / 5段 / 7.5度）
+
+结果：
+✅ 三题全对、讲得最清楚：【】
+😐 答案对，但【比如：直接上方程，孩子看不懂】：【】
+❌ 答错了：【哪个AI错了哪题】
+
+我的感受：【一句你自己的真实感受】
+📌 让AI讲题，家长先自己看一遍答案对不对，再给孩子看讲解
+
+你家孩子几年级？想让我试吃什么，评论区点菜👇`,
+  tags: '#辅导作业 #小学数学 #家长必看 #AI学习 #AI工具 #鸡兔同笼 #数学思维 #豆包 #DeepSeek #AI测评',
+  pin: '三道题的正确答案都在第2张图～有家长想看初中题的吗？',
+},
+{
+  no: '04', title: '5个AI翻译同一段英文，谁最像人话', kind: 'cmp', week: '第1周', who: '学生、外企打工人',
+  why: '你的英语是别人没有的优势：你能判断哪个翻得地道。翻译是高频刚需，这一期最能体现你的专业度。',
+  tools: 'DeepSeek、豆包、Kimi、腾讯元宝、千问，加一个传统翻译做对照（有道翻译或百度翻译）',
+  setup: '每段都开新对话，先粘贴要求再粘贴原文。',
+  tests: [
+    { label: '段1 英译中：职场邮件', text: '把下面这段英文翻译成自然的中文，像中国同事之间说话一样：\nThanks for jumping on this so fast. That said, the numbers don\'t quite add up yet — can you circle back once you\'ve had a chance to sanity-check them? No rush, but let\'s not let this slip through the cracks. Also, heads up: Friday\'s all-hands might get pushed, so take the deadline with a grain of salt.', ref: '<b>参考译文：</b>谢谢你这么快就接手。不过数字好像还有点对不上，你核对一遍之后再跟我同步一下？不着急，但别让这事漏掉了。另外提前说一声：周五的全员大会可能会推迟，所以截止时间先别太当真。<br><b>考点：</b>jump on / add up / circle back / sanity-check / slip through the cracks / heads up / all-hands / take with a grain of salt' },
+    { label: '段2 英译中：吐槽', text: '把这句英文翻译成中文，保留原句的语气：\nI\'m not saying the new update is bad, but my phone now takes a coffee break every time I open the camera.', ref: '<b>参考译文：</b>我没说新版本不好啊，就是现在每次一开相机，手机都得先去喝杯咖啡歇一会儿。<br><b>考点：</b>有没有保留吐槽的幽默感' },
+    { label: '段3 中译英：潜台词', text: '把这句话翻译成英文，要保留说话人的真实意思：\n这个方案还有优化空间，你再琢磨琢磨。', ref: '<b>参考译文：</b>This isn\'t quite there yet. Take another pass at it.<br><b>考点：</b>能不能听出这是委婉的“不行”，而不是直译成“there is room for optimization”' },
+  ],
+  judge: ['意思对不对（1–5分）', '像不像人话（1–5分）', '习语和潜台词有没有翻出来（1–5分）', '记下最离谱的一句，这是笔记的笑点'],
+  assets: ['每段每个工具的翻译截图'],
+  images: [['封面', 'me'], ['原文和考点', 'me'], ['段1对照表', 'me'], ['段2对照表', 'me'], ['段3对照表', 'me'], ['总分表', 'me'], ['我的推荐', 'me']],
+  titles: ['5个AI翻译同一段英文，谁最像人话', '“circle back”怎么翻？5个AI吵起来了', '外企人看过来：哪个AI翻译最地道'],
+  body: `我是科技试吃员，新AI我先替你尝一口🍴
+
+每天和英文邮件打交道，最怕机翻腔：“请在有机会进行合理性检查后绕回来”😵
+这次我用3段话，测了5个AI+有道翻译👇
+1️⃣ 一封满是职场黑话的英文邮件（circle back、heads up、all-hands……）
+2️⃣ 一句带吐槽的英文
+3️⃣ 一句中文职场潜台词：“这个方案还有优化空间，你再琢磨琢磨”
+
+结果：
+🥇 最像人话：【】（【挑一句它翻得好的】）
+😂 最离谱：【】把“【原文】”翻成了“【译文】”
+🧐 能听出潜台词的只有：【】
+
+我的看法：【一句你自己的话，可以写你为什么这么判断】
+
+每段的参考译文放在第2张图了～
+你们还见过哪些离谱机翻？想让我试吃什么，评论区点菜👇`,
+  tags: '#翻译 #英语学习 #外企 #职场英语 #AI翻译 #AI工具 #有道翻译 #DeepSeek #AI测评 #英语',
+  pin: '参考译文是我自己翻的，大家有更好的翻法欢迎评论区battle～',
+},
+{
+  no: '05', title: '不会写Excel公式？一句话让AI写', kind: 'how', week: '第1周', who: '打工人',
+  why: '教程类笔记收藏率最高，Excel又是最常搜的办公技能之一。公式对不对一试就知道，结果可验证。',
+  tools: '用第1期表现最好的那个AI；如果你平时用WPS，也可以直接用WPS AI',
+  setup: '先在表格里做一张假表：A列姓名（张三、李四、王五），B列身份证号用下面这3个编的号码。不要用真实身份证号。',
+  tests: [
+    { label: '假身份证号（复制到B2–B4）', text: '123456199003074321\n123456198512150012\n123456200107221245', ref: '<b>正确结果：</b>1990-03-07 女；1985-12-15 男；2001-07-22 女（第17位单数是男，双数是女）' },
+    { label: '场景1 身份证号', text: 'Excel里B列是18位身份证号，帮我写公式：C列提取出生日期（格式1990-03-07），D列算周岁年龄，E列判断性别。数据从第2行开始。', ref: '<b>参考公式：</b>C2 =TEXT(MID(B2,7,8),"0-00-00")　D2 =DATEDIF(TEXT(MID(B2,7,8),"0-00-00"),TODAY(),"y")　E2 =IF(MOD(MID(B2,17,1),2),"男","女")' },
+    { label: '场景2 跨表查找', text: 'Sheet1的A列是工号，Sheet2里A列是工号、B列是部门。帮我在Sheet1的B列按工号查出部门，找不到就显示“未找到”。', ref: '<b>参考公式：</b>=XLOOKUP(A2,Sheet2!A:A,Sheet2!B:B,"未找到")　老版本Excel：=IFERROR(VLOOKUP(A2,Sheet2!A:B,2,0),"未找到")' },
+    { label: '场景3 多条件求和', text: 'A列是日期，B列是部门，C列是金额。帮我算出销售部9月的金额合计。', ref: '<b>参考公式：</b>=SUMIFS(C:C,B:B,"销售部",A:A,"&gt;="&amp;DATE(2026,9,1),A:A,"&lt;"&amp;DATE(2026,10,1))' },
+  ],
+  judge: ['公式粘进去能不能直接用（有没有报错）', '结果对不对（对照上面的正确结果）', '要追问几次才对'],
+  assets: ['最好录屏：提问 → 复制公式 → 粘贴 → 出结果', '或者截图：AI的回答 + 表格里的结果'],
+  images: [['封面', 'me'], ['场景1：怎么问', 'you'], ['场景1：公式和结果', 'you'], ['场景2', 'you'], ['场景3', 'you'], ['公式汇总卡片（最容易被收藏的一张）', 'me'], ['提问模板', 'me']],
+  titles: ['不会写Excel公式？一句话让AI写', '身份证号提取年龄性别，AI一句话搞定', '打工人必存：3个AI写的Excel公式'],
+  body: `我是科技试吃员，新AI我先替你尝一口🍴
+
+以前遇到Excel公式就去搜，现在直接问AI，说人话就行👇
+我试了3个最常见的场景：
+1️⃣ 身份证号 → 出生日期、年龄、性别
+2️⃣ 按工号从另一张表查部门（VLOOKUP恐惧症福音）
+3️⃣ 按部门+月份求和
+
+📌 提问公式：说清楚【哪一列是什么】+【要在哪一列得到什么】+【数据从第几行开始】
+比如：“B列是18位身份证号，帮我写公式：C列提取出生日期……”
+
+结果：3个场景【全部一次成功 / 第X个要追问一次才对】
+【一句你自己的感受，比如：它还主动提醒我老版本Excel没有XLOOKUP】
+
+所有公式整理在第6张图，直接存👆
+⚠️ 身份证号是隐私，截图记得打码（我这里用的是编的号码）
+
+还有哪些Excel难题？想让我试吃什么，评论区点菜👇`,
+  tags: '#Excel #Excel技巧 #Excel函数 #办公技巧 #打工人 #AI工具 #职场干货 #WPS #效率工具 #VLOOKUP',
+  pin: '老版本Excel没有XLOOKUP的，用第6张图里的VLOOKUP写法～',
+},
+{
+  no: '06', title: '让AI总结论文，谁在一本正经瞎编', kind: 'cmp', week: '第2周', who: '学生、研究生',
+  why: 'AI“幻觉”是学生最怕的事。加一道论文里根本没有答案的陷阱题，谁会编一眼就能看出来。',
+  tools: 'Kimi、豆包、腾讯元宝、千问、DeepSeek（都支持上传PDF；哪个不支持就去掉）',
+  setup: '找一篇你能合法获取的中文论文PDF（10–20页），自己先读一遍，记下前4个问题的答案。每个AI新对话，上传同一个PDF。',
+  tests: [
+    { label: '问题1', text: '用一句话说这篇论文研究的问题是什么。' },
+    { label: '问题2', text: '研究用的数据或样本是什么？样本量多大？', ref: '选论文里有明确数字的问题，方便核对。' },
+    { label: '问题3', text: '论文里的表2说明了什么？', ref: '“表2”换成这篇论文里真实存在的某个表或图。' },
+    { label: '问题4', text: '作者自己提到的研究局限有哪些？' },
+    { label: '问题5（陷阱）', text: '论文第6章的实验结果是什么？', ref: '<b>用法：</b>挑一个论文里不存在的章节号。老实说“论文里没有第6章”= ✅；编了一段“实验结果”= ❌。这是整期的看点。' },
+  ],
+  judge: ['问题1–4对照原文，答对几题', '陷阱题：老实说“没有”，还是编了内容', '有没有标出原文页码或段落'],
+  assets: ['每个AI对陷阱题的回答截图（最重要）', '问题1–4的回答截图'],
+  images: [['封面', 'me'], ['测试方法：5个问题', 'me'], ['陷阱题：谁老实、谁在编（对比图）', 'me'], ['问题2对比', 'you'], ['问题4对比', 'you'], ['总分表', 'me'], ['用AI读文献的3个建议', 'me']],
+  titles: ['让AI总结论文，谁在一本正经瞎编', '我给AI挖了个坑，5个里有几个跳了', '用AI读文献前，一定要做这一步'],
+  body: `我是科技试吃员，新AI我先替你尝一口🍴
+
+用AI读文献，最怕它一本正经地编😇
+我把同一篇论文上传给5个AI，问了5个问题，第5题是个坑：
+问“论文第6章的实验结果是什么”，但这篇论文根本没有第6章
+
+结果：
+✅ 老实说“没有第6章”的：【】
+❌ 编了一整段“实验结果”的：【】
+前4题答对数：【AI名 X/4……】
+
+我的感受：【一句你自己的真实感受】
+
+📌 用AI读文献的3个建议：
+1. 让它标出原文页码或段落，自己回去核对
+2. 先问一个你知道答案的问题“试试水”
+3. 数字、结论、引用，一律回原文确认
+
+你们用哪个读文献？想让我试吃什么，评论区点菜👇`,
+  tags: '#论文 #研究生 #文献阅读 #AI学习 #学术 #AI工具 #Kimi #AI测评 #毕业论文 #大学生',
+  pin: '为了公平，每个AI都是新对话、上传同一个PDF～',
+},
+{
+  no: '07', title: '开会录音丢给AI，5分钟出纪要', kind: 'how', week: '第2周', who: '打工人',
+  why: '整理会议纪要是高频痛点。剧本里故意“说错了又改口”，最能看出AI听得准不准。',
+  tools: '3个有免费额度的录音转文字/纪要工具，例如通义听悟（或千问App里的录音功能）、飞书妙记、讯飞听见。先确认免费时长。',
+  setup: '找一个朋友，照下面的剧本录一段约3分钟的“会议”，手机录音就行。同一段录音上传给3个工具。',
+  tests: [
+    { label: '会议剧本（两个人读）', text: 'A：我们今天就定一下十月读书会的事。时间我想放在下周四下午三点，大家看行不行？\nB：周四可以。场地呢？还是上次那个咖啡馆吗？\nA：上次那个太吵了，这次换成图书馆的小会议室，小王你负责去联系一下。\nB：好，我明天就打电话问。那预算大概多少？\nA：预算是三万八……哦不对，我说错了，是三千八，包括茶歇和礼品。\nB：三千八够了。海报谁来做？\nA：海报小李来做，下周一之前给我初稿。\nB：要不要请一个外面的嘉宾？\nA：这次先不请了，下次再说。\nB：那报名怎么收？\nA：用问卷收，报名截止到下周二晚上十点。还有别的吗？\nB：没了。\nA：好，那就这样，散会。', ref: '<b>正确纪要应该有：</b>下周四下午3点；图书馆小会议室（小王联系）；预算3800元（不是38000）；海报小李负责，下周一前交初稿；报名用问卷，截止下周二晚10点。<b>陷阱：</b>“不请嘉宾”是决定不做的事，不能写进待办。' },
+  ],
+  judge: ['转写有没有错字', '能不能分清两个人', '预算写对3800了没', '待办有没有负责人和时间', '“不请嘉宾”有没有被错写成待办', '免费能用多少分钟'],
+  assets: ['每个工具生成的纪要截图', '转写页面截图（看错字）', '免费额度的截图'],
+  images: [['封面', 'me'], ['测试方法：剧本里埋的2个坑', 'me'], ['工具1的纪要（错处红框）', 'you'], ['工具2的纪要', 'you'], ['工具3的纪要', 'you'], ['对比表', 'me'], ['推荐和使用技巧', 'me']],
+  titles: ['开会录音丢给AI，5分钟出纪要', '打工人别再手写会议纪要了', '我说错一个数，AI纪要会记错吗？'],
+  body: `我是科技试吃员，新AI我先替你尝一口🍴
+
+开完会还要花半小时整理纪要？我试了3个AI纪要工具，录音丢进去几分钟就出来👇
+为了看它们听得准不准，我和朋友录了一段模拟会议，埋了2个坑：
+1️⃣ 先说“预算三万八”，马上改口“说错了，是三千八”
+2️⃣ “这次先不请嘉宾”：这是不做的事，不该出现在待办里
+
+结果：
+✅ 预算写对3800、待办也准：【】
+❌ 把预算记成38000：【】
+😐 【其他发现，比如：分不清两个人说话】
+
+免费额度：【每个工具的免费时长】
+我的推荐：【】，因为【一句你自己的真实感受】
+
+📌 用AI做纪要，数字和负责人一定要自己再对一遍
+你们公司用什么做纪要？想让我试吃什么，评论区点菜👇`,
+  tags: '#会议纪要 #打工人 #职场干货 #效率工具 #AI工具 #录音转文字 #飞书 #办公技巧 #AI测评 #职场',
+  pin: '录音是我和朋友照剧本演的，没有用真实会议内容哈～',
+},
+{
+  no: '08', title: '照着AI做的攻略，我玩了一整天', kind: 'how', week: '第2周', who: '所有人',
+  why: '最“第一手”的内容：真的去走一遍。照片好看，涨粉潜力大，还能加地点吃同城流量。',
+  tools: '千问（接入了阿里的地图和旅行服务）、豆包、腾讯元宝：3个都问，挑最靠谱的那份照着走',
+  setup: '选一个周末。把【】里的内容换成你的城市和出发地。',
+  tests: [
+    { label: '提示词', text: '我周六在【你的城市】玩一天，早上9点从【出发地或地铁站】出发，晚上8点前结束。预算300元以内（不含交通）。喜欢拍照和吃本地小吃，不想走太多路。帮我规划行程：每一站去哪、待多久、怎么过去、大概花多少钱。' },
+  ],
+  judge: ['每一站：地方还在不在、开没开门', '需要预约的，AI有没有提醒', '交通时间准不准', '实际花了多少钱', '推荐的小吃好不好吃', '全天走了多少步'],
+  assets: ['每一站的照片（风景、食物，想露脸就露）', '3个AI给的行程截图', '手机步数截图', '花费记录'],
+  images: [['封面：当天最好看的一张照片加大字', 'you'], ['3个AI给的行程', 'you'], ['第1站：照片 + “AI说的 vs 实际”', 'you'], ['第2站', 'you'], ['第3站', 'you'], ['第4站', 'you'], ['第5站', 'you'], ['翻车点汇总', 'me'], ['总结：值不值得照着走', 'me']],
+  titles: ['照着AI做的攻略，我玩了一整天', 'AI规划的【城市】一日游，靠谱吗？', '300块照着AI玩【城市】，结果……'],
+  body: `我是科技试吃员，新AI我先替你尝一口🍴
+
+都说用AI做攻略，我决定真去走一遍：让3个AI规划【城市】一日游，挑了最靠谱的【AI名】，完全照着走👇
+我的要求：早9晚8，预算300，爱拍照爱吃小吃，不想走太多路
+
+📍第1站【地点】：【AI说的 vs 实际，一句话】
+📍第2站【地点】：【】
+📍第3站【地点】：【】
+📍第4站【地点】：【】
+
+翻车点：
+❌ 【比如：推荐的店已经关了 / 要提前预约它没说】
+✅ 惊喜：【比如：推荐的小吃真的好吃】
+
+实际花费：【】元｜全天步数：【】步
+结论：【值不值得照着走，一句你自己的话】
+
+📌 用AI做攻略，营业时间和预约一定要自己再查一遍
+下次想让我用AI去哪玩？评论区点菜👇`,
+  tags: '#【城市】旅游 #【城市】一日游 #周末去哪儿 #旅行攻略 #AI攻略 #citywalk #AI工具 #千问 #豆包 #AI测评',
+  pin: '三个AI给的完整行程都在第2张图～你们觉得哪个安排最合理？',
+  extra: '发布时加上地点定位（选第一站或城市），同城的人更容易刷到。',
+},
+{
+  no: '09', title: '同一张照片让3个AI修，差别好大', kind: 'cmp', week: '第2周', who: '所有人',
+  why: '修图前后对比天然抓眼球。证件照换底色又是搜索量很大的需求。',
+  tools: '豆包、腾讯元宝、美图秀秀（或醒图），只用免费功能',
+  setup: '准备2张你自己的照片：一张有路人的阴天风景照，一张正面照（不想露脸可以请朋友帮忙，要征得同意）。',
+  tests: [
+    { label: '任务1 消除路人', text: '帮我把照片里背景的路人去掉，其他地方不要动。' },
+    { label: '任务2 换天空', text: '把阴天的天空换成晴天蓝天，要自然。' },
+    { label: '任务3 证件照换底色', text: '把这张照片换成蓝底证件照，头发边缘要自然。' },
+  ],
+  judge: ['有没有留痕迹（边缘、残影）', '有没有改了不该改的地方（脸变了是大忌）', '要不要付费、有没有水印', '用了多久'],
+  assets: ['原图', '每个工具每个任务的结果图（保存高清原图）'],
+  images: [['封面：原图 vs 最好的结果', 'me'], ['任务1：三家对比', 'me'], ['任务2：三家对比', 'me'], ['任务3：三家对比', 'me'], ['放大看细节：边缘、头发', 'me'], ['总评表', 'me'], ['推荐', 'me']],
+  titles: ['同一张照片让3个AI修，差别好大', '证件照换底色，AI能免费搞定吗？', '消除路人哪家强？3个AI实测'],
+  body: `我是科技试吃员，新AI我先替你尝一口🍴
+
+同一张照片交给3个AI修，结果差别真的大👇
+测了3个最常用的修图需求：
+1️⃣ 消除背景路人
+2️⃣ 阴天换晴天
+3️⃣ 证件照换蓝底
+
+结果：
+🥇 【】：【比如：路人去得最干净，脸完全没变】
+🥈 【】：【】
+❌ 【】：【比如：换底色把头发边缘抠糊了 / 要会员才能保存高清】
+
+最意外的是：【一句你自己的真实感受】
+📌 修人像要看看五官有没有被“顺手美颜”，证件照可不能变脸
+
+你们平时用什么修图？想让我试吃什么，评论区点菜👇`,
+  tags: '#修图 #AI修图 #证件照 #消除路人 #拍照技巧 #美图秀秀 #豆包 #AI工具 #手机修图 #AI测评',
+  pin: '原图在第1张图左边～想看我测哪种修图需求？',
+},
+{
+  no: '10', title: '一句话让3个AI拍视频，谁最像样', kind: 'cmp', week: '第2周', who: '所有人、做自媒体的人',
+  why: 'AI视频话题热、画面冲击力强。这一期适合发成视频笔记，视频商单的价格一般是图文的两倍左右，正好先练手。',
+  tools: '可灵、即梦、海螺，用每天的免费额度',
+  setup: '3家用同样的时长（5秒）和比例（竖屏9:16）。',
+  tests: [
+    { label: '提示词1 人物', text: '一个穿红色毛衣的女孩在雪地里转圈，慢动作，电影感', ref: '看脸和手会不会崩' },
+    { label: '提示词2 物理', text: '一杯咖啡被打翻，咖啡洒在白色桌布上，特写镜头', ref: '看液体真不真实' },
+    { label: '提示词3 中文字', text: '一家中式面馆的门口，招牌上写着“老王面馆”，镜头缓缓推进', ref: '看中文招牌写没写对' },
+  ],
+  judge: ['画面崩没崩', '物理真不真实', '中文字写对了没有', '等了多久', '免费额度够生成几条'],
+  assets: ['9段视频（全部下载保存）', '每家的等待时间和额度消耗截图'],
+  images: [['开头3秒：最惊艳或最翻车的一帧', 'you'], ['提示词1：三家对比（上中下或左右拼）', 'you'], ['提示词2：三家对比', 'you'], ['提示词3：三家对比', 'you'], ['结尾：结论字幕', 'me']],
+  imagesNote: '这一期是视频顺序，不是图片。用剪映把三家同一提示词的视频拼在一起，每段标上“可灵/即梦/海螺”。结论字幕我来写。',
+  titles: ['一句话让3个AI拍视频，谁最像样', '可灵vs即梦vs海螺，同一句话差别好大', 'AI视频能写对中文招牌吗？实测'],
+  body: `我是科技试吃员，新AI我先替你尝一口🍴
+
+同一句话，让3个AI生成视频，谁最像样？👇
+测了3个难点：
+1️⃣ 人物转圈（看脸和手会不会崩）
+2️⃣ 咖啡打翻（看液体真不真）
+3️⃣ 中文招牌“老王面馆”（看字能不能写对）
+
+结果：
+🎬 人物：【谁最好】
+☕ 物理：【】
+🀄 中文：【比如：只有X写对了“老王面馆”】
+
+免费额度：【每家免费能生成几条、等了多久】
+我的推荐：【】，【一句你自己的真实感受】
+
+提示词在置顶评论，想自己试可以直接抄～
+想让我试吃什么，评论区点菜👇`,
+  tags: '#AI视频 #可灵 #即梦 #海螺AI #AI生成视频 #自媒体 #AI工具 #短视频制作 #剪映 #AI测评',
+  pin: '三条提示词👇\n1. 一个穿红色毛衣的女孩在雪地里转圈，慢动作，电影感\n2. 一杯咖啡被打翻，咖啡洒在白色桌布上，特写镜头\n3. 一家中式面馆的门口，招牌上写着“老王面馆”，镜头缓缓推进',
+},
+{
+  no: '11', title: '千问新模型能看视频了？我实测了', kind: 'new', week: '第3周起', who: '所有人',
+  why: '大新品发布后48小时内出实测，能吃到搜索和推荐的第一波流量。这一期是模板，任何国内能直接用的新品都能套。',
+  tools: '发布的那个新品。例子：阿里本月发布的千问全模态模型（前提是测试时千问App里已经能用）',
+  setup: '新品发布当天我会给你准备简报：新在哪、官方怎么说、该测什么。你在48小时内测完发布。',
+  tests: [
+    { label: '通用框架：5个任务，30–60分钟', text: '1. 官方主打的功能（官方说它强在哪就测哪）\n2. 固定标尺：第1期的周报陷阱题，和上次的结果比\n3. 一个你生活里的真实任务\n4. 一道陷阱题，看它会不会编\n5. 速度和免费额度' },
+    { label: '例子：让千问看一段视频', text: '（上传一段30秒以内你自己拍的视频，比如做饭、街景）\n这个视频里发生了什么？按时间顺序说。\n第几秒出现了【视频里的某样东西】？\n视频里的人说了什么？\n视频里那只狗是什么颜色的？', ref: '<b>陷阱：</b>最后一问要选视频里根本没有的东西。老实说“视频里没有狗”= ✅。' },
+  ],
+  judge: ['主打功能是不是真的强', '周报题和上次比，进步还是退步', '陷阱题会不会编', '速度和免费额度'],
+  assets: ['每个任务的关键回答截图', '最好录一段屏，展示新功能怎么用'],
+  images: [['封面：“【新品名】，我先试了”', 'me'], ['新在哪：一张图说清', 'me'], ['任务1：主打功能', 'you'], ['任务2：周报题对比', 'you'], ['任务3：生活任务', 'you'], ['任务4：陷阱题', 'you'], ['和旧版或其他AI对比', 'me'], ['值不值得用', 'me']],
+  titles: ['千问新模型能看视频了？我实测了', '【新品名】上线48小时，我先替你试了', '【新品名】实测：这3个功能是真的强'],
+  body: `我是科技试吃员，新AI我先替你尝一口🍴
+
+【新品名】【日期】刚上线，我先替你试了👇
+官方说它最强的是：【一句话】
+我测了5件事：
+1️⃣ 【主打功能】：【结果】
+2️⃣ 老规矩，周报陷阱题：【结果，和上次的X比】
+3️⃣ 【生活任务】：【结果】
+4️⃣ 陷阱题：【会不会编】
+5️⃣ 速度和免费额度：【】
+
+结论：【值得用 / 等等再说 / 只推荐给某类人】
+【一句你自己的真实感受】
+
+还想让我测它什么？评论区点菜，明天补测👇`,
+  tags: '#【新品名】 #【公司名】 #AI新品 #AI测评 #AI工具 #人工智能 #科技 #新品测评 #大模型 #效率工具',
+  pin: '测试时间：【日期】，版本：【】。新品更新很快，结果以你用的时候为准～',
+},
+{
+  no: '12', title: '测了10期AI，我手机里只留下3个', kind: 'cmp', week: '第3–4周', who: '所有人',
+  why: '总结帖收藏率高，还能把新粉丝引到你之前的笔记：先看主页，再关注。',
+  tools: '前10期的结论，加上你真实的使用情况：测完之后你自己还在用哪几个？',
+  setup: '这一期不用新测试。把前面每一期的结论和数据发给我，我来整理速查表。',
+  tests: [],
+  judge: ['留下的3个：每个一句“用来干什么”和“为什么是它”', '删掉的：每个一句原因', '每个场景的最佳选择'],
+  assets: ['手机屏幕上那3个App图标的照片（你自己拍，真实感最强）'],
+  images: [['封面：手机上3个App图标的照片', 'you'], ['留下的3个', 'me'], ['场景 → 最佳工具速查表（收藏率最高的一张）', 'me'], ['删掉的和原因', 'me'], ['往期合集指引', 'me']],
+  titles: ['测了10期AI，我手机里只留下3个', '10期测评总结：每个场景用哪个AI', '打工人的AI全家桶，我只留了这3个'],
+  body: `我是科技试吃员，新AI我先替你尝一口🍴
+
+做了10期AI测评，测了【X】个工具，我手机里最后只留下3个👇
+
+📱 【AI 1】：用来【场景】，因为【原因】
+📱 【AI 2】：用来【场景】，因为【原因】
+📱 【AI 3】：用来【场景】，因为【原因】
+
+删掉的：
+🗑 【】：【一句原因】
+🗑 【】：【一句原因】
+
+📌 场景速查（第3张图，建议收藏）：
+写周报 → 【】
+做PPT → 【】
+讲数学题 → 【】
+翻译 → 【】
+读论文 → 【】
+会议纪要 → 【】
+
+每一期的详细测评都在主页合集里～
+下一轮想让我试吃什么？评论区点菜👇`,
+  tags: '#AI工具 #AI测评 #效率工具 #打工人 #学生党 #AI推荐 #手机App #好用的App #DeepSeek #豆包',
+  pin: '每个场景的完整测评都在主页「AI横评」「AI教程」合集里～',
+},
+];
+
+const KIND = { cmp: '横评', how: '教程', new: '新品' };
+const WHO = { me: '我来做', you: '你来拍' };
+const store = [];
+const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+function copyBlock(label, text, ref) {
+  const i = store.push(text) - 1;
+  return `<div class="copy"><div class="copy-top"><span>${label}</span><button type="button" data-i="${i}">复制</button></div><pre>${esc(text)}</pre>${ref ? `<div class="ref">${ref}</div>` : ''}</div>`;
+}
+const list = (items, ordered) => `<${ordered ? 'ol' : 'ul'}>${items.map((x) => `<li>${x}</li>`).join('')}</${ordered ? 'ol' : 'ul'}>`;
+
+document.getElementById('topic-list').innerHTML = T.map((t, n) => `
+<details class="topic" id="t${t.no}"${n === 0 ? ' open' : ''}>
+  <summary>
+    <span class="tno">${t.no}</span><span class="ttl">${t.title}</span><span class="kind ${t.kind}">${KIND[t.kind]}</span>
+    <span class="meta">${t.week} · 写给${t.who}<span class="chev" aria-hidden="true">›</span></span>
+  </summary>
+  <div class="tbody">
+    <p class="why">${t.why}</p>
+    <div class="blk"><h3>工具</h3><p>${t.tools}</p>${t.setup ? `<p class="muted">${t.setup}</p>` : ''}</div>
+    ${t.tests.length ? `<div class="blk"><h3>测试内容</h3>${t.tests.map((x) => copyBlock(x.label, x.text, x.ref)).join('')}</div>` : ''}
+    <div class="blk"><h3>怎么判断好坏</h3>${list(t.judge)}</div>
+    <div class="blk"><h3>要拍/截的素材</h3>${list(t.assets)}</div>
+    <div class="blk"><h3>${t.imagesNote ? '视频顺序' : '图片顺序'}</h3>
+      <ol class="imgs">${t.images.map(([d, w]) => `<li><span>${d}</span><span class="who ${w}">${WHO[w]}</span></li>`).join('')}</ol>
+      ${t.imagesNote ? `<p class="note">${t.imagesNote}</p>` : ''}
+    </div>
+    <div class="blk"><h3>标题备选</h3>
+      <ul class="titles">${t.titles.map((x) => `<li><span>${x}</span><small>${[...x].length}字</small></li>`).join('')}</ul>
+      ${t.titleNote ? `<p class="warnline">${t.titleNote}</p>` : ''}
+    </div>
+    <div class="blk"><h3>正文模板（【 】里填你的真实结果）</h3>${copyBlock('正文', t.body)}</div>
+    <div class="blk"><h3>话题标签</h3>${copyBlock('标签', t.tags)}</div>
+    <div class="blk"><h3>置顶评论</h3>${copyBlock('置顶评论', t.pin)}</div>
+    ${t.extra ? `<p class="note">${t.extra}</p>` : ''}
+  </div>
+</details>`).join('');
+
+const toc = document.querySelector('nav.toc');
+toc.insertAdjacentHTML('beforeend', T.map((t) => `<a href="#t${t.no}" data-open="t${t.no}">${t.no}</a>`).join(''));
+toc.addEventListener('click', (e) => {
+  const a = e.target.closest('[data-open]');
+  if (a) document.getElementById(a.dataset.open).open = true;
+});
+
+function copyText(text, btn) {
+  const done = () => { btn.textContent = '已复制'; btn.classList.add('done'); setTimeout(() => { btn.textContent = '复制'; btn.classList.remove('done'); }, 1400); };
+  const fallback = () => {
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    let ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+    ta.remove();
+    if (ok) done(); else btn.textContent = '请长按手动复制';
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback);
+  else fallback();
+}
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('button[data-i]');
+  if (b) copyText(store[+b.dataset.i], b);
+});
+</script>

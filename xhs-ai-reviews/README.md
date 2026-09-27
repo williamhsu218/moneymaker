@@ -13,7 +13,10 @@ The kit covers:
 - the platform rules
 - what to send Claude after each test
 
-`launch-kit.html` is the kit page's source.
+**选题手册 (topic handbook, in Chinese):** https://claude.ai/artifact/CxULGe6mVV39Kd1Un1f5GZ
+For each of the 12 posts it has the test prompts, judging criteria and reference answers, assets to capture, image order, titles, a post-text template, hashtags and the pinned comment.
+
+`launch-kit.html` and `topic-handbook.html` are the pages' sources.
 
 ## How each post gets made
 
