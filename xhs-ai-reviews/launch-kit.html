@@ -1,4 +1,4 @@
-<title>AI试吃员 Launch Kit</title>
+<title>科技试吃员 Launch Kit</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
@@ -160,6 +160,12 @@ textarea { width: 100%; min-height: 70px; resize: vertical; font-family: var(--f
 .rule div { display: grid; gap: 2px; }
 .rule small { color: var(--muted); font-size: 14.5px; }
 
+.stages { display: grid; gap: 12px; }
+.stage { display: grid; gap: 6px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+.stage h3 { font-size: 19px; font-stretch: 108%; }
+.stage p { font-size: 15px; color: var(--muted); max-width: 62ch; }
+.stage:last-child { border-style: dashed; }
+
 .split { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
 .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: grid; gap: 10px; align-content: start; }
 .panel h3 { font-size: 18px; font-stretch: 108%; }
@@ -171,9 +177,9 @@ footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line);
 
 <div class="wrap">
 <header>
-  <p class="eyebrow">小红书 launch kit · 0 → 1,000 followers</p>
-  <h1>AI试吃员<span>Test every new AI first, on real tasks</span></h1>
-  <p class="lead">You test the AI tools yourself. I do the research beforehand and turn your results into posts afterwards. This page covers the first 30 days: setting up the account, what to post, and everything you need to shoot post #1.</p>
+  <p class="eyebrow">小红书 launch kit · your account → tech reviewer</p>
+  <h1>科技试吃员<span>New AI, apps and gadgets, tested first on real tasks</span></h1>
+  <p class="lead">Your existing account becomes a tech reviewer. AI is the first series because something new launches every week. Apps and gadgets follow once brands start paying for reviews. You do the testing. I do the research beforehand and turn your results into posts afterwards. This page covers converting the account, the first 30 days, the road to paid reviews, and everything you need for post #1.</p>
   <div class="targets">
     <div><b>1,000</b><small>followers unlocks 蒲公英 brand deals</small></div>
     <div><b>20 posts</b><small>in the first 30 days</small></div>
@@ -182,8 +188,9 @@ footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line);
 </header>
 
 <nav aria-label="Sections">
-  <a href="#setup">Setup</a>
+  <a href="#setup">Convert</a>
   <a href="#plan">30-day plan</a>
+  <a href="#paid">Road to paid</a>
   <a href="#post1">Post #1 kit</a>
   <a href="#rules">Rules</a>
   <a href="#handoff">Send to me</a>
@@ -191,37 +198,40 @@ footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line);
 
 <section id="setup">
   <div class="sec-head">
-    <p class="eyebrow">Days 1–3</p>
-    <h2>Set up the account</h2>
-    <p>Do this before your first post. It takes about 20 minutes, plus a few days of normal scrolling.</p>
+    <p class="eyebrow">Days 1–7</p>
+    <h2>Convert your account</h2>
+    <p>Keep the account, change what it's about. The name, bio and avatar change on day one. Old posts that don't fit get hidden slowly over the following week while you start posting.</p>
   </div>
 
   <div class="names">
-    <div class="name pick"><span class="tag">Recommended</span><span class="zh">AI试吃员</span><small>"The AI food taster": new AI comes out, I taste it first. Easy to remember, and it says what you do.</small></div>
-    <div class="name"><span class="zh">替你先试AI</span><small>"I try the AI for you." Plainer, but it's a phrase people actually search.</small></div>
-    <div class="name"><span class="zh">AI实测所</span><small>"AI test lab." More serious, better if you lean toward office-work tests.</small></div>
+    <div class="name pick"><span class="tag">Recommended</span><span class="zh">昵称｜科技试吃员</span><small>Your current nickname plus "tech taster". It keeps whatever recognition you have, says what you do, and covers AI now and apps and gadgets later.</small></div>
+    <div class="name"><span class="zh">科技试吃员</span><small>The name alone, if your current nickname doesn't mean much to anyone yet.</small></div>
+    <div class="name"><span class="zh">AI试吃员</span><small>Use this for your AI series (合集), not the account, so the account isn't boxed into AI when brands in other categories come looking.</small></div>
   </div>
-  <p class="note">If the name is taken, add your nickname after it (for example AI试吃员 + your name). Pick one and leave it. Changing your name often in the first weeks confuses both followers and the feed.</p>
+  <p class="note">You can change your nickname once every 7 days, and your 小红书号 (ID) only once. Change the name, bio and avatar on the same day, then leave them alone. Only change the ID if the current one is unrelated or embarrassing.</p>
 
   <div class="copy">
     <div class="copy-top"><span class="eyebrow">Bio · 简介</span><button type="button" data-copy="bio">Copy</button></div>
-    <pre id="bio">新AI出来，我先替你试一遍
-只用真实任务测：周报 / PPT / 表格 / 作业
-不吹不黑，截图为证</pre>
+    <pre id="bio">新AI、新App、新数码，我先替你试一遍
+只用真实任务测，截图为证
+合作会标注，结论不收钱</pre>
   </div>
+  <p class="note" style="margin-top:-8px">The last line reads "sponsored posts are labelled; my verdicts aren't for sale." Readers trust it, and it's the reason brands will want to pay you later.</p>
 
   <ol class="steps">
-    <li><div><b>Register and complete real-name verification (实名认证).</b><span class="muted">Use your mainland number. 蒲公英 requires verification, so do it now.</span></div></li>
-    <li><div><b>Set the name, bio and avatar.</b><span class="muted">Avatar: a clear photo of you, or a simple icon in the same yellow and dark green as the covers below. No QR codes, no WeChat ID, no links.</span></div></li>
-    <li><div><b>Spend 2–3 days using 小红书 normally.</b><span class="muted">Search <span class="zh">AI测评</span>, <span class="zh">AI工具</span> and <span class="zh">AI写周报</span>. Follow 15–20 AI creators, and like and save posts you'd want to make. This teaches the feed what your account is about.</span></div></li>
-    <li><div><b>Save 10 AI posts with lots of saves (收藏) to a board.</b><span class="muted">Screenshot them and send them to me. I'll break down why each one works and fold that into your posts.</span></div></li>
+    <li><div><b>Send me screenshots of the account first.</b><span class="muted">Your profile page (name, bio, followers, likes and saves), your 10 most recent posts with their like counts, and follower data from 创作者中心 if you have it. I'll tell you which posts to keep and which to hide.</span></div></li>
+    <li><div><b>Change the name, bio and avatar on the same day.</b><span class="muted">Avatar: a clear photo of you, or a simple icon in the same yellow and dark green as the covers below. No QR codes, WeChat IDs or links. Check that real-name verification (实名认证) is done, because 蒲公英 requires it.</span></div></li>
+    <li><div><b>Hide off-topic posts slowly, 1–2 a day.</b><span class="muted">Set them to 仅自己可见 (only me), most off-topic first. Don't delete them and don't hide them all at once, since sudden mass changes can look abnormal to the platform. Keep posts about tech, study, work or digital life, and any post that did well.</span></div></li>
+    <li><div><b>Start posting right away.</b><span class="muted">You don't need to finish hiding old posts first. Followers who came for your old content may not engage with tech posts at first, so early reach can dip. It recovers as the feed learns the new topic.</span></div></li>
+    <li><div><b>Retrain your own feed.</b><span class="muted">For a few days, search <span class="zh">AI测评</span>, <span class="zh">AI工具</span> and <span class="zh">数码测评</span>. Follow 15–20 tech and AI creators, and save 10 AI posts with lots of saves (收藏). Screenshot those 10 and send them to me. I'll work out why each one does well and use it in your posts.</span></div></li>
+    <li><div><b>Set up three collections (合集).</b><span class="muted"><span class="zh">AI横评</span>, <span class="zh">AI教程</span> and <span class="zh">新品实测</span>. Add <span class="zh">数码/App实测</span> when those posts start. Once you have your best 2–3 tech posts, pin them (置顶).</span></div></li>
     <li><div><b>Install the five apps for post #1 and sign up.</b><span class="muted">All free with a mainland number: <span class="zh">DeepSeek、豆包、Kimi、腾讯元宝、千问</span>.</span></div></li>
   </ol>
 </section>
 
 <section id="plan">
   <div class="sec-head">
-    <p class="eyebrow">Days 4–30</p>
+    <p class="eyebrow">Days 2–30</p>
     <h2>What to post</h2>
     <p>Three kinds of post. Comparisons and how-tos pull steady search traffic and saves. New-release tests bring spikes when something big launches.</p>
   </div>
@@ -249,9 +259,22 @@ footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line);
   </div>
 </section>
 
+<section id="paid">
+  <div class="sec-head">
+    <p class="eyebrow">Months 1–6</p>
+    <h2>The road to paid reviews</h2>
+    <p>Brands pay for reviews through 蒲公英, 小红书's official deal platform. It opens at 1,000 followers. Everything before that builds the two things brands pay for: an audience in 科技数码, and readers who trust your verdicts.</p>
+  </div>
+  <div class="stages">
+    <div class="stage"><span class="eyebrow">Stage 1 · now to 1,000 followers</span><h3>Build the AI series</h3><p>Something launches almost every week, so you're never short of a timely post. The tools are free, so readers can try along. AI apps are also among 小红书's biggest advertisers. Use the same method every time (same prompts, trap checks, screenshots) so your results become known as the ones to trust.</p></div>
+    <div class="stage"><span class="eyebrow">Stage 2 · 1,000 followers</span><h3>Open 蒲公英 and take the first deals</h3><p>Set your price. The platform minimum is ¥100, image posts from small accounts usually go for a few hundred yuan, and video pays about twice as much. Apply for 新品试用 (brands send you products to test). It's the easiest way into app and gadget reviews. Only accept products you'd test with your normal method.</p></div>
+    <div class="stage"><span class="eyebrow">Stage 3 · beyond</span><h3>Widen to apps and gadgets</h3><p>Take on other tech categories as brands ask, using the same scorecard style. From around week 3, try short screen-recorded videos, since video deals pay more. Keep sponsored posts a minority, and run every one through 蒲公英 so it's labelled. 小红书 penalises paid posts arranged privately (私单).</p></div>
+  </div>
+</section>
+
 <section id="post1">
   <div class="sec-head">
-    <p class="eyebrow">Day 4 · about 45 minutes</p>
+    <p class="eyebrow">Day 2 · about 45 minutes</p>
     <h2>Post #1: the weekly report test</h2>
     <p>Five free AIs get the same messy work notes and must turn them into a weekly report for the boss. The notes contain three traps that show which AIs make things up. People care about that much more than about which one writes prettier sentences.</p>
   </div>
@@ -367,6 +390,7 @@ The one I'd keep using: </pre>
 
 <footer>
   <span>Figures from public sources: 蒲公英 opens at 1,000 followers with real-name verification; early brand deals are typically ¥200–2,000 per post; 小红书's AI content rules were announced in March and April 2026.</span>
+  <span>Account limits and advice on hiding old posts come from third-party creator guides (nickname once every 7 days, 小红书号 once, hide 1–2 posts a day). Check the limits in the app before relying on them. 蒲公英 pricing: minimum ¥100; video is roughly twice the image price.</span>
   <span>Tools listed for post #1 were free with a mainland number when this kit was made. Check each app still offers a free tier before testing.</span>
 </footer>
 </div>

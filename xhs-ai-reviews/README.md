@@ -1,11 +1,12 @@
-# AI试吃员 · 小红书 AI review account
+# 科技试吃员 · 小红书 tech review account
 
-A 小红书 account that tests new AI tools first-hand, on real tasks, and posts the results. The account owner does the testing. Claude researches before each test and turns the results into posts afterwards. Money comes from 蒲公英 brand deals once the account reaches 1,000 followers.
+An existing 小红书 account, converted into a tech reviewer that tests new AI tools first-hand on real tasks and posts the results. Apps and gadgets come later, as brands start paying for reviews. The account owner does the testing. Claude researches before each test and turns the results into posts afterwards. Money comes from 蒲公英 brand deals and product trials once the account reaches 1,000 followers.
 
 **Launch kit (open in your browser):** https://claude.ai/artifact/Y9u3WVY4UBufZ9dt8MbLxo
 
 The kit covers:
-- account setup (name, bio, first three days)
+- converting the existing account (name, bio, hiding old posts slowly, collections)
+- the road from AI reviews to paid reviews of apps and gadgets
 - the three post formats and the cover formula
 - the first 12 post titles
 - the complete test kit for post #1: prompts, trap checks and a scorecard
