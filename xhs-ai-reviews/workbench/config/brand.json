@@ -1,0 +1,23 @@
+{
+  "account_name": "科技试吃员",
+  "account_name_note": "若沿用原昵称，可写成“原昵称｜科技试吃员”。昵称通常 7 天可改一次、小红书号只能改一次，改前以 App 内提示为准。",
+  "collections": ["AI横评", "AI教程", "新品实测"],
+  "series_by_format": {"cmp": "AI横评", "how": "AI教程", "new": "新品实测", "recap": "AI横评"},
+  "format_names": {"cmp": "横评", "how": "教程", "new": "新品", "recap": "复盘"},
+  "bio": [
+    "新AI、新App、新数码，我先替你试一遍",
+    "只用真实任务测，截图为证",
+    "合作会标注，结论不收钱"
+  ],
+  "opener": "我是科技试吃员，新AI我先替你尝一口🍴",
+  "closer": "想让我试吃什么，评论区点菜👇",
+  "tagline": "真实任务 · 不吹不黑 · 截图为证",
+  "publish_window": "20:00–21:00（待验证的假设）",
+  "palettes": {
+    "yellow": {"label": "黄底", "bg": "#f2d34c", "ink": "#16201b", "tag_bg": "#16201b", "tag_ink": "#f2d34c", "accent": "#e0593b", "chip_bg": "rgba(22,32,27,0.12)", "chip_ink": "#16201b"},
+    "dark": {"label": "深底", "bg": "#16201b", "ink": "#f4f5f1", "tag_bg": "#f2d34c", "tag_ink": "#16201b", "accent": "#f2d34c", "chip_bg": "rgba(255,255,255,0.14)", "chip_ink": "#f4f5f1"},
+    "mint": {"label": "薄荷底", "bg": "#dcebe3", "ink": "#133f2e", "tag_bg": "#1d6a4d", "tag_ink": "#ffffff", "accent": "#1d6a4d", "chip_bg": "rgba(29,106,77,0.14)", "chip_ink": "#133f2e"}
+  },
+  "default_palette_by_format": {"cmp": "yellow", "how": "dark", "new": "mint", "recap": "yellow"},
+  "inner_palette": {"bg": "#f4f5f1", "surface": "#ffffff", "ink": "#16201b", "muted": "#56625b", "line": "#d3d9d1", "accent": "#1d6a4d", "accent_soft": "#dcebe3", "warn": "#b3391f", "warn_soft": "#f6e1db", "hl": "#f2d34c"}
+}

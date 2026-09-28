@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "name": "新品线索来源",
+  "description": "只作为线索：进入测试前，必须保存官方来源并在自己的账号里确认能用。",
+  "action_output_dir": "logs/radar_actions",
+  "sources": {
+    "manual": {
+      "name": "手动线索",
+      "status": "active",
+      "description": "在工作台“线索”页或 ops/leads.csv 录入：链接 + 一句话 + 我的 App 里能不能用"
+    },
+    "appstore": {
+      "name": "App Store（中国区）版本监测",
+      "status": "needs_setup",
+      "description": "苹果公开的 iTunes Search/Lookup 接口；先查找并确认各 App 的编号，之后每次对比版本号与更新说明",
+      "search_url": "https://itunes.apple.com/search",
+      "lookup_url": "https://itunes.apple.com/lookup",
+      "country": "cn"
+    },
+    "official": {
+      "name": "官方更新页",
+      "status": "active",
+      "description": "定期抓取官方更新日志页面，内容有变化就生成一条待核实线索",
+      "pages": [
+        {"id": "deepseek_updates", "name": "DeepSeek API 更新日志", "url": "https://api-docs.deepseek.com/updates/", "tool": "deepseek"}
+      ],
+      "release_keywords": ["发布", "上线", "升级", "全量", "全新", "多模态", "release", "launch", "announcing"]
+    }
+  },
+  "removed": {
+    "arena_community": "Arena 匿名模型、Reddit、X 等信源已移除：国内访问受限，匿名模型和传闻无法核实，也不符合“只测国内能直接用的 App”的原则。"
+  }
+}

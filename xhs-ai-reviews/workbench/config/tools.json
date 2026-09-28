@@ -1,0 +1,23 @@
+{
+  "note": "测试以手机 App 为主，网页链接只是备用。verified_at 为空的链接和名称，测试当天在 App 内核对后再填。",
+  "tools": [
+    {"id": "deepseek", "display_name": "DeepSeek", "app_name": "DeepSeek", "maker": "深度求索", "category": ["chat"], "web_url": "https://chat.deepseek.com", "appstore_term": "DeepSeek", "verified_at": null},
+    {"id": "doubao", "display_name": "豆包", "app_name": "豆包", "maker": "字节跳动", "category": ["chat", "image"], "web_url": "https://www.doubao.com", "appstore_term": "豆包", "verified_at": null},
+    {"id": "kimi", "display_name": "Kimi", "app_name": "Kimi", "maker": "月之暗面", "category": ["chat"], "web_url": "https://www.kimi.com", "appstore_term": "Kimi", "verified_at": "2026-09-27"},
+    {"id": "yuanbao", "display_name": "腾讯元宝", "app_name": "腾讯元宝", "maker": "腾讯", "category": ["chat", "image"], "web_url": "https://yuanbao.tencent.com", "appstore_term": "腾讯元宝", "verified_at": null},
+    {"id": "qianwen", "display_name": "千问", "app_name": "千问", "maker": "阿里巴巴", "category": ["chat", "travel"], "web_url": "https://www.qianwen.com", "appstore_term": "千问", "verified_at": "2026-09-27"},
+    {"id": "kimi_ppt", "display_name": "Kimi PPT助手", "app_name": "Kimi", "maker": "月之暗面", "category": ["ppt"], "web_url": "https://www.kimi.com", "appstore_term": null, "verified_at": null},
+    {"id": "xunfei_zhiwen", "display_name": "讯飞智文", "app_name": "讯飞智文", "maker": "科大讯飞", "category": ["ppt"], "web_url": "https://zhiwen.xfyun.cn", "appstore_term": "讯飞智文", "verified_at": null},
+    {"id": "wps_ai", "display_name": "WPS AI", "app_name": "WPS Office", "maker": "金山办公", "category": ["ppt", "excel"], "web_url": "https://www.wps.cn", "appstore_term": "WPS Office", "verified_at": null},
+    {"id": "aippt", "display_name": "AiPPT", "app_name": "AiPPT", "maker": "AiPPT", "category": ["ppt"], "web_url": "https://www.aippt.cn", "appstore_term": "AiPPT", "verified_at": null},
+    {"id": "tingwu", "display_name": "通义听悟", "app_name": "通义听悟 / 千问录音", "maker": "阿里巴巴", "category": ["meeting"], "web_url": "https://tingwu.aliyun.com", "appstore_term": null, "verified_at": null, "note": "如已并入千问 App，改测千问里的录音功能并更新名称"},
+    {"id": "feishu_miaoji", "display_name": "飞书妙记", "app_name": "飞书", "maker": "字节跳动", "category": ["meeting"], "web_url": "https://www.feishu.cn", "appstore_term": "飞书", "verified_at": null},
+    {"id": "xunfei_tingjian", "display_name": "讯飞听见", "app_name": "讯飞听见", "maker": "科大讯飞", "category": ["meeting"], "web_url": "https://www.iflyrec.com", "appstore_term": "讯飞听见", "verified_at": null},
+    {"id": "meitu", "display_name": "美图秀秀", "app_name": "美图秀秀", "maker": "美图", "category": ["image"], "web_url": null, "appstore_term": "美图秀秀", "verified_at": null},
+    {"id": "xingtu", "display_name": "醒图", "app_name": "醒图", "maker": "字节跳动", "category": ["image"], "web_url": null, "appstore_term": "醒图", "verified_at": null},
+    {"id": "kling", "display_name": "可灵", "app_name": "可灵AI", "maker": "快手", "category": ["video"], "web_url": "https://klingai.kuaishou.com", "appstore_term": "可灵", "verified_at": null},
+    {"id": "jimeng", "display_name": "即梦", "app_name": "即梦AI", "maker": "字节跳动", "category": ["video", "image"], "web_url": "https://jimeng.jianying.com", "appstore_term": "即梦", "verified_at": null},
+    {"id": "hailuo", "display_name": "海螺", "app_name": "海螺AI", "maker": "MiniMax", "category": ["video"], "web_url": "https://hailuoai.com", "appstore_term": "海螺AI", "verified_at": null},
+    {"id": "youdao", "display_name": "有道翻译", "app_name": "有道翻译", "maker": "网易有道", "category": ["translate"], "web_url": "https://fanyi.youdao.com", "appstore_term": "有道翻译", "verified_at": null}
+  ]
+}

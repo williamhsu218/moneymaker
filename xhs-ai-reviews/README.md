@@ -1,26 +1,28 @@
-# 科技试吃员 · 小红书 tech review account
+# 科技试吃员 · 小红书 AI 工具实测
 
-An existing 小红书 account, converted into a tech reviewer that tests new AI tools first-hand on real tasks and posts the results. Apps and gadgets come later, as brands start paying for reviews. The account owner does the testing. Claude researches before each test and turns the results into posts afterwards. Money comes from 蒲公英 brand deals and product trials once the account reaches 1,000 followers.
+这个目录保留 Opus 5.5 的两份原始方案，并提供已审计的本地工作台。账号持有人负责真实测试、判断、复核和在小红书 App 内发布；Claude 可协助整理截图、转写、提出判定建议和制作草稿。
 
-**Launch kit (open in your browser):** https://claude.ai/artifact/Y9u3WVY4UBufZ9dt8MbLxo
+## 当前可执行版本
 
-The kit covers:
-- converting the existing account (name, bio, hiding old posts slowly, collections)
-- the road from AI reviews to paid reviews of apps and gadgets
-- the three post formats and the cover formula
-- the first 12 post titles
-- the complete test kit for post #1: prompts, trap checks and a scorecard
-- the platform rules
-- what to send Claude after each test
+- [工作台与启动说明](workbench/README.md)
+- [你与 Claude 的协作流程](workbench/docs/claude_workflow.md)
+- [12 期选题和测试标准](workbench/harness/topics.json)
+- [优化计划与实施记录](workbench/docs/superpowers/plans/2026-09-27-xhs-platform-optimization.md)
 
-**选题手册 (topic handbook, in Chinese):** https://claude.ai/artifact/CxULGe6mVV39Kd1Un1f5GZ
-For each of the 12 posts it has the test prompts, judging criteria and reference answers, assets to capture, image order, titles, a post-text template, hashtags and the pinned comment.
+在 `xhs-ai-reviews/workbench/` 目录首次运行：
 
-`launch-kit.html` and `topic-handbook.html` are the pages' sources.
+```bash
+python3 scripts/xhs.py new 01
+python3 scripts/launch_dashboard.py
+```
 
-## How each post gets made
+然后打开 `http://127.0.0.1:8000/`。已有首篇工作区时跳过 `new 01`。工作台使用 Python 标准库和本地前端资源；导出 PNG 图卡需要 Chrome 或 Playwright Chromium。
 
-1. **Brief (Claude):** what the tool is, what's new, pricing, whether it works in China, and 4–5 test tasks.
-2. **Test (you):** run the tasks, take long screenshots or recordings, and write a line on each tool.
-3. **Draft (Claude):** titles, cover and comparison images at 1080×1440, post text, hashtags and a pinned comment.
-4. **Post (you):** edit, declare AI assistance in the publish screen, and publish between 20:00 and 21:00.
+`posts/`、`ops/` 保存真实截图、回答、账号和运营数据，默认被 Git 忽略，不会随公开仓库发布。请自行备份这两个目录。工作台不会自动发布、评论、回复、点赞或关注。
+
+## 原始参考材料
+
+- [起号启动手册](launch-kit.html) · [原始 artifact](https://claude.ai/artifact/Y9u3WVY4UBufZ9dt8MbLxo)
+- [12 期选题手册](topic-handbook.html) · [原始 artifact](https://claude.ai/artifact/CxULGe6mVV39Kd1Un1f5GZ)
+
+两份 HTML 保留原貌，便于追溯方案来源。实际测试规则和流程以工作台的 `harness/topics.json` 与 `docs/claude_workflow.md` 为准。发布时间、涨粉速度、商业合作资格和收益均需用账号实际数据及平台当前提示核实；原始方案中的数字是目标或假设，不是平台承诺。[小红书社区公约 2.0](https://pgy.xiaohongshu.com/help/detail?id=1eda0a065dd894063c2e029a49e8f6a1&userType=4)建议主动说明 AI 辅助参与。

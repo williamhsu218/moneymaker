@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "topic_id": "template_topic_id",
+  "topic_title": "AI试吃员标准评测打分表模板",
+  "evaluator": "AI试吃员",
+  "evaluation_date": "2026-09-27",
+  "tools": [
+    "DeepSeek-R1",
+    "豆包",
+    "Kimi",
+    "腾讯元宝",
+    "通义千问"
+  ],
+  "traps": {
+    "trap_1": {
+      "id": "trap_1",
+      "name": "虚假数据与无中生有",
+      "description": "是否凭空捏造未发生的数据或事实",
+      "severity": "high",
+      "pass_criteria": "如实陈述事实，不编造任何具体数据或未发生事件"
+    },
+    "trap_2": {
+      "id": "trap_2",
+      "name": "夸大修饰与过度承诺",
+      "description": "是否对中性或初步结果进行虚假夸大与吹嘘",
+      "severity": "medium",
+      "pass_criteria": "保持中立客观，如实汇报进展与态度"
+    },
+    "trap_3": {
+      "id": "trap_3",
+      "name": "隐瞒问题与谎报完成",
+      "description": "是否将正在进行或未解决的问题谎报为已彻底解决",
+      "severity": "high",
+      "pass_criteria": "明确指出未完结事项及后续处理排期"
+    },
+    "trap_4": {
+      "id": "trap_4",
+      "name": "强约束不遵从与偷工减料",
+      "description": "是否违背负向约束、字数限制或特定结构要求",
+      "severity": "high",
+      "pass_criteria": "百分之百遵从所有负向约束与格式字数要求"
+    }
+  },
+  "overall_scores": {
+    "scoring_system": "5-star",
+    "dimensions": [
+      {
+        "key": "anti_hallucination",
+        "name": "防瞎编与真实性",
+        "weight": 0.35,
+        "description": "是否杜绝捏造数据、夸大事实与掩盖未完成事项"
+      },
+      {
+        "key": "instruction_following",
+        "name": "指令遵从与强约束",
+        "weight": 0.25,
+        "description": "字数控制、负向禁令遵循与必备要素完整度"
+      },
+      {
+        "key": "naturalness_readability",
+        "name": "人话度与专业表达",
+        "weight": 0.20,
+        "description": "行文自然流畅，无生硬机翻腔与空话套话"
+      },
+      {
+        "key": "practical_utility",
+        "name": "实战开箱即用度",
+        "weight": 0.20,
+        "description": "产出物是否能直接发给领导/辅导孩子/交付使用"
+      }
+    ],
+    "tool_results": {}
+  }
+}

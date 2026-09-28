@@ -1,0 +1,14 @@
+.superpowers/
+.venv/
+.pytest_cache/
+.playwright-cli/
+__pycache__/
+*.py[cod]
+logs/
+.DS_Store
+
+# Account operations and post workspaces contain real screenshots, answers,
+# review decisions and performance data. Keep them local, even when empty.
+/posts/
+/ops/*
+!/ops/README.md

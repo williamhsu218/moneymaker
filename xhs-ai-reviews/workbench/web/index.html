@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>科技试吃员 · 起号工作台</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><span class="brand-mark">试</span><span id="brand-name">科技试吃员</span><small>起号工作台</small></div>
+      <nav class="nav" aria-label="主导航">
+        <a href="#/" data-nav="overview">总览</a>
+        <a href="#/posts" data-nav="posts">篇目</a>
+        <a href="#/account" data-nav="account">账号</a>
+        <a href="#/review" data-nav="review">数据复盘</a>
+        <a href="#/leads" data-nav="leads">线索</a>
+      </nav>
+      <span class="spacer"></span>
+      <span class="server-state" id="server-state"><span class="dot"></span>本机服务</span>
+    </div>
+  </header>
+  <main id="app" aria-live="polite"><div class="loading">加载中…</div></main>
+  <div class="dirty-bar" id="dirty-bar" hidden>
+    <span id="dirty-text">有未保存的修改</span>
+    <button type="button" class="primary" data-action="save-all">保存</button>
+    <button type="button" data-action="discard-all">放弃修改</button>
+  </div>
+  <div class="toast-wrap" id="toasts" role="status"></div>
+  <script src="/js/logic.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
