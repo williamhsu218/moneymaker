@@ -8,6 +8,7 @@
 - [你与 Claude 的协作流程](workbench/docs/claude_workflow.md)
 - [12 期选题和测试标准](workbench/harness/topics.json)
 - [优化计划与实施记录](workbench/docs/superpowers/plans/2026-09-27-xhs-platform-optimization.md)
+- [手机版手册](https://claude.ai/artifact/CxULGe6mVV39Kd1Un1f5GZ)：测试时在手机上复制提示词、对照判定标准，由 `workbench/scripts/build_artifact.py` 从 topics.json 生成
 
 在 `xhs-ai-reviews/workbench/` 目录首次运行：
 
@@ -22,7 +23,7 @@ python3 scripts/launch_dashboard.py
 
 ## 原始参考材料
 
-- [起号启动手册](launch-kit.html) · [原始 artifact](https://claude.ai/artifact/Y9u3WVY4UBufZ9dt8MbLxo)
-- [12 期选题手册](topic-handbook.html) · [原始 artifact](https://claude.ai/artifact/CxULGe6mVV39Kd1Un1f5GZ)
+- [起号启动手册](launch-kit.html) · [artifact](https://claude.ai/artifact/Y9u3WVY4UBufZ9dt8MbLxo)（顶部已加提示：以工作台和手机版手册为准）
+- [12 期选题手册](topic-handbook.html)：最初版本。原 artifact 链接 https://claude.ai/artifact/CxULGe6mVV39Kd1Un1f5GZ 现在发布的是工作台生成的手机版手册（`workbench/artifact/handbook.html`），内容与 `harness/topics.json` 一致。
 
-两份 HTML 保留原貌，便于追溯方案来源。实际测试规则和流程以工作台的 `harness/topics.json` 与 `docs/claude_workflow.md` 为准。发布时间、涨粉速度、商业合作资格和收益均需用账号实际数据及平台当前提示核实；原始方案中的数字是目标或假设，不是平台承诺。[小红书社区公约 2.0](https://pgy.xiaohongshu.com/help/detail?id=1eda0a065dd894063c2e029a49e8f6a1&userType=4)建议主动说明 AI 辅助参与。
+两份 HTML 保留原貌（启动手册只在顶部加了一条提示），便于追溯方案来源。实际测试规则和流程以工作台的 `harness/topics.json` 与 `docs/claude_workflow.md` 为准。发布时间、涨粉速度、商业合作资格和收益均需用账号实际数据及平台当前提示核实；原始方案中的数字是目标或假设，不是平台承诺。[小红书社区公约 2.0](https://pgy.xiaohongshu.com/help/detail?id=1eda0a065dd894063c2e029a49e8f6a1&userType=4)建议主动说明 AI 辅助参与。

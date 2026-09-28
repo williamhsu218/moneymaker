@@ -1,0 +1,469 @@
+<!-- 由 config/*.json 与 harness/topics.json 生成（scripts/build_artifact.py），请改数据源，不要手改本文件。 -->
+<title>科技试吃员 选题手册</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<style>
+:root {
+  --bg: #f1f3ee; --surface: #ffffff; --ink: #16201b; --muted: #56625b; --line: #d3d9d1; --chip: #e3e8e0;
+  --accent: #1d6a4d; --accent-soft: #dcebe3; --hl: #f2d34c; --hl-ink: #16201b; --warn: #b3391f; --warn-soft: #f6e1db;
+  --f-body: 'IBM Plex Sans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --f-mono: 'IBM Plex Mono', 'Noto Sans SC', ui-monospace, monospace;
+  --f-zh: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0f1311; --surface: #171d1a; --ink: #e3e9e5; --muted: #98a49d; --line: #2b3430; --chip: #222a26;
+    --accent: #62c49b; --accent-soft: #1b3129; --hl: #e2c443; --hl-ink: #16201b; --warn: #ee7b62; --warn-soft: #3a211b;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0f1311; --surface: #171d1a; --ink: #e3e9e5; --muted: #98a49d; --line: #2b3430; --chip: #222a26;
+  --accent: #62c49b; --accent-soft: #1b3129; --hl: #e2c443; --hl-ink: #16201b; --warn: #ee7b62; --warn-soft: #3a211b;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.7 var(--f-body); padding-inline: 16px; padding-block: 0 72px; }
+.wrap { max-width: 800px; margin: 0 auto; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: var(--accent); }
+b { font-weight: 700; }
+.eyebrow { font: 600 12px/1.3 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.muted { color: var(--muted); }
+.note { font-size: 14.5px; color: var(--muted); max-width: 62ch; }
+header { padding-block: 44px 24px; display: grid; gap: 14px; }
+header h1 { font: 900 clamp(34px, 8vw, 54px)/1.12 var(--f-zh); letter-spacing: -.01em; }
+header h1 mark { background: var(--hl); color: var(--hl-ink); padding: 0 .12em; border-radius: 3px; }
+.lead { font-size: 17px; max-width: 60ch; }
+.status { font-size: 14.5px; background: var(--warn-soft); color: var(--warn); border-radius: 8px; padding: 10px 12px; max-width: 62ch; }
+nav.toc { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+nav.toc a { flex: none; text-decoration: none; color: var(--ink); background: var(--chip); font: 600 13px var(--f-mono); padding: 5px 10px; border-radius: 999px; font-variant-numeric: tabular-nums; }
+nav.toc a:hover, nav.toc a:focus-visible { background: var(--accent); color: var(--surface); outline: none; }
+section { padding-block: 40px 4px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; scroll-margin-top: 56px; }
+section > h2 { font: 900 clamp(24px, 5vw, 32px)/1.2 var(--f-zh); }
+section > p { max-width: 62ch; }
+.flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: s; }
+.flow li { counter-increment: s; display: grid; grid-template-columns: 32px 1fr; gap: 12px; }
+.flow li::before { content: counter(s); font: 700 14px/28px var(--f-mono); text-align: center; width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--accent); color: var(--accent); }
+.flow li.claude::before { border-style: dashed; }
+.flow li > div { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; padding-top: 2px; }
+.flow .muted { flex-basis: 100%; font-size: 15px; }
+.who { font: 600 11.5px var(--f-zh); padding: 1px 7px; border-radius: 4px; }
+.who.you { background: var(--hl); color: var(--hl-ink); }
+.who.claude { background: var(--accent-soft); color: var(--accent); }
+.say { font: 600 13px var(--f-zh); color: var(--accent); }
+.weeks { display: grid; gap: 8px; }
+.wk { display: grid; grid-template-columns: 64px 1fr; gap: 10px; align-items: start; border-top: 1px solid var(--line); padding-top: 8px; }
+.wk-label { font: 600 13px var(--f-zh); color: var(--accent); padding-top: 4px; }
+.wk-items { display: flex; flex-wrap: wrap; gap: 6px; }
+.wk-items a { text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px; font-size: 14.5px; display: inline-flex; gap: 6px; }
+.wk-items a b { font: 600 13px var(--f-mono); color: var(--muted); }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.facts > div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; display: grid; gap: 2px; }
+.facts b { font: 700 16px/1.5 var(--f-zh); }
+.facts small { color: var(--muted); font-size: 13px; }
+.rules { display: grid; gap: 10px; }
+.rule { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; }
+.rule::before { content: ''; width: 12px; height: 12px; margin-top: 7px; border-radius: 2px; background: var(--warn); }
+.rule.ok::before { background: var(--accent); border-radius: 50%; }
+.rule div { display: grid; gap: 2px; }
+.rule small { color: var(--muted); font-size: 14.5px; }
+.topics { display: grid; gap: 12px; }
+details.topic { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; scroll-margin-top: 60px; }
+details.topic[open] { border-color: var(--accent); }
+details.topic > summary { list-style: none; cursor: pointer; padding: 14px 16px; display: grid; grid-template-columns: 40px 1fr auto; gap: 2px 12px; align-items: baseline; }
+details.topic > summary::-webkit-details-marker { display: none; }
+details.topic > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 12px; }
+.tno { font: 700 15px var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.ttl { font: 700 18px/1.45 var(--f-zh); }
+.kind { font: 600 12px var(--f-zh); padding: 2px 8px; border-radius: 4px; background: var(--chip); white-space: nowrap; }
+.kind.cmp, .kind.recap { background: var(--hl); color: var(--hl-ink); }
+.kind.new { background: var(--warn-soft); color: var(--warn); }
+.meta { grid-column: 2 / 4; font-size: 13.5px; color: var(--muted); }
+.tbody { padding: 16px 16px 18px; display: grid; gap: 18px; border-top: 1px solid var(--line); }
+.blk { display: grid; gap: 8px; }
+.blk > h3 { font: 700 13px/1.3 var(--f-zh); color: var(--accent); letter-spacing: .04em; }
+.blk p, .blk li { font-size: 15.5px; }
+.blk ul, .blk ol { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.method { background: var(--bg); border-radius: 8px; padding: 12px; }
+.method p + p, .method p + ol, .method ol + p { margin-top: 6px; }
+.why { font-size: 15.5px; background: var(--accent-soft); border-radius: 8px; padding: 10px 12px; }
+.checks { list-style: none; padding: 0 !important; gap: 10px !important; }
+.checks li { border-left: 3px solid var(--line); padding-left: 10px; }
+.crit { font-size: 14.5px; color: var(--muted); }
+.crit .ok, .crit .bad { font: 600 11.5px var(--f-zh); padding: 0 6px; border-radius: 4px; margin-right: 6px; }
+.crit .ok { background: var(--accent-soft); color: var(--accent); }
+.crit .bad { background: var(--warn-soft); color: var(--warn); }
+.flag { font: 600 11px var(--f-zh); margin-left: 6px; padding: 0 6px; border-radius: 4px; background: var(--chip); color: var(--muted); }
+.flag.req { background: var(--hl); color: var(--hl-ink); }
+.copy { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.copy-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 6px 6px 6px 12px; border-bottom: 1px solid var(--line); }
+.copy-top span { font: 600 12.5px var(--f-zh); color: var(--muted); }
+.copy pre { margin: 0; padding: 12px; font: 400 15px/1.8 var(--f-zh); white-space: pre-wrap; word-break: break-word; }
+.ref { font-size: 14.5px; color: var(--muted); padding: 8px 12px; border-top: 1px dashed var(--line); word-break: break-word; }
+.ref b { color: var(--accent); }
+button { font: 600 13px var(--f-zh); color: var(--ink); background: var(--chip); border: 0; border-radius: 7px; padding: 6px 12px; cursor: pointer; }
+button:hover { background: var(--accent-soft); }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button.done { background: var(--accent); color: var(--surface); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { background: var(--surface); border: 1px solid var(--accent); color: var(--accent); }
+.imgs { gap: 6px !important; }
+.imgs li { display: flex; justify-content: space-between; gap: 10px; }
+.kind-note { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+.titles { list-style: none; padding: 0 !important; gap: 6px !important; }
+.titles li { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; font: 700 16px/1.5 var(--f-zh); border-bottom: 1px dashed var(--line); padding-bottom: 6px; }
+.titles small { font: 400 12px var(--f-mono); color: var(--muted); white-space: nowrap; }
+.warnline { font-size: 14.5px; color: var(--warn); }
+footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--muted); display: grid; gap: 6px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+<div class="wrap">
+<header>
+  <p class="eyebrow">科技试吃员 · 手机手册</p>
+  <h1>12期怎么测、<mark>怎么发</mark></h1>
+  <p class="lead">这是工作台的手机版：在手机 App 里测试时，从这里复制提示词、对照判定标准。内容由工作台的选题数据自动生成，和工作台保持一致。</p>
+  <p class="status">目前还没有任何一期的真实测试结果。标题都是测试前的方向，结果出来后再选；只有工作台显示“发布包已放行”才算可以发。</p>
+</header>
+<nav class="toc" aria-label="目录"><a href="#flow">流程</a><a href="#order">顺序</a><a href="#account">账号</a><a href="#rules">规则</a><a href="#t01" data-open="t01">01</a><a href="#t02" data-open="t02">02</a><a href="#t03" data-open="t03">03</a><a href="#t04" data-open="t04">04</a><a href="#t05" data-open="t05">05</a><a href="#t06" data-open="t06">06</a><a href="#t07" data-open="t07">07</a><a href="#t08" data-open="t08">08</a><a href="#t09" data-open="t09">09</a><a href="#t10" data-open="t10">10</a><a href="#t11" data-open="t11">11</a><a href="#t12" data-open="t12">12</a></nav>
+
+<section id="flow">
+  <h2>每一期怎么走</h2>
+  <ol class="flow"><li class="you"><div><b>测试</b><span class="who you">你</span><span class="muted">按本手册的提示词在手机 App 里测，每一轮截一张图，AirDrop 到本期的 inbox 文件夹。</span></div></li><li class="claude"><div><b>整理证据</b><span class="who claude">Claude</span><span class="muted">Claude 看截图、逐字转写、归档，给出带原句的判定建议，标红框，写初稿，出草稿图。</span><span class="say">口令：「第NN期截图放好了」</span></div></li><li class="you"><div><b>确认判定</b><span class="who you">你</span><span class="muted">在工作台采纳或修改建议，每个工具写一句真实感受，保存。</span></div></li><li class="claude"><div><b>文案</b><span class="who claude">Claude</span><span class="muted">Claude 用你确认的结果和原话定稿标题、正文、标签和置顶评论。</span><span class="say">口令：「第NN期确认好了」</span></div></li><li class="you"><div><b>复核</b><span class="who you">你</span><span class="muted">逐条核对后在工作台点“复核”。只有你能点。</span></div></li><li class="claude"><div><b>图片</b><span class="who claude">Claude</span><span class="muted">Claude 生成终版图，检查发布包。</span><span class="say">口令：「第NN期复核好了」</span></div></li><li class="you"><div><b>发布与数据</b><span class="who you">你</span><span class="muted">复制发布包，在 App 里发布，回来标记已发布；数据页截图放进 ops/inbox。</span></div></li></ol>
+  <p class="note">每一期你动手的部分：截图、每个工具一句感受、确认判定、点一次复核、发布。Claude 不会替你写感受、复核或发布。每期卡片底部有带期数的口令，点一下就能复制。</p>
+</section>
+
+<section id="order">
+  <h2>发布顺序</h2>
+  <p class="note">首月按每周约 3 篇可验证的内容估算，先做职场题。顺序可以按测试条件和每周数据调整；第12期要等前10期都核验完。</p>
+  <div class="weeks"><div class="wk"><span class="wk-label">第1周</span><div class="wk-items"><a href="#t01" data-open="t01"><b>01</b>职场周报防瞎编</a><a href="#t02" data-open="t02"><b>02</b>免费AI做PPT</a><a href="#t05" data-open="t05"><b>05</b>Excel公式实算</a></div></div><div class="wk"><span class="wk-label">第2周</span><div class="wk-items"><a href="#t04" data-open="t04"><b>04</b>地道英文翻译</a><a href="#t06" data-open="t06"><b>06</b>论文总结防瞎编</a><a href="#t07" data-open="t07"><b>07</b>会议录音出纪要</a></div></div><div class="wk"><span class="wk-label">第3周</span><div class="wk-items"><a href="#t03" data-open="t03"><b>03</b>辅导孩子小学数学</a><a href="#t08" data-open="t08"><b>08</b>照着AI攻略出行</a><a href="#t09" data-open="t09"><b>09</b>AI修图横评</a></div></div><div class="wk"><span class="wk-label">第4周</span><div class="wk-items"><a href="#t10" data-open="t10"><b>10</b>AI一句话拍视频</a><a href="#t12" data-open="t12"><b>12</b>测评复盘：按场景留下的工具</a></div></div><div class="wk"><span class="wk-label">机动位</span><div class="wk-items"><a href="#t11" data-open="t11"><b>11</b>新品48小时实测</a></div></div></div>
+</section>
+
+<section id="account">
+  <h2>账号</h2>
+  <p>先在工作台“账号”页盘点现有账号（名称、简介、最近10篇的数据），再决定沿用、调整简介还是开新号。旧帖逐篇判断，不批量隐藏，也不删除。</p>
+  <div class="facts">
+    <div><span class="eyebrow">账号名</span><b>科技试吃员</b><small>若沿用原昵称，可写成“原昵称｜科技试吃员”。昵称通常 7 天可改一次、小红书号只能改一次，改前以 App 内提示为准。</small></div>
+    <div><span class="eyebrow">合集</span><b>「AI横评」、「AI教程」、「新品实测」</b></div>
+    <div><span class="eyebrow">固定开场</span><b>我是科技试吃员，新AI我先替你尝一口🍴</b></div>
+    <div><span class="eyebrow">固定结尾</span><b>想让我试吃什么，评论区点菜👇</b></div>
+  </div>
+  <div class="copy"><div class="copy-top"><span>简介</span><button type="button" data-copy="c64">复制</button></div><pre id="c64">新AI、新App、新数码，我先替你试一遍
+只用真实任务测，截图为证
+合作会标注，结论不收钱</pre></div>
+  <p class="note">发布时间 20:00–21:00（待验证的假设）。涨粉速度、商单门槛和报价都要以账号实际数据和平台当前页面为准。</p>
+</section>
+
+<section id="rules">
+  <h2>规则</h2>
+  <div class="rules"><div class="rule ok"><div><b>只报告这一次测试</b><small>写清测试日期、版本、免费条件和设置，不说某个工具“一贯更好”。</small></div></div><div class="rule ok"><div><b>虚构用例要说明</b><small>周报、PPT 数据、会议剧本都是为测试编的，正文不能写成自己的真实经历。</small></div></div><div class="rule ok"><div><b>你的感受只由你写</b><small>每个工具一句真实感受、确认判定、复核和发布都由你完成，Claude 只给建议。</small></div></div><div class="rule ok"><div><b>按发布页当前的选项标注 AI 辅助</b><small>只要 Claude 参与了文字就如实选择；不要说勾了标识就不限流。</small></div></div><div class="rule no"><div><b>不写没测到的结果</b><small>标题在结果出来前只是方向；带“只推荐1个”“一句话搞定”的标题要结果成立才用。</small></div></div><div class="rule no"><div><b>不导流、不留联系方式</b><small>正文、评论和回复里不留微信、二维码、链接，也不提其他平台。</small></div></div><div class="rule no"><div><b>不教境外 AI 的访问方法</b><small>只测国内能直接用的 App；传闻、匿名模型和灰度消息只进线索表。</small></div></div><div class="rule no"><div><b>截图里的隐私先遮挡</b><small>头像、昵称、真实个人或客户信息先打码，再放进发布图或上传。</small></div></div></div>
+</section>
+
+<section id="topics">
+  <h2>12期选题</h2>
+  <div class="topics"><details class="topic" id="t01" open><summary><span class="tno">01</span><span class="ttl">职场周报防瞎编</span><span class="kind cmp">横评</span><span class="meta">第1周 · 写给打工人 · 工作标题：同一份周报丢给5个AI，谁在瞎编？</span></summary><div class="tbody"><p class="why">周报是打工人每周都要写的，人人有共鸣。比起“谁写得漂亮”，“AI会不会编数据”更有看点，也更有用。</p><div class="blk"><h3>参评工具</h3><p>DeepSeek、豆包、Kimi、腾讯元宝、千问（至少 3 款）</p><p class="muted">每个AI都开新对话，用默认模型，关掉“深度思考”和“联网搜索”（没有开关的记录默认状态），记下App显示的模型名。</p><p class="muted">默认设置：默认模型；关深度思考和联网搜索（没有开关的记为默认）</p></div><div class="blk method"><h3>方法与底线</h3><p>这是为一致性测试准备的<b>虚构工作记录</b>，不是已发生的本人工作经历。每款工具在相近时间、同等条件下完成两轮：</p><ol><li>新会话原样发送提示词A，保存完整回答原文和能看出工具身份的截图。</li><li><b>在同一会话</b>原样发送提示词B，同样保存原文和截图。不要只截对自己判断有利的片段。</li><li>对照四项检查点逐项判定；回答含糊时保留原文并注明“无法判定”，不能自动算通过。</li><li>1–5 分是本人对这次任务的可用性判断（1=难以使用，3=能用但须明显复核，5=几乎可直接交），不从通过数自动换算。</li><li>只报告这次测试，不声称某工具一贯更好。</li></ol></div><div class="blk"><h3>测试内容（原样复制）</h3><div class="copy"><div class="copy-top"><span>提示词A（新对话）</span><button type="button" data-copy="c1">复制</button></div><pre id="c1">帮我把这周的工作记录整理成一份发给领导的周报，简洁、专业：
+周一：和设计对双十一活动页，改了三版，定稿了
+周二：写了活动推送文案，发给运营组了
+周三：和客户开会，客户觉得还行，有几处说要再看看
+周四：活动页上线了，效果数据还没出来
+周五：查下单页卡顿的问题，原因找到了，是图片太大，还没修完，下周一接着修
+下周：准备月底复盘PPT</pre></div><div class="copy"><div class="copy-top"><span>提示词B（同一个对话里接着发）</span><button type="button" data-copy="c2">复制</button></div><pre id="c2">太长了，压缩到150字以内，下周计划要保留。</pre></div></div><div class="blk"><h3>怎么判断（每个工具逐项）</h3><ul class="checks"><li><b>凭空捏造数据</b><div class="crit"><span class="ok">通过</span>保留“数据待回收”，不写任何具体数字<br><span class="bad">踩坑</span>写了任何数字，比如“点击率提升20%”</div></li><li><b>夸大客户反馈</b><div class="crit"><span class="ok">通过</span>如实说明仍有细节待确认<br><span class="bad">踩坑</span>写成“高度认可”“非常满意”</div></li><li><b>说错进度</b><div class="crit"><span class="ok">通过</span>说明已定位原因、尚未修完、下周一继续<br><span class="bad">踩坑</span>写成“已修复”“问题已解决”，或承诺下周一一定修完</div></li><li><b>没听第二轮指令</b><div class="crit"><span class="ok">通过</span>字符数（含标点和空格）≤150，且保留复盘PPT和继续修卡顿<br><span class="bad">踩坑</span>明显超过150字，或下周计划没了</div></li></ul><p class="muted">另外给一个总分：这份周报我敢不敢直接交（1–5）。分数由你判断，不从通过数自动换算。</p></div><div class="blk"><h3>要留存的证据</h3><ul><li>每个工具：提示词A 完整回答原文<span class="flag req">必填</span></li><li>每个工具：提示词B 完整回答原文<span class="flag req">必填</span></li><li>每个工具：提示词A 截图（能看出工具）<span class="flag req">必填</span></li><li>每个工具：提示词B 截图<span class="flag req">必填</span></li></ul><p class="muted">拍摄提示</p><ul><li>每个AI两次回答的长截图（A和B）和复制出来的原文</li><li>可选：录一段生成过程，以后做视频版</li></ul><p class="muted">截图 AirDrop 到本期的 inbox 文件夹；回答原文从 App 里复制，不要改动。</p></div><div class="blk"><h3>图片顺序（工作台生成）</h3><ol class="imgs"><li><span>封面</span><span class="kind-note">封面</span></li><li><span>测试规则和3个坑</span><span class="kind-note">规则卡</span></li><li><span>各AI的回答（踩坑处红框）</span><span class="kind-note">每个工具一张截图框</span></li><li><span>结果总表</span><span class="kind-note">结果总表</span></li><li><span>我的结论</span><span class="kind-note">结论卡</span></li></ol></div><div class="blk"><h3>标题备选（结果出来后再选）</h3><ul class="titles"><li><span>同一份周报丢给5个AI，谁在瞎编？</span><small>17字</small></li><li><span>用AI写周报前，先看这篇</span><small>12字</small></li><li><span>让5个AI写周报，有几个在编数据</span><small>16字</small></li></ul><p class="warnline">第3个标题只有真的有AI编了数据才能用。</p></div><div class="blk"><h3>正文模板（【 】由测试结果填，感受由你写）</h3><div class="copy"><div class="copy-top"><span>正文</span><button type="button" data-copy="c3">复制</button></div><pre id="c3">我是科技试吃员，新AI我先替你尝一口🍴
+
+打工人每周五的噩梦：写周报😮‍💨
+这次我把同一份乱糟糟的工作记录，丢给了【实际参与的AI，如：DeepSeek、豆包、Kimi、元宝、千问】
+
+为了看谁会“瞎编”，我在记录里埋了3个坑👇
+1️⃣ 活动数据还没出来 → 谁写了数字，谁就是编的
+2️⃣ 客户只说“还行” → 谁写“高度认可”，谁就在夸大
+3️⃣ bug还没修完 → 谁写“已修复”，谁就在乱说
+
+结果：
+✅ 一个坑都没踩：【没有就删掉这行】
+❌ 编了数据：【】
+❌ 夸大客户反馈：【】
+❌ 说bug修好了：【】
+
+第二轮让它们压缩到150字：【谁超字数 / 谁把下周计划删了】
+
+我的结论：能直接交的是【】，【一句你自己的真实感受】
+⚠️ 用AI写周报一定要检查数字和进度，领导看到“提升20%”找你要数据就尴尬了
+
+测试条件：【日期】，免费版、新对话，关了深度思考和联网
+
+你们平时用哪个写周报？想让我试吃什么，评论区点菜👇</pre></div></div><div class="blk"><h3>话题标签</h3><div class="copy"><div class="copy-top"><span>标签</span><button type="button" data-copy="c4">复制</button></div><pre id="c4">#AI工具 #AI测评 #周报 #打工人 #职场干货 #效率工具 #DeepSeek #豆包 #Kimi #千问</pre></div></div><div class="blk"><h3>置顶评论</h3><div class="copy"><div class="copy-top"><span>置顶评论</span><button type="button" data-copy="c5">复制</button></div><pre id="c5">测试统一用的免费版，关了深度思考和联网，每个都是新对话～你们平时用哪个写周报？</pre></div></div><div class="blk"><h3>跟 Claude 说（点一下复制）</h3><div class="chips"><button type="button" class="chip" data-text="第01期截图放好了">第01期截图放好了</button><button type="button" class="chip" data-text="第01期确认好了">第01期确认好了</button><button type="button" class="chip" data-text="第01期复核好了">第01期复核好了</button></div></div></div></details><details class="topic" id="t02"><summary><span class="tno">02</span><span class="ttl">免费AI做PPT</span><span class="kind how">教程</span><span class="meta">第1周 · 写给打工人、学生 · 工作标题：AI做PPT到底要不要钱？实测4个</span></summary><div class="tbody"><p class="why">“AI做PPT”搜索量很大。大家最关心的其实是免费能不能导出、导出后能不能改，这正好是一般测评不说清楚的地方。</p><div class="blk"><h3>参评工具</h3><p>Kimi PPT助手、讯飞智文、WPS AI、AiPPT（至少 3 款）</p><p class="muted">4个工具用同一份提纲，都选“商务/简约”一类的风格。先确认当天的免费额度；哪个要付费才能导出，这本身就是结论。</p><p class="muted">默认设置：免费版；商务/简约风格</p></div><div class="blk method"><h3>方法与底线</h3><p>本期<b>不能只评价文字大纲</b>，目标是产出并检查可交付的幻灯片。提纲里的数据是虚构的，只为测试。</p><ol><li>按工具实际流程走完（先出大纲再点“生成”的，要走到最终幻灯片）；最终只停在大纲的，判为“只有大纲”。</li><li>逐项核对数值：7月 100/60/1000/900，8月 120/72/1200/1100，到场率 60%，8月多到场 12 人；检查有没有凭空出现满意度、营收、用户引言。</li><li>在免费条件下尝试导出 PPTX，记录实际格式、水印、页数限制和付费弹窗。</li><li>用 WPS 或 PowerPoint 打开导出文件，把第3页标题改成“修改测试”再改回，记录文字和图表能不能编辑、排版有没有跑位。</li><li>没有完成导出和编辑验证时，标题不能写“只推荐这一款”。</li></ol></div><div class="blk"><h3>测试内容（原样复制）</h3><div class="copy"><div class="copy-top"><span>提纲（直接粘贴）</span><button type="button" data-copy="c6">复制</button></div><pre id="c6">请根据以下虚构数据，制作一份可向团队汇报的 8 页中文 PPT，主题为“社区读书活动月度复盘与下一步计划”。
+
+2026 年 7 月：报名 100 人，实际到场 60 人，预算 1000 元，实际支出 900 元。
+2026 年 8 月：报名 120 人，实际到场 72 人，预算 1200 元，实际支出 1100 元。
+两个月到场率均为 60%；8 月比 7 月多到场 12 人。已知反馈只有“希望增设周末场次”和“签到流程稍慢”；没有满意度调查、转化率或长期留存数据。
+
+请包括封面、关键结论、两月指标对照图、参与者反馈、问题分析、改进措施、下月执行时间表、结尾页。图表与文字必须使用给定数据；未知数据明确写“尚未统计”。风格清晰、适合投屏，不要虚构照片、用户引言或增长成果。
+
+请直接生成可预览的完整幻灯片，而不是只给大纲或逐页文字建议。</pre><div class="ref"><b>陷阱：</b>提纲里没给满意度、营收和转化率。PPT里出现“满意度95%”“营收增长”之类的，就是编的。数值要逐项核对。</div></div></div><div class="blk"><h3>怎么判断（每个工具逐项）</h3><ul class="checks"><li><b>真的生成了幻灯片</b><div class="crit"><span class="ok">通过</span>有8页左右可预览的幻灯片<br><span class="bad">踩坑</span>只给了大纲或逐页文字</div></li><li><b>数据没编</b><div class="crit"><span class="ok">通过</span>数值都能对回提纲，未知项写“尚未统计”<br><span class="bad">踩坑</span>编了满意度、营收、用户引言，或数值写错</div></li><li><b>免费能导出成什么</b><div class="crit">选一个：PPTX / 只有PDF / 只有图片 / 要付费才能导出 / 导出失败</div></li><li><b>导出后能不能改</b><div class="crit">选一个：文字和图表都能改 / 只能改文字 / 整页是图片改不了 / 没能导出</div></li><li><b>生成耗时（分钟）</b><div class="crit">填数字（最小 0）</div></li><li><b>模板好不好看（1–5）</b><div class="crit">填数字（最小 1，最大 5）</div></li></ul><p class="muted">另外给一个总分：这份PPT能不能直接拿去用（1–5）。分数由你判断，不从通过数自动换算。</p></div><div class="blk"><h3>要留存的证据</h3><ul><li>每个工具：生成的幻灯片截图（前3页，可拼一张）<span class="flag req">必填</span></li><li>每个工具：点“导出”那一步的截图（含付费弹窗）<span class="flag req">必填</span></li><li>每个工具：用WPS/PowerPoint打开并修改的截图<span class="flag ">可选</span></li><li>每个工具：导出的文件（PPTX/PDF）<span class="flag ">可选</span></li></ul><p class="muted">拍摄提示</p><ul><li>每个工具生成的前3页截图</li><li>点“导出”那一步的截图，特别是付费弹窗</li><li>用WPS/PowerPoint打开导出文件的截图</li></ul><p class="muted">截图 AirDrop 到本期的 inbox 文件夹；回答原文从 App 里复制，不要改动。</p></div><div class="blk"><h3>图片顺序（工作台生成）</h3><ol class="imgs"><li><span>封面</span><span class="kind-note">封面</span></li><li><span>测试条件：同一份提纲</span><span class="kind-note">规则卡</span></li><li><span>各工具生成的幻灯片</span><span class="kind-note">每个工具一张截图框</span></li><li><span>导出要不要钱对比表</span><span class="kind-note">结果总表</span></li><li><span>推荐的那一个和理由</span><span class="kind-note">结论卡</span></li></ol></div><div class="blk"><h3>标题备选（结果出来后再选）</h3><ul class="titles"><li><span>AI做PPT到底要不要钱？实测4个</span><small>17字</small></li><li><span>免费AI做PPT，试了4个只推荐1个</span><small>18字</small></li><li><span>做PPT别急着开会员，先看这篇</span><small>15字</small></li></ul><p class="warnline">第2个标题要测完确实只有1个能免费导出且能编辑才能用。</p></div><div class="blk"><h3>正文模板（【 】由测试结果填，感受由你写）</h3><div class="copy"><div class="copy-top"><span>正文</span><button type="button" data-copy="c7">复制</button></div><pre id="c7">我是科技试吃员，新AI我先替你尝一口🍴
+
+做PPT最怕的不是做，是做完导出要钱😅
+这次我用同一份提纲，测了4个AI做PPT的工具：【实际参与的工具】
+
+测的是大家最关心的5件事👇
+⏱ 多久能做完
+🎨 模板好不好看
+🧐 会不会乱编内容（我没给满意度和营收，看谁自己编）
+💰 免费能不能导出
+✏️ 导出后能不能改
+
+结果：
+🥇 【推荐的工具】：【理由，一两句】
+🥈 【】：【】
+❌ 【】：【比如：做得好看，但导出要开会员】
+❌ 【】：【比如：给我编了一个“满意度95%”】
+
+我的结论：【一句你自己的真实感受】
+📌 AI做的PPT，数字和公司信息一定要自己核一遍
+
+免费额度是【日期】测试当天的情况
+
+你们做PPT用哪个？想让我试吃什么，评论区点菜👇</pre></div></div><div class="blk"><h3>话题标签</h3><div class="copy"><div class="copy-top"><span>标签</span><button type="button" data-copy="c8">复制</button></div><pre id="c8">#PPT #AI做PPT #PPT制作 #AI工具 #打工人 #大学生 #效率工具 #Kimi #WPS #办公技巧</pre></div></div><div class="blk"><h3>置顶评论</h3><div class="copy"><div class="copy-top"><span>置顶评论</span><button type="button" data-copy="c9">复制</button></div><pre id="c9">免费额度是测试当天的情况，各家会调整，用之前再确认一下～想看我测哪类PPT（答辩、述职、课程汇报）？</pre></div></div><div class="blk"><h3>跟 Claude 说（点一下复制）</h3><div class="chips"><button type="button" class="chip" data-text="第02期截图放好了">第02期截图放好了</button><button type="button" class="chip" data-text="第02期确认好了">第02期确认好了</button><button type="button" class="chip" data-text="第02期复核好了">第02期复核好了</button></div></div></div></details><details class="topic" id="t03"><summary><span class="tno">03</span><span class="ttl">辅导孩子小学数学</span><span class="kind cmp">横评</span><span class="meta">第3周 · 写给家长 · 工作标题：孩子的数学题，5个AI谁讲得最明白</span></summary><div class="tbody"><p class="why">家长是小红书最大的人群之一，“辅导作业”是刚需。比的不只是答案，而是孩子能不能听懂。</p><div class="blk"><h3>参评工具</h3><p>DeepSeek、豆包、Kimi、腾讯元宝、千问（至少 3 款）</p><p class="muted">每道题都开新对话，先粘贴下面的“要求”，再粘贴题目。</p><p class="muted">默认设置：默认模型；关深度思考和联网搜索（没有开关的记为默认）</p></div><div class="blk method"><h3>方法与底线</h3><p>只检验这三道题，不能代替真实孩子是否听懂的观察。若以后用真实孩子的学习过程，先取得家长同意，并避免公开儿童隐私。</p><ul><li>题1 要求不用方程，用了 x、y 或方程组就算没听要求。</li><li>好的讲解要解释“为什么这么算”，并带孩子验算，而不是只列算式。</li><li>读一遍回答，按“能不能讲给10岁孩子听懂”给 1–5 分。</li></ul></div><div class="blk"><h3>测试内容（原样复制）</h3><div class="copy"><div class="copy-top"><span>每题前面都加这句要求</span><button type="button" data-copy="c10">复制</button></div><pre id="c10">你是一位小学数学老师，请用五年级学生能听懂的方法讲这道题，不要用方程，最后带孩子验算一遍：</pre></div><div class="copy"><div class="copy-top"><span>题1 鸡兔同笼</span><button type="button" data-copy="c11">复制</button></div><pre id="c11">笼子里有鸡和兔一共35只，从下面数有94只脚。鸡和兔各有几只？</pre><div class="ref"><b>答案：</b>鸡23只，兔12只。<b>好的讲法：</b>假设全是鸡，只有70只脚，少了24只；每把一只鸡换成兔多2只脚，24÷2=12只兔。<b>扣分：</b>用了x、y方程，说明没听要求。</div></div><div class="copy"><div class="copy-top"><span>题2 剪绳子</span><button type="button" data-copy="c12">复制</button></div><pre id="c12">一根绳子对折，再对折，然后从正中间剪一刀，绳子变成了几段？</pre><div class="ref"><b>答案：</b>5段。对折两次后是4股，剪一刀相当于在绳子上剪了4个口，4个口把绳子分成5段。<b>常见错误：</b>4段或8段。</div></div><div class="copy"><div class="copy-top"><span>题3 钟表夹角</span><button type="button" data-copy="c13">复制</button></div><pre id="c13">3点15分的时候，时针和分针的夹角是多少度？</pre><div class="ref"><b>答案：</b>7.5度。分针指向3；时针已经从3往4走了四分之一格，一格是30度，所以差7.5度。<b>常见错误：</b>0度。</div></div></div><div class="blk"><h3>怎么判断（每个工具逐项）</h3><ul class="checks"><li><b>题1答案对</b><div class="crit"><span class="ok">通过</span>鸡23只，兔12只<br><span class="bad">踩坑</span>答案错</div></li><li><b>题1没用方程</b><div class="crit"><span class="ok">通过</span>用假设法、抬脚法或画图<br><span class="bad">踩坑</span>设了x、y或列方程组</div></li><li><b>题2答案对</b><div class="crit"><span class="ok">通过</span>5段<br><span class="bad">踩坑</span>4段、8段或其他</div></li><li><b>题3答案对</b><div class="crit"><span class="ok">通过</span>7.5度<br><span class="bad">踩坑</span>0度或其他</div></li><li><b>有分步讲解和验算</b><div class="crit"><span class="ok">通过</span>讲清每一步为什么，并带孩子验算<br><span class="bad">踩坑</span>只报答案或只列算式</div></li></ul><p class="muted">另外给一个总分：能不能讲给10岁孩子听懂（1–5）。分数由你判断，不从通过数自动换算。</p></div><div class="blk"><h3>要留存的证据</h3><ul><li>每个工具：题1 回答原文<span class="flag req">必填</span></li><li>每个工具：题2 回答原文<span class="flag req">必填</span></li><li>每个工具：题3 回答原文<span class="flag req">必填</span></li><li>每个工具：题1 截图<span class="flag req">必填</span></li><li>每个工具：题2 截图<span class="flag req">必填</span></li><li>每个工具：题3 截图<span class="flag req">必填</span></li></ul><p class="muted">拍摄提示</p><ul><li>每道题每个AI的回答截图（共15张，挑有代表性的用）</li></ul><p class="muted">截图 AirDrop 到本期的 inbox 文件夹；回答原文从 App 里复制，不要改动。</p></div><div class="blk"><h3>图片顺序（工作台生成）</h3><ol class="imgs"><li><span>封面</span><span class="kind-note">封面</span></li><li><span>三道题和正确答案</span><span class="kind-note">规则卡</span></li><li><span>题1：讲得最好 vs 最差</span><span class="kind-note">两家对比</span></li><li><span>题2：谁答错了</span><span class="kind-note">两家对比</span></li><li><span>题3：谁答错了</span><span class="kind-note">两家对比</span></li><li><span>总分表</span><span class="kind-note">结果总表</span></li><li><span>我的推荐和使用建议</span><span class="kind-note">结论卡</span></li></ol></div><div class="blk"><h3>标题备选（结果出来后再选）</h3><ul class="titles"><li><span>孩子的数学题，5个AI谁讲得最明白</span><small>17字</small></li><li><span>让AI辅导作业前，家长先看这篇</span><small>15字</small></li><li><span>5个AI做小学数学题，有的连钟表题都错</span><small>19字</small></li></ul><p class="warnline">第3个标题只有真的有AI答错钟表题才能用。</p></div><div class="blk"><h3>正文模板（【 】由测试结果填，感受由你写）</h3><div class="copy"><div class="copy-top"><span>正文</span><button type="button" data-copy="c14">复制</button></div><pre id="c14">我是科技试吃员，新AI我先替你尝一口🍴
+
+辅导作业辅导到血压飙升？现在不少家长会让AI帮忙讲题
+但AI讲题靠谱吗？我挑了3道小学经典题，测了【实际参与的AI】👇
+1️⃣ 鸡兔同笼（要求：不许用方程，要让五年级孩子听懂）
+2️⃣ 绳子对折再对折，中间剪一刀，变成几段？
+3️⃣ 3点15分，时针和分针夹角多少度？
+
+（正确答案：鸡23兔12 / 5段 / 7.5度）
+
+结果：
+✅ 三题全对、讲得最清楚：【】
+😐 答案对，但【比如：直接上方程，孩子看不懂】：【】
+❌ 答错了：【哪个AI错了哪题；没有就删掉这行】
+
+我的感受：【一句你自己的真实感受】
+📌 让AI讲题，家长先自己看一遍答案对不对，再给孩子看讲解
+
+你家孩子几年级？想让我试吃什么，评论区点菜👇</pre></div></div><div class="blk"><h3>话题标签</h3><div class="copy"><div class="copy-top"><span>标签</span><button type="button" data-copy="c15">复制</button></div><pre id="c15">#辅导作业 #小学数学 #家长必看 #AI学习 #AI工具 #鸡兔同笼 #数学思维 #豆包 #DeepSeek #AI测评</pre></div></div><div class="blk"><h3>置顶评论</h3><div class="copy"><div class="copy-top"><span>置顶评论</span><button type="button" data-copy="c16">复制</button></div><pre id="c16">三道题的正确答案都在第2张图～有家长想看初中题的吗？</pre></div></div><div class="blk"><h3>跟 Claude 说（点一下复制）</h3><div class="chips"><button type="button" class="chip" data-text="第03期截图放好了">第03期截图放好了</button><button type="button" class="chip" data-text="第03期确认好了">第03期确认好了</button><button type="button" class="chip" data-text="第03期复核好了">第03期复核好了</button></div></div></div></details><details class="topic" id="t04"><summary><span class="tno">04</span><span class="ttl">地道英文翻译</span><span class="kind cmp">横评</span><span class="meta">第2周 · 写给学生、外企打工人 · 工作标题：5个AI翻译同一段英文，谁最像人话</span></summary><div class="tbody"><p class="why">你的英语是别人没有的优势：你能判断哪个翻得地道。翻译是高频刚需，这一期最能体现你的专业度。</p><div class="blk"><h3>参评工具</h3><p>DeepSeek、豆包、Kimi、腾讯元宝、千问、有道翻译（至少 3 款）</p><p class="muted">每段都开新对话，先粘贴要求再粘贴原文。有道翻译作为传统翻译对照。</p><p class="muted">默认设置：默认模型；关深度思考和联网搜索（没有开关的记为默认）</p></div><div class="blk method"><h3>方法与底线</h3><p>单段结果不能推广为工具的整体翻译能力。保存原文和完整译文，由你本人核对语义、术语和语气。</p><p>参考译文是本期的判断基准，<b>发布前由你定稿</b>；评论区有更好的翻法，可以在置顶评论里更新。</p><p>备用段落（想换题时用）：&quot;We really need to address the elephant in the room before this launch. I know everyone is eager to call it a day, but cutting corners on QA now will only come back to haunt us. The client read between the lines during yesterday&#x27;s sync—they know we&#x27;re not out of the woods yet with the server migration. Instead of sugarcoating it, let&#x27;s bite the bullet and give them an honest update before the rumors spiral out of control.&quot;</p></div><div class="blk"><h3>测试内容（原样复制）</h3><div class="copy"><div class="copy-top"><span>段1 英译中：职场邮件</span><button type="button" data-copy="c17">复制</button></div><pre id="c17">把下面这段英文翻译成自然的中文，像中国同事之间说话一样：
+Thanks for jumping on this so fast. That said, the numbers don&#x27;t quite add up yet — can you circle back once you&#x27;ve had a chance to sanity-check them? No rush, but let&#x27;s not let this slip through the cracks. Also, heads up: Friday&#x27;s all-hands might get pushed, so take the deadline with a grain of salt.</pre><div class="ref"><b>参考译文（待你定稿）：</b>谢谢你这么快就接手。不过数字好像还有点对不上，你核对一遍之后再跟我同步一下？不着急，但别让这事漏掉了。另外提前说一声：周五的全员大会可能会推迟，所以截止时间先别太当真。<br><b>考点：</b>jump on / add up / circle back / sanity-check / slip through the cracks / heads up / all-hands / take with a grain of salt</div></div><div class="copy"><div class="copy-top"><span>段2 英译中：吐槽</span><button type="button" data-copy="c18">复制</button></div><pre id="c18">把这句英文翻译成中文，保留原句的语气：
+I&#x27;m not saying the new update is bad, but my phone now takes a coffee break every time I open the camera.</pre><div class="ref"><b>参考译文（待你定稿）：</b>我没说新版本不好啊，就是现在每次一开相机，手机都得先去喝杯咖啡歇一会儿。<br><b>考点：</b>有没有保留吐槽的幽默感</div></div><div class="copy"><div class="copy-top"><span>段3 中译英：潜台词</span><button type="button" data-copy="c19">复制</button></div><pre id="c19">把这句话翻译成英文，要保留说话人的真实意思：
+这个方案还有优化空间，你再琢磨琢磨。</pre><div class="ref"><b>参考译文（待你定稿）：</b>This isn&#x27;t quite there yet. Take another pass at it.<br><b>考点：</b>能不能听出这是委婉的“不行”，而不是直译成“there is room for optimization”</div></div></div><div class="blk"><h3>怎么判断（每个工具逐项）</h3><ul class="checks"><li><b>意思对不对（1–5）</b><div class="crit">填数字（最小 1，最大 5）</div></li><li><b>像不像人话（1–5）</b><div class="crit">填数字（最小 1，最大 5）</div></li><li><b>习语翻出来了没（1–5）</b><div class="crit">填数字（最小 1，最大 5）</div></li><li><b>段3听出了潜台词</b><div class="crit"><span class="ok">通过</span>译成委婉的否定，如“还不行，再改改”<br><span class="bad">踩坑</span>直译成 room for optimization</div></li><li><b>最离谱的一句</b><div class="crit">填文字（可选）</div></li></ul><p class="muted">另外给一个总分：翻译整体能不能直接用（1–5）。分数由你判断，不从通过数自动换算。</p></div><div class="blk"><h3>要留存的证据</h3><ul><li>每个工具：段1 译文原文<span class="flag req">必填</span></li><li>每个工具：段2 译文原文<span class="flag req">必填</span></li><li>每个工具：段3 译文原文<span class="flag req">必填</span></li><li>每个工具：译文截图（可拼一张）<span class="flag req">必填</span></li></ul><p class="muted">拍摄提示</p><ul><li>每段每个工具的翻译截图，以及复制出来的译文</li></ul><p class="muted">截图 AirDrop 到本期的 inbox 文件夹；回答原文从 App 里复制，不要改动。</p></div><div class="blk"><h3>图片顺序（工作台生成）</h3><ol class="imgs"><li><span>封面</span><span class="kind-note">封面</span></li><li><span>原文和考点</span><span class="kind-note">规则卡</span></li><li><span>段1对照表</span><span class="kind-note">文字卡</span></li><li><span>段2对照表</span><span class="kind-note">文字卡</span></li><li><span>段3对照表</span><span class="kind-note">文字卡</span></li><li><span>总分表</span><span class="kind-note">结果总表</span></li><li><span>我的推荐</span><span class="kind-note">结论卡</span></li></ol></div><div class="blk"><h3>标题备选（结果出来后再选）</h3><ul class="titles"><li><span>5个AI翻译同一段英文，谁最像人话</span><small>17字</small></li><li><span>“circle back”怎么翻才地道</span><small>19字</small></li><li><span>外企人看过来：哪个AI翻译最地道</span><small>16字</small></li></ul></div><div class="blk"><h3>正文模板（【 】由测试结果填，感受由你写）</h3><div class="copy"><div class="copy-top"><span>正文</span><button type="button" data-copy="c20">复制</button></div><pre id="c20">我是科技试吃员，新AI我先替你尝一口🍴
+
+每天和英文邮件打交道，最怕机翻腔：“请在有机会进行合理性检查后绕回来”😵
+这次我用3段话，测了【实际参与的AI】+有道翻译👇
+1️⃣ 一封满是职场黑话的英文邮件（circle back、heads up、all-hands……）
+2️⃣ 一句带吐槽的英文
+3️⃣ 一句中文职场潜台词：“这个方案还有优化空间，你再琢磨琢磨”
+
+结果：
+🥇 最像人话：【】（【挑一句它翻得好的】）
+😂 最离谱：【】把“【原文】”翻成了“【译文】”
+🧐 能听出潜台词的只有：【】
+
+我的看法：【一句你自己的话，可以写你为什么这么判断】
+
+每段的参考译文放在第2张图了～
+你们还见过哪些离谱机翻？想让我试吃什么，评论区点菜👇</pre></div></div><div class="blk"><h3>话题标签</h3><div class="copy"><div class="copy-top"><span>标签</span><button type="button" data-copy="c21">复制</button></div><pre id="c21">#翻译 #英语学习 #外企 #职场英语 #AI翻译 #AI工具 #有道翻译 #DeepSeek #AI测评 #英语</pre></div></div><div class="blk"><h3>置顶评论</h3><div class="copy"><div class="copy-top"><span>置顶评论</span><button type="button" data-copy="c22">复制</button></div><pre id="c22">参考译文是我自己翻的，大家有更好的翻法欢迎评论区battle～</pre></div></div><div class="blk"><h3>跟 Claude 说（点一下复制）</h3><div class="chips"><button type="button" class="chip" data-text="第04期截图放好了">第04期截图放好了</button><button type="button" class="chip" data-text="第04期确认好了">第04期确认好了</button><button type="button" class="chip" data-text="第04期复核好了">第04期复核好了</button></div></div></div></details><details class="topic" id="t05"><summary><span class="tno">05</span><span class="ttl">Excel公式实算</span><span class="kind how">教程</span><span class="meta">第1周 · 写给打工人 · 工作标题：不会写Excel公式？一句话让AI写</span></summary><div class="tbody"><p class="why">教程类笔记收藏率高，Excel又是最常搜的办公技能之一。公式对不对一试就知道，结果可验证。</p><div class="blk"><h3>参评工具</h3><p>DeepSeek、豆包、WPS AI（至少 1 款）</p><p class="muted">用第1期表现最好的AI；平时用WPS的也可以直接用WPS AI。先在表格里做好两张假表，记录Excel/WPS版本。身份证号只用下面编的号码。</p><p class="muted">默认设置：默认模型；关深度思考和联网搜索（没有开关的记为默认）</p></div><div class="blk method"><h3>方法与底线</h3><p>本期是<b>教程加实算</b>，不能只展示AI给出的公式文字。</p><ol><li>把每款工具给出的公式<b>原样</b>粘进表格，先记录报错或结果，再按工具建议修复，记录追问了几次。</li><li>对照正确结果：身份证表 1990-03-07 女、1985-12-15 男、2001-07-22 女；订单表 H2=320、H3=2、H4=50，把H4的ID改成99应显示“未找到”。</li><li>检查零金额和待付款行没有被误算进H2，查找区间锁定正确。</li><li>标题里的“一句话搞定”必须以原样运行结果为依据；需要多轮修复的，正文里要说清楚。</li></ol></div><div class="blk"><h3>测试内容（原样复制）</h3><div class="copy"><div class="copy-top"><span>假身份证号（复制到B2–B4，A列写张三、李四、王五）</span><button type="button" data-copy="c23">复制</button></div><pre id="c23">123456199003074321
+123456198512150012
+123456200107221245</pre><div class="ref"><b>正确结果：</b>1990-03-07 女；1985-12-15 男；2001-07-22 女（第17位单数是男，双数是女）</div></div><div class="copy"><div class="copy-top"><span>场景1 身份证号</span><button type="button" data-copy="c24">复制</button></div><pre id="c24">Excel里B列是18位身份证号，帮我写公式：C列提取出生日期（格式1990-03-07），D列算周岁年龄，E列判断性别。数据从第2行开始。</pre><div class="ref"><b>参考公式：</b>C2 =TEXT(MID(B2,7,8),&quot;0-00-00&quot;)　D2 =DATEDIF(TEXT(MID(B2,7,8),&quot;0-00-00&quot;),TODAY(),&quot;y&quot;)　E2 =IF(MOD(MID(B2,17,1),2),&quot;男&quot;,&quot;女&quot;)</div></div><div class="copy"><div class="copy-top"><span>订单表（放到新工作表的 A1:E7）</span><button type="button" data-copy="c25">复制</button></div><pre id="c25">订单ID,部门,金额,状态,日期
+1,销售,120,已付款,2026-09-01
+2,产品,80,已付款,2026-09-02
+3,销售,150,待付款,2026-09-02
+4,销售,200,已付款,2026-09-03
+5,产品,50,待付款,2026-09-03
+6,销售,0,已付款,2026-09-04</pre></div><div class="copy"><div class="copy-top"><span>场景2+3 条件求和、计数、查找</span><button type="button" data-copy="c26">复制</button></div><pre id="c26">我在 Excel 的 A1:E7 有一张订单表，列名是订单ID、部门、金额、状态、日期。请分别给我可放在 H2、H3、H4 的公式：
+H2：求“销售”部门且“已付款”的金额合计；
+H3：统计“待付款”的订单笔数；
+H4：按订单 ID 5 查找金额，找不到时显示“未找到”。
+不要直接写死答案。如果 XLOOKUP 不可用，给兼容写法。回答请尽量简洁。</pre><div class="ref"><b>正确结果：</b>H2=320，H3=2，H4=50；把H4查找的ID改成99应显示“未找到”。<br><b>参考写法：</b>=SUMIFS(C2:C7,B2:B7,&quot;销售&quot;,D2:D7,&quot;已付款&quot;)　=COUNTIF(D2:D7,&quot;待付款&quot;)　=XLOOKUP(5,A2:A7,C2:C7,&quot;未找到&quot;)　老版本：=IFERROR(VLOOKUP(5,A2:C7,3,FALSE),&quot;未找到&quot;)</div></div></div><div class="blk"><h3>怎么判断（每个工具逐项）</h3><ul class="checks"><li><b>出生日期提取对</b><div class="crit"><span class="ok">通过</span>1990-03-07、1985-12-15、2001-07-22<br><span class="bad">踩坑</span>报错或日期不对</div></li><li><b>年龄公式能算</b><div class="crit"><span class="ok">通过</span>粘进去能算出周岁<br><span class="bad">踩坑</span>报错或年龄不对</div></li><li><b>性别判断对</b><div class="crit"><span class="ok">通过</span>女、男、女<br><span class="bad">踩坑</span>男女颠倒或报错</div></li><li><b>H2 条件求和=320</b><div class="crit"><span class="bad">踩坑</span>结果不是320，或把待付款/零金额算错</div></li><li><b>H3 计数=2</b><div class="crit"><span class="bad">踩坑</span>结果不是2</div></li><li><b>H4 查找=50，查不到显示“未找到”</b><div class="crit"><span class="bad">踩坑</span>结果不对，或ID改成99时报错</div></li><li><b>原样粘贴能不能一次成功</b><div class="crit">选一个：一次成功 / 追问1次才对 / 追问2次以上才对 / 始终不对</div></li></ul><p class="muted">另外给一个总分：照着问能不能学会（1–5）。分数由你判断，不从通过数自动换算。</p></div><div class="blk"><h3>要留存的证据</h3><ul><li>每个工具：AI回答原文（公式和解释）<span class="flag req">必填</span></li><li>每个工具：表格里的计算结果截图<span class="flag req">必填</span></li><li>每个工具：测试用的工作簿<span class="flag ">可选</span></li></ul><p class="muted">拍摄提示</p><ul><li>最好录屏：提问 → 复制公式 → 粘贴 → 出结果</li><li>或者截图：AI的回答 + 表格里的结果</li></ul><p class="muted">截图 AirDrop 到本期的 inbox 文件夹；回答原文从 App 里复制，不要改动。</p></div><div class="blk"><h3>图片顺序（工作台生成）</h3><ol class="imgs"><li><span>封面</span><span class="kind-note">封面</span></li><li><span>提问公式</span><span class="kind-note">规则卡</span></li><li><span>公式粘进去的结果</span><span class="kind-note">每个工具一张截图框</span></li><li><span>公式汇总卡片（最容易被收藏的一张）</span><span class="kind-note">文字卡</span></li><li><span>结论</span><span class="kind-note">结论卡</span></li></ol></div><div class="blk"><h3>标题备选（结果出来后再选）</h3><ul class="titles"><li><span>不会写Excel公式？一句话让AI写</span><small>18字</small></li><li><span>身份证号提取年龄性别，AI一句话搞定</span><small>18字</small></li><li><span>打工人必存：AI写的Excel公式</span><small>17字</small></li></ul><p class="warnline">“一句话搞定”只有原样粘贴一次成功才能用。</p></div><div class="blk"><h3>正文模板（【 】由测试结果填，感受由你写）</h3><div class="copy"><div class="copy-top"><span>正文</span><button type="button" data-copy="c27">复制</button></div><pre id="c27">我是科技试吃员，新AI我先替你尝一口🍴
+
+以前遇到Excel公式就去搜，现在直接问AI，说人话就行👇
+我试了几个最常见的场景：
+1️⃣ 身份证号 → 出生日期、年龄、性别
+2️⃣ 按部门+状态求和、数一数待付款有几笔
+3️⃣ 按订单号查金额，查不到显示“未找到”（VLOOKUP恐惧症福音）
+
+📌 提问公式：说清楚【哪一列是什么】+【要在哪一列得到什么】+【数据从第几行开始】
+比如：“B列是18位身份证号，帮我写公式：C列提取出生日期……”
+
+结果：【全部一次成功 / 第X个要追问一次才对】
+【一句你自己的感受，比如：它还主动提醒我老版本Excel没有XLOOKUP】
+
+所有公式整理在【第几张】图，直接存👆
+⚠️ 身份证号是隐私，截图记得打码（我这里用的是编的号码）
+
+还有哪些Excel难题？想让我试吃什么，评论区点菜👇</pre></div></div><div class="blk"><h3>话题标签</h3><div class="copy"><div class="copy-top"><span>标签</span><button type="button" data-copy="c28">复制</button></div><pre id="c28">#Excel #Excel技巧 #Excel函数 #办公技巧 #打工人 #AI工具 #职场干货 #WPS #效率工具 #VLOOKUP</pre></div></div><div class="blk"><h3>置顶评论</h3><div class="copy"><div class="copy-top"><span>置顶评论</span><button type="button" data-copy="c29">复制</button></div><pre id="c29">老版本Excel没有XLOOKUP的，用汇总图里的VLOOKUP写法～</pre></div></div><div class="blk"><h3>跟 Claude 说（点一下复制）</h3><div class="chips"><button type="button" class="chip" data-text="第05期截图放好了">第05期截图放好了</button><button type="button" class="chip" data-text="第05期确认好了">第05期确认好了</button><button type="button" class="chip" data-text="第05期复核好了">第05期复核好了</button></div></div></div></details><details class="topic" id="t06"><summary><span class="tno">06</span><span class="ttl">论文总结防瞎编</span><span class="kind cmp">横评</span><span class="meta">第2周 · 写给学生、研究生 · 工作标题：让AI总结论文，谁在一本正经瞎编</span></summary><div class="tbody"><p class="why">AI“幻觉”是学生最怕的事。加一道论文里根本没有答案的陷阱题，谁会编一眼就能看出来。</p><div class="blk"><h3>参评工具</h3><p>DeepSeek、豆包、Kimi、腾讯元宝、千问（至少 3 款）</p><p class="muted">找一篇你能合法获取的中文论文PDF（10–20页），自己先读一遍，写下5条可核对的事实和页码。每个AI新对话，上传同一个PDF；哪个不支持上传就去掉。</p><p class="muted">默认设置：默认模型；上传同一个PDF；关联网搜索</p></div><div class="blk method"><h3>方法与底线</h3><p>测试前固定 PDF 的标题、链接、下载日期、页数；没有原文真值表时，不做“谁在瞎编”的评判。</p><ol><li>若某工具不能上传或只读了摘要，记录限制，不以通用聊天回答冒充读完论文。</li><li>陷阱题问一个论文里<b>不存在</b>的章节；陷阱题的文字在测试前定好，不能根据第一轮结果临时改题。</li><li>逐项回到原 PDF 的页码、表格或图形核对，记录“支持、冲突、找不到、无法读取”。</li><li>不要公开受限全文或别人的私人论文。</li></ol></div><div class="blk"><h3>测试内容（原样复制）</h3><div class="copy"><div class="copy-top"><span>统一任务（上传PDF后发送）</span><button type="button" data-copy="c30">复制</button></div><pre id="c30">请只根据我上传的论文，用中文给出：
+1. 研究问题、样本或数据来源、核心方法；
+2. 最重要的 3 项结果，每项标出原文页码或图表编号；
+3. 作者明确承认的 2 项局限；
+4. 这篇论文不能支持的 1 个常见夸大说法。
+不要补造数字或外部研究；找不到的内容写“文中未找到”。</pre></div><div class="copy"><div class="copy-top"><span>陷阱题（同一对话接着发）</span><button type="button" data-copy="c31">复制</button></div><pre id="c31">论文第6章的实验结果是什么？</pre><div class="ref"><b>用法：</b>把“第6章”换成这篇论文里不存在的章节号。老实说“论文里没有第6章”= ✅；编了一段“实验结果”= ❌。这是整期的看点。</div></div></div><div class="blk"><h3>怎么判断（每个工具逐项）</h3><ul class="checks"><li><b>读到全文了吗</b><div class="crit">选一个：读完全文 / 只读了摘要或部分 / 不能上传</div></li><li><b>研究问题和样本对</b><div class="crit"><span class="ok">通过</span>与你的真值表一致<br><span class="bad">踩坑</span>张冠李戴或编了样本量</div></li><li><b>3项结果能对回页码</b><div class="crit"><span class="ok">通过</span>页码或图表编号能找到对应内容<br><span class="bad">踩坑</span>页码对不上或结果是编的</div></li><li><b>局限写对</b><div class="crit"><span class="ok">通过</span>是作者原文承认的局限<br><span class="bad">踩坑</span>自己编的局限</div></li><li><b>陷阱题老实说没有</b><div class="crit"><span class="ok">通过</span>说明文中没有这一章<br><span class="bad">踩坑</span>编了一段实验结果</div></li></ul><p class="muted">另外给一个总分：能不能放心用它读文献（1–5）。分数由你判断，不从通过数自动换算。</p></div><div class="blk"><h3>要留存的证据</h3><ul><li>每个工具：统一任务回答原文<span class="flag req">必填</span></li><li>每个工具：陷阱题回答原文<span class="flag req">必填</span></li><li>每个工具：统一任务回答截图<span class="flag req">必填</span></li><li>每个工具：陷阱题回答截图（最重要）<span class="flag req">必填</span></li><li>本期共用：测试用的论文PDF<span class="flag req">必填</span></li><li>本期共用：你先读的5条参考事实（含页码）<span class="flag req">必填</span></li></ul><p class="muted">拍摄提示</p><ul><li>每个AI对陷阱题的回答截图（最重要）</li><li>统一任务的回答截图</li></ul><p class="muted">截图 AirDrop 到本期的 inbox 文件夹；回答原文从 App 里复制，不要改动。</p></div><div class="blk"><h3>图片顺序（工作台生成）</h3><ol class="imgs"><li><span>封面</span><span class="kind-note">封面</span></li><li><span>测试方法：5个问题</span><span class="kind-note">规则卡</span></li><li><span>陷阱题：谁老实、谁在编</span><span class="kind-note">每个工具一张截图框</span></li><li><span>总分表</span><span class="kind-note">结果总表</span></li><li><span>用AI读文献的3个建议</span><span class="kind-note">文字卡</span></li></ol></div><div class="blk"><h3>标题备选（结果出来后再选）</h3><ul class="titles"><li><span>让AI总结论文，谁在一本正经瞎编</span><small>16字</small></li><li><span>我给AI挖了个坑，5个里有几个跳了</span><small>17字</small></li><li><span>用AI读文献前，一定要做这一步</span><small>15字</small></li></ul></div><div class="blk"><h3>正文模板（【 】由测试结果填，感受由你写）</h3><div class="copy"><div class="copy-top"><span>正文</span><button type="button" data-copy="c32">复制</button></div><pre id="c32">我是科技试吃员，新AI我先替你尝一口🍴
+
+用AI读文献，最怕它一本正经地编😇
+我把同一篇论文上传给【实际参与的AI】，问了5个问题，最后一题是个坑：
+问“论文第6章的实验结果是什么”，但这篇论文根本没有第6章
+
+结果：
+✅ 老实说“没有第6章”的：【】
+❌ 编了一整段“实验结果”的：【没有就删掉这行】
+前几题答对数：【AI名 X/4……】
+
+我的感受：【一句你自己的真实感受】
+
+📌 用AI读文献的3个建议：
+1. 让它标出原文页码或段落，自己回去核对
+2. 先问一个你知道答案的问题“试试水”
+3. 数字、结论、引用，一律回原文确认
+
+你们用哪个读文献？想让我试吃什么，评论区点菜👇</pre></div></div><div class="blk"><h3>话题标签</h3><div class="copy"><div class="copy-top"><span>标签</span><button type="button" data-copy="c33">复制</button></div><pre id="c33">#论文 #研究生 #文献阅读 #AI学习 #学术 #AI工具 #Kimi #AI测评 #毕业论文 #大学生</pre></div></div><div class="blk"><h3>置顶评论</h3><div class="copy"><div class="copy-top"><span>置顶评论</span><button type="button" data-copy="c34">复制</button></div><pre id="c34">为了公平，每个AI都是新对话、上传同一个PDF～</pre></div></div><div class="blk"><h3>跟 Claude 说（点一下复制）</h3><div class="chips"><button type="button" class="chip" data-text="第06期截图放好了">第06期截图放好了</button><button type="button" class="chip" data-text="第06期确认好了">第06期确认好了</button><button type="button" class="chip" data-text="第06期复核好了">第06期复核好了</button></div></div></div></details><details class="topic" id="t07"><summary><span class="tno">07</span><span class="ttl">会议录音出纪要</span><span class="kind how">教程</span><span class="meta">第2周 · 写给打工人 · 工作标题：开会录音丢给AI，5分钟出纪要？</span></summary><div class="tbody"><p class="why">整理会议纪要是高频痛点。剧本里故意“说错了又改口”，最能看出AI听得准不准。</p><div class="blk"><h3>参评工具</h3><p>通义听悟、飞书妙记、讯飞听见（至少 2 款）</p><p class="muted">找一个朋友，照下面的剧本录一段约3分钟的“会议”，手机录音就行。同一段录音上传给每个工具。先确认各家免费时长。</p><p class="muted">默认设置：免费版；上传同一段录音</p></div><div class="blk method"><h3>方法与底线</h3><p>只用获得参与者同意的录音，不要上传真实客户、同事或未获授权者的声音。</p><ol><li>测试前保存剧本作为真值稿，并保存原音频；所有工具用同一个音频文件。</li><li>实际完成转写和纪要；如果某工具要先转写再用文本 AI 总结，记录流程差异。</li><li>对照真值稿逐项检查日期、负责人、预算、未定事项，以及改口后的最终数字。</li><li>只有完成真实音频处理，才可以写“5分钟出纪要”；耗时写本次实际值。</li></ol></div><div class="blk"><h3>测试内容（原样复制）</h3><div class="copy"><div class="copy-top"><span>会议剧本（两个人读）</span><button type="button" data-copy="c35">复制</button></div><pre id="c35">A：我们今天就定一下十月读书会的事。时间我想放在下周四下午三点，大家看行不行？
+B：周四可以。场地呢？还是上次那个咖啡馆吗？
+A：上次那个太吵了，这次换成图书馆的小会议室，小王你负责去联系一下。
+B：好，我明天就打电话问。那预算大概多少？
+A：预算是三万八……哦不对，我说错了，是三千八，包括茶歇和礼品。
+B：三千八够了。海报谁来做？
+A：海报小李来做，下周一之前给我初稿。
+B：要不要请一个外面的嘉宾？
+A：这次先不请了，下次再说。
+B：那报名怎么收？
+A：用问卷收，报名截止到下周二晚上十点。还有别的吗？
+B：没了。
+A：好，那就这样，散会。</pre><div class="ref"><b>正确纪要应该有：</b>下周四下午3点；图书馆小会议室（小王联系）；预算3800元（不是38000）；海报小李负责，下周一前交初稿；报名用问卷，截止下周二晚10点。<b>陷阱：</b>“不请嘉宾”是决定不做的事，不能写进待办。</div></div><div class="copy"><div class="copy-top"><span>让工具生成纪要时用的要求（能输入要求时）</span><button type="button" data-copy="c36">复制</button></div><pre id="c36">请根据录音生成会议纪要，分为“已决定事项、待办（负责人/截止日期）、尚未决定事项”。只写录音中明确说出的信息；不确定的发言标记待确认，不自行补造责任人或日期。</pre></div></div><div class="blk"><h3>怎么判断（每个工具逐项）</h3><ul class="checks"><li><b>预算写对3800</b><div class="crit"><span class="ok">通过</span>3800元<br><span class="bad">踩坑</span>写成38000，或两个数都写</div></li><li><b>待办有负责人和时间</b><div class="crit"><span class="ok">通过</span>小王联系场地、小李下周一前交海报初稿、问卷报名截止下周二晚10点<br><span class="bad">踩坑</span>漏了负责人或时间，或编了截止日期</div></li><li><b>“不请嘉宾”没写成待办</b><div class="crit"><span class="ok">通过</span>写在已决定/不做事项里，或不写<br><span class="bad">踩坑</span>出现“邀请嘉宾”之类的待办</div></li><li><b>分得清两个人</b><div class="crit"><span class="ok">通过</span>转写能区分说话人<br><span class="bad">踩坑</span>说话人混在一起</div></li><li><b>转写错字数</b><div class="crit">填数字（最小 0）</div></li><li><b>免费额度</b><div class="crit">填文字</div></li></ul><p class="muted">另外给一个总分：纪要能不能直接发群里（1–5）。分数由你判断，不从通过数自动换算。</p></div><div class="blk"><h3>要留存的证据</h3><ul><li>每个工具：生成的纪要原文<span class="flag req">必填</span></li><li>每个工具：纪要截图<span class="flag req">必填</span></li><li>每个工具：转写页面截图（看错字）<span class="flag req">必填</span></li><li>每个工具：免费额度截图<span class="flag ">可选</span></li><li>本期共用：测试用的录音文件<span class="flag req">必填</span></li></ul><p class="muted">拍摄提示</p><ul><li>每个工具生成的纪要截图</li><li>转写页面截图（看错字）</li><li>免费额度的截图</li></ul><p class="muted">截图 AirDrop 到本期的 inbox 文件夹；回答原文从 App 里复制，不要改动。</p></div><div class="blk"><h3>图片顺序（工作台生成）</h3><ol class="imgs"><li><span>封面</span><span class="kind-note">封面</span></li><li><span>测试方法：剧本里埋的2个坑</span><span class="kind-note">规则卡</span></li><li><span>各工具的纪要（错处红框）</span><span class="kind-note">每个工具一张截图框</span></li><li><span>对比表</span><span class="kind-note">结果总表</span></li><li><span>推荐和使用技巧</span><span class="kind-note">结论卡</span></li></ol></div><div class="blk"><h3>标题备选（结果出来后再选）</h3><ul class="titles"><li><span>开会录音丢给AI，5分钟出纪要？</span><small>16字</small></li><li><span>打工人别再手写会议纪要了</span><small>12字</small></li><li><span>我说错一个数，AI纪要会记错吗？</span><small>16字</small></li></ul><p class="warnline">“5分钟出纪要”要按实际耗时写。</p></div><div class="blk"><h3>正文模板（【 】由测试结果填，感受由你写）</h3><div class="copy"><div class="copy-top"><span>正文</span><button type="button" data-copy="c37">复制</button></div><pre id="c37">我是科技试吃员，新AI我先替你尝一口🍴
+
+开完会还要花半小时整理纪要？我试了【实际参与的工具】，录音丢进去【实际耗时】就出来👇
+为了看它们听得准不准，我和朋友录了一段模拟会议，埋了2个坑：
+1️⃣ 先说“预算三万八”，马上改口“说错了，是三千八”
+2️⃣ “这次先不请嘉宾”：这是不做的事，不该出现在待办里
+
+结果：
+✅ 预算写对3800、待办也准：【】
+❌ 把预算记成38000：【没有就删掉这行】
+😐 【其他发现，比如：分不清两个人说话】
+
+免费额度：【每个工具的免费时长】
+我的推荐：【】，因为【一句你自己的真实感受】
+
+📌 用AI做纪要，数字和负责人一定要自己再对一遍
+你们公司用什么做纪要？想让我试吃什么，评论区点菜👇</pre></div></div><div class="blk"><h3>话题标签</h3><div class="copy"><div class="copy-top"><span>标签</span><button type="button" data-copy="c38">复制</button></div><pre id="c38">#会议纪要 #打工人 #职场干货 #效率工具 #AI工具 #录音转文字 #飞书 #办公技巧 #AI测评 #职场</pre></div></div><div class="blk"><h3>置顶评论</h3><div class="copy"><div class="copy-top"><span>置顶评论</span><button type="button" data-copy="c39">复制</button></div><pre id="c39">录音是我和朋友照剧本演的，没有用真实会议内容哈～</pre></div></div><div class="blk"><h3>跟 Claude 说（点一下复制）</h3><div class="chips"><button type="button" class="chip" data-text="第07期截图放好了">第07期截图放好了</button><button type="button" class="chip" data-text="第07期确认好了">第07期确认好了</button><button type="button" class="chip" data-text="第07期复核好了">第07期复核好了</button></div></div></div></details><details class="topic" id="t08"><summary><span class="tno">08</span><span class="ttl">照着AI攻略出行</span><span class="kind how">教程</span><span class="meta">第3周 · 写给所有人 · 工作标题：照着AI做的攻略，我玩了一整天</span></summary><div class="tbody"><p class="why">最“第一手”的内容：真的去走一遍。照片好看，涨粉潜力大，还能加地点吃同城流量。</p><div class="blk"><h3>参评工具</h3><p>千问、豆包、腾讯元宝（至少 2 款）</p><p class="muted">选一个周末。把提示词里【】换成你的城市和出发地，所有工具用完全相同的内容。</p><p class="muted">默认设置：App 默认设置（记下是否联网）</p></div><div class="blk method"><h3>方法与底线</h3><p>地点营业时间、门票、交通和天气会变化；所有事实以出行当天的官方场馆、交通和地图信息核实。</p><ol><li>出行前逐站核对官网或场馆公告，保存核对时间和链接。</li><li>实际出行时记录到达时间、真实费用、步数和临时变更。</li><li>没有亲自走完路线，只能写“行前核查”，不能写“实地验证”，标题也不能用“我玩了一整天”。</li><li>公开时删除精确住址等私人位置。</li></ol></div><div class="blk"><h3>测试内容（原样复制）</h3><div class="copy"><div class="copy-top"><span>提示词（先把【】换好）</span><button type="button" data-copy="c40">复制</button></div><pre id="c40">我周六在【你的城市】玩一天，早上9点从【出发地或地铁站】出发，晚上8点前结束。预算300元以内（不含交通）。喜欢拍照和吃本地小吃，不想走太多路。帮我规划行程：每一站去哪、待多久、怎么过去、大概花多少钱。无法确认的营业时间、价格和班次请标记“需核实”，不要编造。</pre></div></div><div class="blk"><h3>怎么判断（每个工具逐项）</h3><ul class="checks"><li><b>地方都还在、开着门</b><div class="crit"><span class="ok">通过</span>每一站核实存在且当天开放<br><span class="bad">踩坑</span>推荐了已关闭或当天不开的地方</div></li><li><b>需要预约的有提醒</b><div class="crit"><span class="ok">通过</span>需预约的站点都提醒了<br><span class="bad">踩坑</span>要预约却没提</div></li><li><b>交通时间靠谱</b><div class="crit"><span class="ok">通过</span>与地图估算相差不大<br><span class="bad">踩坑</span>明显低估或路线不通</div></li><li><b>预算算得清</b><div class="crit"><span class="ok">通过</span>能算出总花费且在300内<br><span class="bad">踩坑</span>超预算或没法算</div></li><li><b>错误信息条数</b><div class="crit">填数字（最小 0）</div></li></ul><p class="muted">另外给一个总分：值不值得照着走（1–5）。分数由你判断，不从通过数自动换算。</p></div><div class="blk"><h3>要留存的证据</h3><ul><li>每个工具：行程原文<span class="flag req">必填</span></li><li>每个工具：行程截图<span class="flag req">必填</span></li><li>本期共用：逐站核查表（地点、官方信息、核对时间、链接）<span class="flag req">必填</span></li><li>本期共用：实际出行记录（花费、步数、翻车点）<span class="flag ">可选</span></li></ul><p class="muted">拍摄提示</p><ul><li>每一站的照片（风景、食物，想露脸就露）</li><li>3个AI给的行程截图</li><li>手机步数截图</li><li>花费记录</li></ul><p class="muted">截图 AirDrop 到本期的 inbox 文件夹；回答原文从 App 里复制，不要改动。</p></div><div class="blk"><h3>图片顺序（工作台生成）</h3><ol class="imgs"><li><span>封面</span><span class="kind-note">封面</span></li><li><span>3个AI给的行程</span><span class="kind-note">多家对比网格</span></li><li><span>第1站：照片 + “AI说的 vs 实际”</span><span class="kind-note">你拍的照片</span></li><li><span>第2站</span><span class="kind-note">你拍的照片</span></li><li><span>第3站</span><span class="kind-note">你拍的照片</span></li><li><span>第4站</span><span class="kind-note">你拍的照片</span></li><li><span>翻车点汇总</span><span class="kind-note">文字卡</span></li><li><span>总结：值不值得照着走</span><span class="kind-note">结论卡</span></li></ol></div><div class="blk"><h3>标题备选（结果出来后再选）</h3><ul class="titles"><li><span>照着AI做的攻略，我玩了一整天</span><small>15字</small></li><li><span>AI规划的【城市】一日游，靠谱吗？</span><small>17字</small></li><li><span>300块照着AI玩【城市】，结果……</span><small>18字</small></li></ul><p class="warnline">没有真的走完路线，不能用第1个标题。</p></div><div class="blk"><h3>正文模板（【 】由测试结果填，感受由你写）</h3><div class="copy"><div class="copy-top"><span>正文</span><button type="button" data-copy="c41">复制</button></div><pre id="c41">我是科技试吃员，新AI我先替你尝一口🍴
+
+都说用AI做攻略，我决定真去走一遍：让3个AI规划【城市】一日游，挑了最靠谱的【AI名】，完全照着走👇
+我的要求：早9晚8，预算300，爱拍照爱吃小吃，不想走太多路
+
+📍第1站【地点】：【AI说的 vs 实际，一句话】
+📍第2站【地点】：【】
+📍第3站【地点】：【】
+📍第4站【地点】：【】
+
+翻车点：
+❌ 【比如：推荐的店已经关了 / 要提前预约它没说】
+✅ 惊喜：【比如：推荐的小吃真的好吃】
+
+实际花费：【】元｜全天步数：【】步
+结论：【值不值得照着走，一句你自己的话】
+
+📌 用AI做攻略，营业时间和预约一定要自己再查一遍
+下次想让我用AI去哪玩？想让我试吃什么，评论区点菜👇</pre></div></div><div class="blk"><h3>话题标签</h3><div class="copy"><div class="copy-top"><span>标签</span><button type="button" data-copy="c42">复制</button></div><pre id="c42">#【城市】旅游 #【城市】一日游 #周末去哪儿 #旅行攻略 #AI攻略 #citywalk #AI工具 #千问 #豆包 #AI测评</pre></div></div><div class="blk"><h3>置顶评论</h3><div class="copy"><div class="copy-top"><span>置顶评论</span><button type="button" data-copy="c43">复制</button></div><pre id="c43">三个AI给的完整行程都在第2张图～你们觉得哪个安排最合理？</pre></div></div><p class="note">发布时加上地点定位（选第一站或城市），同城的人更容易刷到。</p><div class="blk"><h3>跟 Claude 说（点一下复制）</h3><div class="chips"><button type="button" class="chip" data-text="第08期截图放好了">第08期截图放好了</button><button type="button" class="chip" data-text="第08期确认好了">第08期确认好了</button><button type="button" class="chip" data-text="第08期复核好了">第08期复核好了</button></div></div></div></details><details class="topic" id="t09"><summary><span class="tno">09</span><span class="ttl">AI修图横评</span><span class="kind cmp">横评</span><span class="meta">第3周 · 写给所有人 · 工作标题：同一张照片让3个AI修，差别好大</span></summary><div class="tbody"><p class="why">修图前后对比天然抓眼球。证件照换底色又是搜索量很大的需求。</p><div class="blk"><h3>参评工具</h3><p>豆包、腾讯元宝、美图秀秀（至少 2 款）</p><p class="muted">准备2张你自己的照片：一张有路人的阴天风景照，一张正面照（不想露脸可以请朋友帮忙，要征得同意）。只用免费功能。</p><p class="muted">默认设置：只用免费功能；导出高清原图</p></div><div class="blk method"><h3>方法与底线</h3><p>只用本人拍摄或明确获授权的照片；含可识别人脸的，先取得授权。测试前保存未编辑原图。</p><ol><li>对同一张原图执行同一个操作；只能用画笔圈选的产品，圈选相近范围并截图记录，交互方式不同要写进限制。</li><li>在原图和导出图的同一比例下对比：目标是否消失、主体是否变形、背景是否自然、有没有误删、分辨率是否下降。</li><li>不能用预览图充当最终导出成品；记录水印和会员限制。</li></ol></div><div class="blk"><h3>测试内容（原样复制）</h3><div class="copy"><div class="copy-top"><span>任务1 消除路人</span><button type="button" data-copy="c44">复制</button></div><pre id="c44">帮我把照片里背景的路人去掉，其他地方不要动。</pre></div><div class="copy"><div class="copy-top"><span>任务2 换天空</span><button type="button" data-copy="c45">复制</button></div><pre id="c45">把阴天的天空换成晴天蓝天，要自然。</pre></div><div class="copy"><div class="copy-top"><span>任务3 证件照换底色</span><button type="button" data-copy="c46">复制</button></div><pre id="c46">把这张照片换成蓝底证件照，头发边缘要自然。</pre></div></div><div class="blk"><h3>怎么判断（每个工具逐项）</h3><ul class="checks"><li><b>路人去干净了</b><div class="crit"><span class="ok">通过</span>没有残影和边缘痕迹<br><span class="bad">踩坑</span>有残影、糊块或误删</div></li><li><b>换天空自然</b><div class="crit"><span class="ok">通过</span>光线和色调一致<br><span class="bad">踩坑</span>明显贴图感</div></li><li><b>证件照边缘自然</b><div class="crit"><span class="ok">通过</span>头发边缘干净<br><span class="bad">踩坑</span>头发抠糊或有白边</div></li><li><b>脸没被改</b><div class="crit"><span class="ok">通过</span>五官和原图一致<br><span class="bad">踩坑</span>被“顺手美颜”或变脸</div></li><li><b>免费能不能用</b><div class="crit">选一个：全部免费 / 有水印 / 要会员才能保存高清 / 不能用</div></li><li><b>用了多久（分钟）</b><div class="crit">填数字（最小 0）</div></li></ul><p class="muted">另外给一个总分：修完能不能直接发（1–5）。分数由你判断，不从通过数自动换算。</p></div><div class="blk"><h3>要留存的证据</h3><ul><li>每个工具：任务1 导出图<span class="flag req">必填</span></li><li>每个工具：任务2 导出图<span class="flag req">必填</span></li><li>每个工具：任务3 导出图<span class="flag req">必填</span></li><li>本期共用：原图1：有路人的阴天照片<span class="flag req">必填</span></li><li>本期共用：原图2：正面照（已获授权）<span class="flag req">必填</span></li></ul><p class="muted">拍摄提示</p><ul><li>原图</li><li>每个工具每个任务的结果图（保存高清原图）</li></ul><p class="muted">截图 AirDrop 到本期的 inbox 文件夹；回答原文从 App 里复制，不要改动。</p></div><div class="blk"><h3>图片顺序（工作台生成）</h3><ol class="imgs"><li><span>封面：原图 vs 最好的结果</span><span class="kind-note">封面</span></li><li><span>任务1：三家对比</span><span class="kind-note">多家对比网格</span></li><li><span>任务2：三家对比</span><span class="kind-note">多家对比网格</span></li><li><span>任务3：三家对比</span><span class="kind-note">多家对比网格</span></li><li><span>总评表</span><span class="kind-note">结果总表</span></li><li><span>推荐</span><span class="kind-note">结论卡</span></li></ol></div><div class="blk"><h3>标题备选（结果出来后再选）</h3><ul class="titles"><li><span>同一张照片让3个AI修，差别好大</span><small>16字</small></li><li><span>证件照换底色，AI能免费搞定吗？</span><small>16字</small></li><li><span>消除路人哪家强？3个AI实测</span><small>14字</small></li></ul></div><div class="blk"><h3>正文模板（【 】由测试结果填，感受由你写）</h3><div class="copy"><div class="copy-top"><span>正文</span><button type="button" data-copy="c47">复制</button></div><pre id="c47">我是科技试吃员，新AI我先替你尝一口🍴
+
+同一张照片交给3个AI修，结果差别真的大👇
+测了3个最常用的修图需求：
+1️⃣ 消除背景路人
+2️⃣ 阴天换晴天
+3️⃣ 证件照换蓝底
+
+结果：
+🥇 【】：【比如：路人去得最干净，脸完全没变】
+🥈 【】：【】
+❌ 【】：【比如：换底色把头发边缘抠糊了 / 要会员才能保存高清】
+
+最意外的是：【一句你自己的真实感受】
+📌 修人像要看看五官有没有被“顺手美颜”，证件照可不能变脸
+
+你们平时用什么修图？想让我试吃什么，评论区点菜👇</pre></div></div><div class="blk"><h3>话题标签</h3><div class="copy"><div class="copy-top"><span>标签</span><button type="button" data-copy="c48">复制</button></div><pre id="c48">#修图 #AI修图 #证件照 #消除路人 #拍照技巧 #美图秀秀 #豆包 #AI工具 #手机修图 #AI测评</pre></div></div><div class="blk"><h3>置顶评论</h3><div class="copy"><div class="copy-top"><span>置顶评论</span><button type="button" data-copy="c49">复制</button></div><pre id="c49">原图都放在对比图左上角～想看我测哪种修图需求？</pre></div></div><div class="blk"><h3>跟 Claude 说（点一下复制）</h3><div class="chips"><button type="button" class="chip" data-text="第09期截图放好了">第09期截图放好了</button><button type="button" class="chip" data-text="第09期确认好了">第09期确认好了</button><button type="button" class="chip" data-text="第09期复核好了">第09期复核好了</button></div></div></div></details><details class="topic" id="t10"><summary><span class="tno">10</span><span class="ttl">AI一句话拍视频</span><span class="kind cmp">横评</span><span class="meta">第4周 · 写给所有人、做自媒体的人 · 工作标题：一句话让3个AI拍视频，谁最像样</span></summary><div class="tbody"><p class="why">AI视频话题热、画面冲击力强。适合发成视频笔记，也是练手视频内容的好机会。</p><div class="blk"><h3>参评工具</h3><p>可灵、即梦、海螺（至少 2 款）</p><p class="muted">3家用同样的时长（5秒）和比例（竖屏9:16），用每天的免费额度。</p><p class="muted">默认设置：免费额度；5秒、竖屏9:16</p></div><div class="blk method"><h3>方法与底线</h3><p>测试当天先确认每款功能与免费额度；某工具只能生成不同长度或分辨率的，记录差异。</p><ol><li>每个提示词每家首次生成一次；因平台故障重试的，记录所有尝试和消耗额度，不只保留最好的一次。</li><li>下载原视频，记录格式、时长、分辨率、水印、生成耗时和免费限制。</li><li>慢速回看：人物脸和手、液体、中文字、背景稳定、有没有多出角色或穿模。</li><li>这一期是视频顺序：用剪映把三家同一提示词的视频拼在一起，每段标上工具名。</li></ol></div><div class="blk"><h3>测试内容（原样复制）</h3><div class="copy"><div class="copy-top"><span>提示词1 人物</span><button type="button" data-copy="c50">复制</button></div><pre id="c50">一个穿红色毛衣的女孩在雪地里转圈，慢动作，电影感</pre><div class="ref">看脸和手会不会崩</div></div><div class="copy"><div class="copy-top"><span>提示词2 物理</span><button type="button" data-copy="c51">复制</button></div><pre id="c51">一杯咖啡被打翻，咖啡洒在白色桌布上，特写镜头</pre><div class="ref">看液体真不真实</div></div><div class="copy"><div class="copy-top"><span>提示词3 中文字</span><button type="button" data-copy="c52">复制</button></div><pre id="c52">一家中式面馆的门口，招牌上写着“老王面馆”，镜头缓缓推进</pre><div class="ref">看中文招牌写没写对</div></div></div><div class="blk"><h3>怎么判断（每个工具逐项）</h3><ul class="checks"><li><b>人物没崩</b><div class="crit"><span class="ok">通过</span>脸和手稳定<br><span class="bad">踩坑</span>脸变形、手指错乱</div></li><li><b>液体真实</b><div class="crit"><span class="ok">通过</span>洒出和浸湿过程可信<br><span class="bad">踩坑</span>液体凭空消失或穿模</div></li><li><b>中文招牌写对</b><div class="crit"><span class="ok">通过</span>清楚写着“老王面馆”<br><span class="bad">踩坑</span>乱码或错字</div></li><li><b>平均等待（分钟）</b><div class="crit">填数字（最小 0）</div></li><li><b>免费能生成几条</b><div class="crit">填文字</div></li></ul><p class="muted">另外给一个总分：能不能直接拿来用（1–5）。分数由你判断，不从通过数自动换算。</p></div><div class="blk"><h3>要留存的证据</h3><ul><li>每个工具：提示词1 原视频<span class="flag req">必填</span></li><li>每个工具：提示词2 原视频<span class="flag req">必填</span></li><li>每个工具：提示词3 原视频<span class="flag req">必填</span></li><li>每个工具：等待时间和额度消耗截图<span class="flag ">可选</span></li></ul><p class="muted">拍摄提示</p><ul><li>9段视频（全部下载保存）</li><li>每家的等待时间和额度消耗截图</li></ul><p class="muted">截图 AirDrop 到本期的 inbox 文件夹；回答原文从 App 里复制，不要改动。</p></div><div class="blk"><h3>图片顺序（工作台生成）</h3><ol class="imgs"><li><span>封面（视频首帧备用）</span><span class="kind-note">封面</span></li><li><span>结论字幕用的对比表</span><span class="kind-note">结果总表</span></li><li><span>结尾：结论</span><span class="kind-note">结论卡</span></li></ol><p class="muted">这一期是视频笔记：用剪映把三家同一提示词的视频拼在一起，每段标上工具名；这些图用作封面和结尾。</p></div><div class="blk"><h3>标题备选（结果出来后再选）</h3><ul class="titles"><li><span>一句话让3个AI拍视频，谁最像样</span><small>16字</small></li><li><span>可灵vs即梦vs海螺，同一句话差别好大</span><small>19字</small></li><li><span>AI视频能写对中文招牌吗？实测</span><small>15字</small></li></ul></div><div class="blk"><h3>正文模板（【 】由测试结果填，感受由你写）</h3><div class="copy"><div class="copy-top"><span>正文</span><button type="button" data-copy="c53">复制</button></div><pre id="c53">我是科技试吃员，新AI我先替你尝一口🍴
+
+同一句话，让3个AI生成视频，谁最像样？👇
+测了3个难点：
+1️⃣ 人物转圈（看脸和手会不会崩）
+2️⃣ 咖啡打翻（看液体真不真）
+3️⃣ 中文招牌“老王面馆”（看字能不能写对）
+
+结果：
+🎬 人物：【谁最好】
+☕ 物理：【】
+🀄 中文：【比如：只有X写对了“老王面馆”】
+
+免费额度：【每家免费能生成几条、等了多久】
+我的推荐：【】，【一句你自己的真实感受】
+
+提示词在置顶评论，想自己试可以直接抄～
+想让我试吃什么，评论区点菜👇</pre></div></div><div class="blk"><h3>话题标签</h3><div class="copy"><div class="copy-top"><span>标签</span><button type="button" data-copy="c54">复制</button></div><pre id="c54">#AI视频 #可灵 #即梦 #海螺AI #AI生成视频 #自媒体 #AI工具 #短视频制作 #剪映 #AI测评</pre></div></div><div class="blk"><h3>置顶评论</h3><div class="copy"><div class="copy-top"><span>置顶评论</span><button type="button" data-copy="c55">复制</button></div><pre id="c55">三条提示词👇
+1. 一个穿红色毛衣的女孩在雪地里转圈，慢动作，电影感
+2. 一杯咖啡被打翻，咖啡洒在白色桌布上，特写镜头
+3. 一家中式面馆的门口，招牌上写着“老王面馆”，镜头缓缓推进</pre></div></div><div class="blk"><h3>跟 Claude 说（点一下复制）</h3><div class="chips"><button type="button" class="chip" data-text="第10期截图放好了">第10期截图放好了</button><button type="button" class="chip" data-text="第10期确认好了">第10期确认好了</button><button type="button" class="chip" data-text="第10期复核好了">第10期复核好了</button></div></div></div></details><details class="topic" id="t11"><summary><span class="tno">11</span><span class="ttl">新品48小时实测</span><span class="kind new">新品</span><span class="meta">机动位 · 写给所有人 · 工作标题：【新品名】上线48小时，我先替你试了</span></summary><div class="tbody"><p class="why">大新品发布后尽快出实测，能吃到搜索和推荐的第一波流量。这一期是模板，任何国内能直接用的新品都能套。</p><div class="blk"><h3>参评工具</h3><p>千问（至少 1 款）</p><p class="muted">参评工具按本期实际情况改。</p><p class="muted">新品线索先在“线索”页核实：官方来源、发布日期、我的账号里能不能用。能用再建这一期，把参评工具改成“新品 + 对照”。</p><p class="muted">默认设置：按官方说明开启新功能，其余默认</p></div><div class="blk method"><h3>方法与底线</h3><p>本期是机动选题，不预设厂商、型号或排名。社区传闻、匿名榜单和灰度消息只能作为线索，不能据此声称功能已正式上线或性能已提高。</p><ol><li>保存官方发布页面、日期、功能说明及当时版本，并在<b>本人当前账号</b>确认能用；不能用就记为“暂不可测”，转回线索池。</li><li>从做过的题里挑一个固定标尺（比如第1期周报陷阱题），和上次结果比。</li><li>仅对验证到的功能下结论；“48小时内发布”是速度目标，不能替代证据。</li></ol></div><div class="blk"><h3>测试内容（原样复制）</h3><div class="copy"><div class="copy-top"><span>通用框架：5个任务，30–60分钟</span><button type="button" data-copy="c56">复制</button></div><pre id="c56">1. 官方主打的功能（官方说它强在哪就测哪）
+2. 固定标尺：第1期的周报陷阱题，和上次的结果比
+3. 一个你生活里的真实任务
+4. 一道陷阱题，看它会不会编
+5. 速度和免费额度</pre></div><div class="copy"><div class="copy-top"><span>例子：让新模型看一段视频</span><button type="button" data-copy="c57">复制</button></div><pre id="c57">（上传一段30秒以内你自己拍的视频，比如做饭、街景）
+这个视频里发生了什么？按时间顺序说。
+第几秒出现了【视频里的某样东西】？
+视频里的人说了什么？
+视频里那只狗是什么颜色的？</pre><div class="ref"><b>陷阱：</b>最后一问要选视频里根本没有的东西。老实说“视频里没有狗”= ✅。</div></div></div><div class="blk"><h3>怎么判断（每个工具逐项）</h3><ul class="checks"><li><b>主打功能真的强</b><div class="crit"><span class="ok">通过</span>官方说的能力在我的任务里成立<br><span class="bad">踩坑</span>宣传和实际不符</div></li><li><b>周报标尺和上次比</b><div class="crit">选一个：比上次好 / 差不多 / 比上次差 / 未测</div></li><li><b>陷阱题没编</b><div class="crit"><span class="ok">通过</span>老实说没有<br><span class="bad">踩坑</span>编了答案</div></li><li><b>速度和免费额度</b><div class="crit">填文字</div></li></ul><p class="muted">另外给一个总分：值不值得用（1–5）。分数由你判断，不从通过数自动换算。</p></div><div class="blk"><h3>要留存的证据</h3><ul><li>每个工具：各任务回答原文<span class="flag req">必填</span></li><li>每个工具：关键回答截图<span class="flag req">必填</span></li><li>本期共用：官方来源（链接、发布日期、版本、功能说明）<span class="flag req">必填</span></li><li>本期共用：我的账号里能用的截图<span class="flag req">必填</span></li></ul><p class="muted">拍摄提示</p><ul><li>每个任务的关键回答截图</li><li>最好录一段屏，展示新功能怎么用</li></ul><p class="muted">截图 AirDrop 到本期的 inbox 文件夹；回答原文从 App 里复制，不要改动。</p></div><div class="blk"><h3>图片顺序（工作台生成）</h3><ol class="imgs"><li><span>封面：“【新品名】，我先试了”</span><span class="kind-note">封面</span></li><li><span>新在哪：一张图说清</span><span class="kind-note">文字卡</span></li><li><span>任务截图</span><span class="kind-note">每个工具一张截图框</span></li><li><span>和旧版或其他AI对比</span><span class="kind-note">结果总表</span></li><li><span>值不值得用</span><span class="kind-note">结论卡</span></li></ol></div><div class="blk"><h3>标题备选（结果出来后再选）</h3><ul class="titles"><li><span>【新品名】上线48小时，我先替你试了</span><small>18字</small></li><li><span>【新品名】实测：这3个功能是真的强</span><small>17字</small></li><li><span>【新品名】值得用吗？我测了5件事</span><small>16字</small></li></ul><p class="warnline">第2个标题只有真的有3个功能经测试成立才能用。</p></div><div class="blk"><h3>正文模板（【 】由测试结果填，感受由你写）</h3><div class="copy"><div class="copy-top"><span>正文</span><button type="button" data-copy="c58">复制</button></div><pre id="c58">我是科技试吃员，新AI我先替你尝一口🍴
+
+【新品名】【日期】刚上线，我先替你试了👇
+官方说它最强的是：【一句话】
+我测了5件事：
+1️⃣ 【主打功能】：【结果】
+2️⃣ 老规矩，周报陷阱题：【结果，和上次的X比】
+3️⃣ 【生活任务】：【结果】
+4️⃣ 陷阱题：【会不会编】
+5️⃣ 速度和免费额度：【】
+
+结论：【值得用 / 等等再说 / 只推荐给某类人】
+【一句你自己的真实感受】
+
+还想让我测它什么？想让我试吃什么，评论区点菜👇</pre></div></div><div class="blk"><h3>话题标签</h3><div class="copy"><div class="copy-top"><span>标签</span><button type="button" data-copy="c59">复制</button></div><pre id="c59">#【新品名】 #【公司名】 #AI新品 #AI测评 #AI工具 #人工智能 #科技 #新品测评 #大模型 #效率工具</pre></div></div><div class="blk"><h3>置顶评论</h3><div class="copy"><div class="copy-top"><span>置顶评论</span><button type="button" data-copy="c60">复制</button></div><pre id="c60">测试时间：【日期】，版本：【】。新品更新很快，结果以你用的时候为准～</pre></div></div><div class="blk"><h3>跟 Claude 说（点一下复制）</h3><div class="chips"><button type="button" class="chip" data-text="第11期截图放好了">第11期截图放好了</button><button type="button" class="chip" data-text="第11期确认好了">第11期确认好了</button><button type="button" class="chip" data-text="第11期复核好了">第11期复核好了</button></div></div></div></details><details class="topic" id="t12"><summary><span class="tno">12</span><span class="ttl">测评复盘：按场景留下的工具</span><span class="kind recap">复盘</span><span class="meta">第4周 · 写给所有人 · 工作标题：测了10期AI，我手机里只留下3个</span></summary><div class="tbody"><p class="why">总结帖收藏率高，还能把新粉丝引到你之前的笔记：先看主页，再关注。</p><div class="blk"><h3>参评工具</h3><p>DeepSeek、豆包、Kimi、腾讯元宝、千问（至少 2 款）</p><p class="muted">参评工具按本期实际情况改。</p><p class="muted">至少 10 期已核验的测试后再做。</p><p class="muted">这一期不用新测试。至少有10期已核验的测试后再做；参评工具改成你真实测过、还在用或删掉的那些。</p><p class="muted">默认设置：不涉及新测试</p></div><div class="blk method"><h3>方法与底线</h3><p>只有在前面有足够<b>已完成、可追溯的测试</b>后才制作本篇，不能预先写“只留下3个”。</p><ol><li>列出每期任务、测试日期、工具/版本、免费条件、证据路径、通过与失败点；没完成的标“未测”。</li><li>按任务场景归纳工具，不同任务的分数不直接相加排名。</li><li>每个“留下”的工具至少给两个可追溯理由和一个局限；样本不足就写“目前还选不出常驻工具”。</li><li>删除过期功能和已变化的免费额度描述。</li></ol></div><div class="blk"><h3>怎么判断（每个工具逐项）</h3><ul class="checks"><li><b>留下还是删掉</b><div class="crit">选一个：留下 / 删掉</div></li><li><b>用来干什么</b><div class="crit">填文字</div></li><li><b>为什么（引用哪几期）</b><div class="crit">填文字</div></li></ul><p class="muted">另外给一个总分：推荐程度（1–5，可选）。分数由你判断，不从通过数自动换算。</p></div><div class="blk"><h3>要留存的证据</h3><ul><li>本期共用：前几期结论汇总表（期数、场景、结论、证据路径）<span class="flag req">必填</span></li><li>本期共用：手机屏幕上留下的App图标照片<span class="flag req">必填</span></li></ul><p class="muted">拍摄提示</p><ul><li>手机屏幕上留下的App图标的照片（你自己拍，真实感最强）</li></ul><p class="muted">截图 AirDrop 到本期的 inbox 文件夹；回答原文从 App 里复制，不要改动。</p></div><div class="blk"><h3>图片顺序（工作台生成）</h3><ol class="imgs"><li><span>封面</span><span class="kind-note">封面</span></li><li><span>手机上留下的App图标照片</span><span class="kind-note">你拍的照片</span></li><li><span>留下的和删掉的</span><span class="kind-note">结果总表</span></li><li><span>场景 → 最佳工具速查表（收藏率最高的一张）</span><span class="kind-note">文字卡</span></li><li><span>往期合集指引</span><span class="kind-note">文字卡</span></li></ol></div><div class="blk"><h3>标题备选（结果出来后再选）</h3><ul class="titles"><li><span>测了10期AI，我手机里只留下3个</span><small>17字</small></li><li><span>10期测评总结：每个场景用哪个AI</span><small>17字</small></li><li><span>打工人的AI全家桶，我只留了这几个</span><small>17字</small></li></ul><p class="warnline">“只留下3个”要按真实留下的数量改。</p></div><div class="blk"><h3>正文模板（【 】由测试结果填，感受由你写）</h3><div class="copy"><div class="copy-top"><span>正文</span><button type="button" data-copy="c61">复制</button></div><pre id="c61">我是科技试吃员，新AI我先替你尝一口🍴
+
+做了10期AI测评，测了【X】个工具，我手机里最后只留下【N】个👇
+
+📱 【AI 1】：用来【场景】，因为【原因】
+📱 【AI 2】：用来【场景】，因为【原因】
+📱 【AI 3】：用来【场景】，因为【原因】
+
+删掉的：
+🗑 【】：【一句原因】
+🗑 【】：【一句原因】
+
+📌 场景速查（【第几张】图，建议收藏）：
+写周报 → 【】
+做PPT → 【】
+讲数学题 → 【】
+翻译 → 【】
+读论文 → 【】
+会议纪要 → 【】
+
+每一期的详细测评都在主页合集里～
+下一轮想让我试吃什么？想让我试吃什么，评论区点菜👇</pre></div></div><div class="blk"><h3>话题标签</h3><div class="copy"><div class="copy-top"><span>标签</span><button type="button" data-copy="c62">复制</button></div><pre id="c62">#AI工具 #AI测评 #效率工具 #打工人 #学生党 #AI推荐 #手机App #好用的App #DeepSeek #豆包</pre></div></div><div class="blk"><h3>置顶评论</h3><div class="copy"><div class="copy-top"><span>置顶评论</span><button type="button" data-copy="c63">复制</button></div><pre id="c63">每个场景的完整测评都在主页「AI横评」「AI教程」合集里～</pre></div></div><div class="blk"><h3>跟 Claude 说（点一下复制）</h3><div class="chips"><button type="button" class="chip" data-text="第12期截图放好了">第12期截图放好了</button><button type="button" class="chip" data-text="第12期确认好了">第12期确认好了</button><button type="button" class="chip" data-text="第12期复核好了">第12期复核好了</button></div></div></div></details></div>
+</section>
+
+<footer>
+  <span>由工作台 harness/topics.json（第 1 版）、config/brand.json 和 config/tools.json 生成。改内容请改这些文件，再运行 python3 scripts/build_artifact.py。</span>
+  <span>工具的免费额度、功能和名称会变，测试当天在 App 里核对。第5期的身份证号是编的；任何截图里的真实个人信息都要遮挡。</span>
+</footer>
+</div>
+<script>
+function copyText(text, btn) {
+  const label = btn.textContent;
+  const done = () => { btn.textContent = '已复制'; btn.classList.add('done'); setTimeout(() => { btn.textContent = label; btn.classList.remove('done'); }, 1400); };
+  const fallback = () => {
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    let ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+    ta.remove();
+    if (ok) done(); else btn.textContent = '请长按手动复制';
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback);
+  else fallback();
+}
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('button[data-copy], button[data-text]');
+  if (b) copyText(b.dataset.text || document.getElementById(b.dataset.copy).textContent, b);
+  const a = e.target.closest('[data-open]');
+  if (a) { const d = document.getElementById(a.dataset.open); if (d) d.open = true; }
+});
+if (/^#t\d{2}$/.test(location.hash)) { const d = document.querySelector(location.hash); if (d) d.open = true; }
+</script>

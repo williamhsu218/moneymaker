@@ -4,6 +4,7 @@
 
 - 起号计划与规则：[docs/claude_artifact_launch_kit.md](docs/claude_artifact_launch_kit.md)
 - 优化方案与执行记录：[docs/superpowers/plans/2026-09-27-xhs-platform-optimization.md](docs/superpowers/plans/2026-09-27-xhs-platform-optimization.md)
+- 手机版手册（测试时在手机上复制提示词、对照判定标准）：[选题手册 artifact](https://claude.ai/artifact/CxULGe6mVV39Kd1Un1f5GZ)，由 `artifact/handbook.html` 发布
 
 ## 启动
 
@@ -38,6 +39,7 @@ python3 scripts/launch_dashboard.py             # 打开 http://127.0.0.1:8000
 | `config/tools.json` | 工具 id、显示名、网页链接、App Store 搜索词 |
 | `harness/topics.json` | 12 期选题的唯一数据源（测试内容、判定、证据、图片顺序、正文模板、标签） |
 | `harness/prompts/*.md` | 由 `scripts/build_prompts.py` 从 topics.json 生成，勿手改 |
+| `artifact/handbook.html` | 手机版手册，由 `scripts/build_artifact.py` 从 config 和 topics.json 生成，勿手改；发布到选题手册 artifact |
 | `posts/<篇目>/` | 每期工作区：`copy.md`、`scorecard.json`、`evidence/`、`inbox/`、`images/`、`photos/` |
 | `ops/` | 排期、发布后数据、账号盘点、评论点菜、对标笔记、新品线索、周复盘 |
 | `scripts/` | 服务端与命令行工具（见下） |
@@ -56,6 +58,7 @@ python scripts/handoff.py post-01-weekly-report                         # 给 Cl
 python scripts/weekly_review.py --week 1                                # 周复盘
 python scripts/xhs_radar.py --appstore-resolve | --appstore-check | --official-check
 python scripts/build_prompts.py [--check]                               # 由 topics.json 生成测试说明
+python scripts/build_artifact.py [--check]                              # 由 config 和 topics.json 生成手机版手册
 ```
 
 ## 测试

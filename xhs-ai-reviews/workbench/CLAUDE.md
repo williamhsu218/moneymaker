@@ -5,3 +5,4 @@
 - 读写项目文件一律用 `python3 scripts/xhs.py …`，不手改 JSON。
 - 真实感受只由账号持有人写；复核和发布只由账号持有人点；Claude 只给建议。
 - 修改代码后运行 `python3 -m pytest -q` 和 `node tests/test_frontend_logic.js`。
+- 改了 `harness/topics.json` 或 `config/*.json` 后，运行 `python3 scripts/build_prompts.py` 和 `python3 scripts/build_artifact.py`，再把 `artifact/handbook.html` 重新发布到选题手册 artifact（https://claude.ai/artifact/CxULGe6mVV39Kd1Un1f5GZ，带 `url` 更新原链接）。
